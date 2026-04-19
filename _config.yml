@@ -56,6 +56,13 @@ sphinx:
     html_theme_options:
       article_footer_items:
         - comments.html
+      # Separate light/dark logos so the wordmark stays legible in both themes.
+      # The SVGs use only system fonts (Georgia / Times) because web fonts
+      # can't cross the <img src> sandbox that Sphinx embeds the logo in.
+      logo:
+        image_light: _static/logo-light.svg
+        image_dark: _static/logo-dark.svg
+        alt_text: "J Rosser — knowledge base"
     # Point Thebe at our own repo (otherwise it falls back to an example repo).
     thebe_config:
       repository_url: https://github.com/jrosseruk/knowledge_base

@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 210 40" role="img"
      aria-label="J Rosser knowledge base">
-  <rect x="0" y="4" width="32" height="32" rx="7" fill="#6B3FA0"/>
+  <rect x="0" y="4" width="32" height="32" rx="7" fill="#9F7BCC"/>
   <text x="16" y="28"
         text-anchor="middle"
         font-family="Georgia, 'Times New Roman', serif"
         font-style="italic"
         font-size="22"
         font-weight="700"
-        fill="#ffffff">&#8706;</text>
+        fill="#1b1b1f">&#8706;</text>
   <text x="42" y="26"
         font-family="Georgia, 'Times New Roman', serif"
         font-size="17"
         font-weight="600"
-        fill="#212529">knowledge base</text>
+        fill="#e9ecef">knowledge base</text>
 </svg>
