@@ -1,0 +1,111 @@
+# Jupyter Book configuration
+# Docs: https://jupyterbook.org/customize/config.html
+
+title: "J Rosser — Notebooks on Maths & AI"
+author: "J Rosser"
+logo: _static/logo.svg
+copyright: "2026"
+only_build_toc_files: true
+
+execute:
+  execute_notebooks: "cache"   # re-execute only when source changes
+  timeout: 120
+  allow_errors: false
+
+parse:
+  myst_enable_extensions:
+    - amsmath
+    - attrs_block       # lets us attach classes to markdown blocks (e.g. year headings)
+    - colon_fence
+    - deflist
+    - dollarmath
+    - html_image
+    - linkify
+    - replacements
+    - smartquotes
+    - substitution
+    - tasklist
+
+sphinx:
+  config:
+    html_theme: sphinx_book_theme
+    html_show_copyright: true
+    html_static_path: ['_static']
+    html_css_files: ['custom.css']
+    html_js_files: ['timeline.js']
+    templates_path: ['_templates']
+    mathjax3_config:
+      tex:
+        macros:
+          "RR": "\\mathbb{R}"
+          "EE": "\\mathbb{E}"
+          "grad": "\\nabla"
+    # ---- Bibliography (sphinxcontrib-bibtex) ----
+    bibtex_bibfiles:
+      - references.bib
+    bibtex_reference_style: author_year
+    bibtex_default_style: alpha
+    # Silence a known benign warning where sphinxcontrib-bibtex logs
+    # "duplicate citation" for every key shown on the global references page
+    # that is also {cite}`-ed inline elsewhere. Output is correct.
+    suppress_warnings:
+      - bibtex.duplicate_citation
+    # Add our comments template to every article footer. Don't list
+    # prev-next.html here — Jupyter Book already renders its own prev/next
+    # footer separately, so listing it again would duplicate it.
+    html_theme_options:
+      article_footer_items:
+        - comments.html
+    # Point Thebe at our own repo (otherwise it falls back to an example repo).
+    thebe_config:
+      repository_url: https://github.com/jrosseruk/knowledge_base
+      repository_branch: main
+      selector: ".thebe,.cell"
+      selector_input: "pre"
+      selector_output: ".output, .cell_output"
+    # ---- Giscus (GitHub Discussions comments) ----
+    # Flip `comments_enabled` to true AFTER:
+    #   1) making the repo public,
+    #   2) enabling Discussions in repo settings,
+    #   3) installing the giscus app (https://github.com/apps/giscus) on it,
+    #   4) running https://giscus.app to fetch repo_id & category_id.
+    html_context:
+      comments_enabled: false
+      giscus_repo: "jrosseruk/knowledge_base"
+      giscus_repo_id: "REPLACE_WITH_REPO_ID"
+      giscus_category: "General"
+      giscus_category_id: "REPLACE_WITH_CATEGORY_ID"
+      giscus_mapping: "pathname"
+      giscus_reactions_enabled: "1"
+      giscus_emit_metadata: "0"
+      giscus_input_position: "bottom"
+      giscus_lang: "en"
+  extra_extensions:
+    - sphinx.ext.intersphinx
+    - sphinxcontrib.bibtex
+
+latex:
+  latex_documents:
+    targetname: knowledge_base.tex
+
+html:
+  favicon: _static/favicon.svg
+  use_issues_button: true
+  use_repository_button: true
+  use_edit_page_button: true
+  home_page_in_navbar: true
+  baseurl: "https://jrosseruk.github.io/knowledge_base/"
+  extra_footer: |
+    <p>Built with <a href="https://jupyterbook.org">Jupyter Book</a>.</p>
+
+repository:
+  url: https://github.com/jrosseruk/knowledge_base
+  branch: main
+  path_to_book: ""
+
+# Live runnable code cells via Thebe (backed by Binder).
+launch_buttons:
+  notebook_interface: "jupyterlab"
+  binderhub_url: "https://mybinder.org"
+  colab_url: "https://colab.research.google.com"
+  thebe: true

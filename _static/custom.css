@@ -1,0 +1,356 @@
+/* =======================================================================
+ * Site-wide custom styles.
+ *
+ * Sections:
+ *   1. Brand tokens (colour + typography)
+ *   2. Typography overrides
+ *   3. Brand colour → links, focus rings, theme accents
+ *   4. Homepage hero
+ *   5. Vertical timeline
+ *   6. Year dividers
+ *   7. Fade-up animation (respects prefers-reduced-motion)
+ *   8. Giscus comments block
+ * ======================================================================= */
+
+/* ----- 1. Brand tokens ------------------------------------------------- */
+
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap");
+
+:root {
+  /* Oxidised purple. Change this single value to rebrand the whole site. */
+  --kb-primary: #6B3FA0;
+  --kb-primary-contrast: #ffffff;
+  --kb-primary-soft: #efe7f7;
+  --kb-primary-soft-border: #d9c5ec;
+  --kb-primary-dark: #52307f;
+
+  /* Font stacks */
+  --kb-font-display: "Fraunces", Georgia, "Times New Roman", serif;
+  --kb-font-body:    "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --kb-font-mono:    "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+html[data-theme="dark"] {
+  --kb-primary:         #b38bdd;
+  --kb-primary-contrast: #1a1020;
+  --kb-primary-soft:    #2a1a3c;
+  --kb-primary-soft-border: #4a315f;
+  --kb-primary-dark:    #d8b9f2;
+}
+
+/* ----- 2. Typography --------------------------------------------------- */
+
+html, body {
+  font-family: var(--kb-font-body);
+}
+
+h1, h2, h3, h4, h5, h6,
+.bd-header .navbar-brand,
+.bd-sidebar .bd-sidebar-title {
+  font-family: var(--kb-font-display);
+  font-weight: 600;
+  letter-spacing: -0.005em;
+}
+
+h1 { font-weight: 700; letter-spacing: -0.015em; }
+
+code, kbd, samp, pre,
+.highlight pre,
+.highlight code,
+.cell_input pre,
+.cell_output pre {
+  font-family: var(--kb-font-mono);
+  font-variant-ligatures: none;
+}
+
+/* ----- 3. Brand colour accents ---------------------------------------- */
+
+/* Override the PyData / Sphinx Book theme primary accent variable. */
+:root {
+  --pst-color-primary:       var(--kb-primary);
+  --pst-color-primary-hover: var(--kb-primary-dark);
+  --pst-color-link:          var(--kb-primary);
+  --pst-color-link-hover:    var(--kb-primary-dark);
+}
+html[data-theme="dark"] {
+  --pst-color-primary:       var(--kb-primary);
+  --pst-color-primary-hover: var(--kb-primary-dark);
+  --pst-color-link:          var(--kb-primary);
+  --pst-color-link-hover:    var(--kb-primary-dark);
+}
+
+a:focus-visible,
+button:focus-visible,
+[role="button"]:focus-visible {
+  outline: 2px solid var(--kb-primary);
+  outline-offset: 2px;
+  border-radius: 3px;
+}
+
+/* ----- 4. Homepage hero ---------------------------------------------- */
+
+/* The markdown `# What I'm learning` renders normally as the page H1 above
+ * the hero. We lift it so it reads as part of the hero block. */
+.bd-article > section > h1:first-child {
+  font-size: clamp(2rem, 4.5vw, 3rem);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin: 0.5rem 0 1rem;
+}
+
+.kb-hero {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 2rem;
+  align-items: center;
+  max-width: 1100px;
+  margin: 0.25rem auto 2.5rem;
+  padding: 0 0 2rem;
+  border-bottom: 1px solid var(--pst-color-border, #dee2e6);
+}
+
+.kb-hero p {
+  font-size: 1.12rem;
+  color: var(--pst-color-text-muted, #6c757d);
+  line-height: 1.55;
+  margin: 0;
+  max-width: 44ch;
+}
+
+.kb-hero-art {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.kb-hero-art img,
+.kb-hero-art svg {
+  width: 100%;
+  max-width: 340px;
+  height: auto;
+}
+
+@media (max-width: 768px) {
+  .kb-hero {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+    text-align: center;
+  }
+  .kb-hero-art { justify-content: center; }
+}
+
+/* ----- 5. Vertical timeline ----------------------------------------- */
+
+.kb-timeline {
+  position: relative;
+  list-style: none;
+  max-width: 1100px;
+  margin: 0 auto 3rem;
+  padding: 1rem 0;
+}
+
+.kb-timeline::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 3px;
+  background: var(--pst-color-border, #dee2e6);
+  transform: translateX(-50%);
+  border-radius: 3px;
+}
+
+.kb-entry {
+  position: relative;
+  width: 50%;
+  padding: 0.75rem 2.5rem;
+  box-sizing: border-box;
+}
+
+.kb-entry--left  { left: 0;   text-align: right; }
+.kb-entry--right { left: 50%; text-align: left;  }
+
+/* Dot on the centre line. */
+.kb-entry::before {
+  content: "";
+  position: absolute;
+  top: 1.5rem;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--kb-primary);
+  border: 3px solid var(--pst-color-background, #fff);
+  z-index: 1;
+  box-shadow: 0 0 0 1px var(--pst-color-border, #dee2e6);
+}
+
+.kb-entry--left::before  { right: -8px; }
+.kb-entry--right::before { left: -8px; }
+
+/* Card — deliberately no hover effect (requested). */
+.kb-card {
+  display: block;
+  background: var(--pst-color-on-background, #fff);
+  border: 1px solid var(--pst-color-border, #dee2e6);
+  border-radius: 10px;
+  padding: 1rem 1.25rem;
+  text-decoration: none !important;
+  color: inherit !important;
+}
+
+.kb-date {
+  display: inline-block;
+  font-family: var(--kb-font-mono);
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--kb-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-right: 0.4rem;
+}
+
+.kb-title {
+  font-family: var(--kb-font-display);
+  font-size: 1.12rem;
+  font-weight: 600;
+  margin: 0.3rem 0 0.35rem;
+  color: var(--pst-color-text-base, #212529);
+  line-height: 1.3;
+}
+
+.kb-desc {
+  font-size: 0.92rem;
+  color: var(--pst-color-text-muted, #6c757d);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.kb-tag {
+  display: inline-block;
+  font-family: var(--kb-font-body);
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+  vertical-align: 2px;
+}
+
+.kb-tag-ai     { background: var(--kb-primary-soft); color: var(--kb-primary-dark); }
+.kb-tag-maths  { background: #fff3cd; color: #8a6d0b; }
+.kb-tag-paper  { background: #e2d9f3; color: #59359a; }
+.kb-tag-note   { background: #e6f4ea; color: #1e6b3a; }
+
+.kb-entry--right .kb-tag { margin-left: 0.4rem; }
+.kb-entry--left  .kb-tag { margin-right: 0.4rem; }
+
+html[data-theme="dark"] .kb-card {
+  background: var(--pst-color-surface, #222832);
+  border-color: var(--pst-color-border, #3c4554);
+}
+html[data-theme="dark"] .kb-entry::before {
+  border-color: var(--pst-color-background, #14181f);
+}
+html[data-theme="dark"] .kb-tag-maths { background: #4a3a0a; color: #ffd966; }
+html[data-theme="dark"] .kb-tag-paper { background: #3a2a5c; color: #c8a2ff; }
+html[data-theme="dark"] .kb-tag-note  { background: #1e4530; color: #9ddcae; }
+
+/* ----- 6. Year dividers ---------------------------------------------
+ * The homepage uses real top-level H2s ("## 2026") so they appear in the
+ * right-hand "On this page" nav. We target them structurally (scoped to
+ * the intro page) and style them as sticky pills in the brand colour. */
+
+#what-im-learning > section > h2 {
+  display: block;
+  width: fit-content;
+  margin: 2.25rem auto 1rem;
+  padding: 0.3rem 1.15rem;
+  position: sticky;
+  top: 4.25rem;            /* clears the fixed page header */
+  z-index: 2;
+  background: var(--pst-color-background, #fff);
+  border: 2px solid var(--kb-primary);
+  border-radius: 999px;
+  border-bottom: 2px solid var(--kb-primary);   /* override theme's bottom rule */
+  text-align: center;
+  font-family: var(--kb-font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--kb-primary);
+}
+
+#what-im-learning > section > h2 > a.headerlink {
+  display: none;   /* hide the '#' anchor on year pills for visual calm */
+}
+
+/* ----- 7. Fade-up animation ----------------------------------------- */
+
+.kb-entry {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 0.5s cubic-bezier(0.2, 0.6, 0.2, 1),
+    transform 0.5s cubic-bezier(0.2, 0.6, 0.2, 1);
+}
+
+.kb-entry.kb-in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .kb-entry {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+/* ----- 8. Mobile timeline ------------------------------------------- */
+
+@media (max-width: 768px) {
+  .kb-timeline::before { left: 20px; }
+
+  .kb-entry,
+  .kb-entry--left,
+  .kb-entry--right {
+    width: 100%;
+    left: 0;
+    padding-left: 48px;
+    padding-right: 1rem;
+    text-align: left;
+  }
+
+  .kb-entry::before,
+  .kb-entry--left::before,
+  .kb-entry--right::before {
+    left: 12px;
+    right: auto;
+  }
+
+  .kb-entry--left .kb-tag { margin-left: 0.4rem; margin-right: 0; }
+
+  .kb-year { top: 4rem; }
+}
+
+/* ----- 9. Giscus comments section ----------------------------------- */
+
+.kb-comments {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--pst-color-border, #dee2e6);
+}
+.kb-comments h2 {
+  font-family: var(--kb-font-display);
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 0 0 0.35rem;
+}
+.kb-comments-intro {
+  font-size: 0.9rem;
+  color: var(--pst-color-text-muted, #6c757d);
+  margin: 0 0 1rem;
+}

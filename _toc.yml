@@ -1,0 +1,21 @@
+# Table of contents — docs: https://jupyterbook.org/customize/toc.html
+# The homepage timeline in intro.md is the canonical reverse-chronological
+# ordering; the sidebar below is a simple topic grouping.
+
+format: jb-book
+root: intro
+parts:
+  - caption: AI research
+    chapters:
+      - file: content/ai/infusion
+      - file: content/ai/grpo
+      - file: content/ai/loss-landscapes
+  - caption: Maths
+    chapters:
+      - file: content/maths/index
+      - file: content/maths/hvp
+      - file: content/maths/kronecker
+      - file: content/maths/fisher
+  - caption: Appendix
+    chapters:
+      - file: references

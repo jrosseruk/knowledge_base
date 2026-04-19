@@ -1,0 +1,36 @@
+{#
+  Giscus comments (GitHub Discussions backend).
+  Gated by `comments_enabled` in html_context so it stays invisible until
+  you flip the switch (see _config.yml for activation steps).
+#}
+{% if comments_enabled %}
+<section class="kb-comments" aria-label="Comments">
+  <h2>Discussion</h2>
+  <p class="kb-comments-intro">
+    Sign in with GitHub to leave a comment — these are powered by
+    <a href="https://giscus.app" target="_blank" rel="noopener">giscus</a>
+    and stored as GitHub Discussions on the repo.
+  </p>
+  <script
+    src="https://giscus.app/client.js"
+    data-repo="{{ giscus_repo }}"
+    data-repo-id="{{ giscus_repo_id }}"
+    data-category="{{ giscus_category }}"
+    data-category-id="{{ giscus_category_id }}"
+    data-mapping="{{ giscus_mapping }}"
+    data-strict="0"
+    data-reactions-enabled="{{ giscus_reactions_enabled }}"
+    data-emit-metadata="{{ giscus_emit_metadata }}"
+    data-input-position="{{ giscus_input_position }}"
+    data-theme="preferred_color_scheme"
+    data-lang="{{ giscus_lang }}"
+    data-loading="lazy"
+    crossorigin="anonymous"
+    async>
+  </script>
+  <noscript>
+    Comments require JavaScript. Alternatively, open a discussion directly on
+    <a href="https://github.com/{{ giscus_repo }}/discussions">GitHub</a>.
+  </noscript>
+</section>
+{% endif %}

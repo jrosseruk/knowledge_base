@@ -1,0 +1,12 @@
+# Copied verbatim into the root of the built site via html_extra_path.
+#
+# NOTE: because this site is hosted at jrosseruk.github.io/knowledge_base/
+# (a GitHub Pages project page), search engines only honour robots.txt at the
+# host root (jrosseruk.github.io/robots.txt), which we don't control. This
+# file is mostly cosmetic for the current hosting setup; it starts to matter
+# if the site ever moves to a custom domain.
+
+User-agent: *
+Allow: /
+
+Sitemap: https://jrosseruk.github.io/knowledge_base/sitemap.xml
