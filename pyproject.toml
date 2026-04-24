@@ -1,0 +1,22 @@
+[project]
+name = "knowledge-base"
+version = "0.1.0"
+description = "J Rosser — Notebooks on Maths, ML & AI"
+requires-python = ">=3.14"
+dependencies = [
+    # Jupyter Book (pin to 1.x; 2.x is a different tool)
+    "jupyter-book>=1.0.3,<2",
+
+    # Sphinx extensions
+    "sphinxcontrib-bibtex>=2.6",
+    "sphinxext-opengraph>=0.9",
+    "sphinx-sitemap>=2.6",
+
+    # Scientific / notebook runtime
+    "matplotlib>=3.8",
+    "numpy>=1.26",
+    "sympy>=1.13",
+    "torch>=2.2",
+    "ipykernel>=6.29",
+    "ipywidgets>=8.1",
+]

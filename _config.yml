@@ -1,11 +1,15 @@
 # Jupyter Book configuration
 # Docs: https://jupyterbook.org/customize/config.html
 
-title: "J Rosser — Notebooks on Maths & AI"
+title: "J Rosser — Notebooks on Maths, ML & AI"
 author: "J Rosser"
 logo: _static/logo.svg
 copyright: "2026"
 only_build_toc_files: true
+exclude_patterns:
+  - .venv
+  - _build
+  - "**.ipynb_checkpoints"
 
 execute:
   execute_notebooks: "cache"   # re-execute only when source changes

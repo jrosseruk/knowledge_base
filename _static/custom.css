@@ -239,6 +239,7 @@ button:focus-visible,
 }
 
 .kb-tag-ai     { background: var(--kb-primary-soft); color: var(--kb-primary-dark); }
+.kb-tag-ml     { background: #dbeafe; color: #1e40af; }
 .kb-tag-maths  { background: #fff3cd; color: #8a6d0b; }
 .kb-tag-paper  { background: #e2d9f3; color: #59359a; }
 .kb-tag-note   { background: #e6f4ea; color: #1e6b3a; }
@@ -253,6 +254,7 @@ html[data-theme="dark"] .kb-card {
 html[data-theme="dark"] .kb-entry::before {
   border-color: var(--pst-color-background, #14181f);
 }
+html[data-theme="dark"] .kb-tag-ml    { background: #1e3a5f; color: #93c5fd; }
 html[data-theme="dark"] .kb-tag-maths { background: #4a3a0a; color: #ffd966; }
 html[data-theme="dark"] .kb-tag-paper { background: #3a2a5c; color: #c8a2ff; }
 html[data-theme="dark"] .kb-tag-note  { background: #1e4530; color: #9ddcae; }

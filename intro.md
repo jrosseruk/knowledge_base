@@ -20,6 +20,18 @@
 ```{raw} html
 <ol class="kb-timeline">
 
+  <li class="kb-entry kb-entry--right">
+    <a class="kb-card" href="content/ml/hooks_explainer.html">
+      <span class="kb-date">Apr 24</span>
+      <span class="kb-tag kb-tag-ml">ML</span>
+      <h3 class="kb-title">Forward, backward, and hooks in PyTorch</h3>
+      <p class="kb-desc">What actually happens when you call <code>.backward()</code>,
+        and how <code>register_forward_hook</code> / <code>register_full_backward_hook</code>
+        let you capture per-layer (a, δ) factors — the building blocks for
+        K-FAC and influence estimation.</p>
+    </a>
+  </li>
+
   <li class="kb-entry kb-entry--left">
     <a class="kb-card" href="content/ai/infusion.html">
       <span class="kb-date">Apr 19</span>

@@ -16,6 +16,9 @@ parts:
       - file: content/maths/hvp
       - file: content/maths/kronecker
       - file: content/maths/fisher
+  - caption: ML
+    chapters:
+      - file: content/ml/hooks_explainer
   - caption: Appendix
     chapters:
       - file: references
