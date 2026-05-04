@@ -5,17 +5,11 @@
 format: jb-book
 root: intro
 parts:
-  - caption: AI research
+  - caption: Training data attribution
     chapters:
-      - file: content/ai/infusion
-      - file: content/ai/grpo
-      - file: content/ai/loss-landscapes
-  - caption: Maths
-    chapters:
-      - file: content/maths/index
-      - file: content/maths/hvp
-      - file: content/maths/kronecker
-      - file: content/maths/fisher
+      - file: content/training-data-attribution/index
+        sections:
+          - file: content/training-data-attribution/influence_functions
   - caption: ML
     chapters:
       - file: content/ml/hooks_explainer

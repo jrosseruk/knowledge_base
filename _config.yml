@@ -31,6 +31,8 @@ parse:
     - tasklist
 
 sphinx:
+  local_extensions:
+    timeline: _ext
   config:
     html_theme: sphinx_book_theme
     html_show_copyright: true
@@ -105,7 +107,7 @@ html:
   use_repository_button: true
   use_edit_page_button: true
   home_page_in_navbar: true
-  baseurl: "https://jrosseruk.github.io/knowledge_base/"
+  baseurl: "https://jrosser.co.uk/knowledge_base/"
   extra_footer: |
     <p>Built with <a href="https://jupyterbook.org">Jupyter Book</a>.</p>
 
