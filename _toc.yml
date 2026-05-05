@@ -7,9 +7,7 @@ root: intro
 parts:
   - caption: Training data attribution
     chapters:
-      - file: content/training-data-attribution/index
-        sections:
-          - file: content/training-data-attribution/influence_functions
+      - file: content/training-data-attribution/influence_functions
   - caption: ML
     chapters:
       - file: content/ml/hooks_explainer
