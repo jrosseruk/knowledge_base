@@ -5,6 +5,12 @@
 format: jb-book
 root: intro
 parts:
+  - caption: Sparse autoencoders
+    chapters:
+      - file: content/sae/01_superposition_and_saes
+      - file: content/sae/02_architectures_jumprelu
+      - file: content/sae/03_neuronpedia_dashboard
+      - file: content/sae/04_train_jumprelu_gemma3_1b
   - caption: Training data attribution
     chapters:
       - file: content/training-data-attribution/influence_functions
