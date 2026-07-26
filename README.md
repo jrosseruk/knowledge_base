@@ -16,7 +16,7 @@ Live site: <https://jrosseruk.github.io/knowledge_base/>
 ├── intro.md                 # landing page (timeline auto-generated from kb_* front-matter)
 ├── _ext/timeline.py         # the timeline Sphinx extension
 ├── content/
-│   ├── sae/                 # SAE speedrun: 00 primer → 01 superposition → 02 JumpReLU
+│   ├── sae/                 # SAE speedrun: 01 SAEs from scratch → 02 JumpReLU
 │   │                        #   → 03 Neuronpedia dashboard → 04 train on Gemma 3 1B
 │   ├── training-data-attribution/
 │   └── ml/
