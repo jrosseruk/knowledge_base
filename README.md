@@ -13,12 +13,14 @@ Live site: <https://jrosseruk.github.io/knowledge_base/>
 .
 ├── _config.yml              # Jupyter Book config
 ├── _toc.yml                 # table of contents (which pages appear, in what order)
-├── intro.md                 # landing page
+├── intro.md                 # landing page (timeline auto-generated from kb_* front-matter)
+├── _ext/timeline.py         # the timeline Sphinx extension
 ├── content/
-│   ├── ai/
-│   │   └── infusion.ipynb   # first notebook (influence-function edits)
-│   └── maths/
-│       └── index.md         # section landing page
+│   ├── sae/                 # SAE speedrun: 00 primer → 01 superposition → 02 JumpReLU
+│   │                        #   → 03 Neuronpedia dashboard → 04 train on Gemma 3 1B
+│   ├── training-data-attribution/
+│   └── ml/
+├── references.md            # bibliography page (references.bib)
 ├── requirements.txt
 └── .github/workflows/deploy.yml
 ```
