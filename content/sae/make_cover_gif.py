@@ -34,7 +34,7 @@ def ease(t):
 def phase(f, a, b):
     return float(ease((f - a) / max(b - a, 1)))
 
-fig, ax = plt.subplots(figsize=(W / 100, H / 100), dpi=100)
+fig, ax = plt.subplots(figsize=(W / 100, H / 100), dpi=150)   # 1800x1013 output
 fig.patch.set_facecolor(BG)
 ax.set_position([0, 0, 1, 1])          # axes fill the figure: data coords == pixels, true centering
 
