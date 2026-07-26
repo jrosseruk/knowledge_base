@@ -7,6 +7,7 @@ root: intro
 parts:
   - caption: Sparse autoencoders
     chapters:
+      - file: content/sae/00_autoencoders_from_scratch
       - file: content/sae/01_superposition_and_saes
       - file: content/sae/02_architectures_jumprelu
       - file: content/sae/03_neuronpedia_dashboard
