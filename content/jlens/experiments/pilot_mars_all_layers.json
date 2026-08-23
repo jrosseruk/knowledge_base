@@ -1,0 +1,1549 @@
+{
+ "model": "google/gemma-3-12b-it",
+ "prompt": "Fact: The color of the planet fourth from the Sun is ",
+ "greedy_continuation": "\nred.\n\nThis is",
+ "n_corpus_sequences": 64,
+ "seq_len": 128,
+ "token_ids": {
+  "Mars": 81522,
+  "red": 1192
+ },
+ "rows": [
+  {
+   "layer": 0,
+   "j": {
+    "Mars_rank": 110604,
+    "red_rank": 6288,
+    "top": [
+     "er",
+     "o",
+     "ed",
+     "i",
+     "an",
+     "e",
+     "en",
+     "ar"
+    ]
+   },
+   "logit": {
+    "Mars_rank": 144059,
+    "red_rank": 100656,
+    "top": [
+     "\u0928",
+     "quele",
+     "\u0627\u0646",
+     "\u043d\u0430",
+     "\u043b",
+     "in",
+     "P",
+     "zelfde"
+    ]
+   },
+   "seconds": 6.67
+  },
+  {
+   "layer": 1,
+   "j": {
+    "Mars_rank": 89925,
+    "red_rank": 7718,
+    "top": [
+     "o",
+     "er",
+     "e",
+     "i",
+     "an",
+     "ed",
+     "en",
+     "u"
+    ]
+   },
+   "logit": {
+    "Mars_rank": 159276,
+    "red_rank": 75166,
+    "top": [
+     "\u0928",
+     "\u0627\u0646",
+     "\u043d\u0430",
+     "in",
+     " \u0410\u0443",
+     "\u82b0",
+     "quele",
+     " \u0406\u043d"
+    ]
+   },
+   "seconds": 4.02
+  },
+  {
+   "layer": 2,
+   "j": {
+    "Mars_rank": 126561,
+    "red_rank": 17628,
+    "top": [
+     "o",
+     "er",
+     "e",
+     "ed",
+     "an",
+     "i",
+     "en",
+     "a"
+    ]
+   },
+   "logit": {
+    "Mars_rank": 210632,
+    "red_rank": 73250,
+    "top": [
+     " In",
+     " \u0410\u0443",
+     "in",
+     "\u82b0",
+     "\u0928",
+     " \u0406\u043d",
+     "\u88f5",
+     " I"
+    ]
+   },
+   "seconds": 3.95
+  },
+  {
+   "layer": 3,
+   "j": {
+    "Mars_rank": 139532,
+    "red_rank": 14568,
+    "top": [
+     "er",
+     "o",
+     "e",
+     "ed",
+     "an",
+     "i",
+     "a",
+     "en"
+    ]
+   },
+   "logit": {
+    "Mars_rank": 222243,
+    "red_rank": 78597,
+    "top": [
+     " In",
+     " \u0410\u0443",
+     "\u88f5",
+     " I",
+     "\u82b0",
+     "in",
+     " \u0406\u043d",
+     " and"
+    ]
+   },
+   "seconds": 3.92
+  },
+  {
+   "layer": 4,
+   "j": {
+    "Mars_rank": 175848,
+    "red_rank": 9466,
+    "top": [
+     "er",
+     "o",
+     "e",
+     "ed",
+     "i",
+     "an",
+     "a",
+     "en"
+    ]
+   },
+   "logit": {
+    "Mars_rank": 235035,
+    "red_rank": 107387,
+    "top": [
+     " In",
+     "\u88f5",
+     ")$,",
+     "zelfde",
+     "\u82b0",
+     " I",
+     " \u0410\u0443",
+     " Andere"
+    ]
+   },
+   "seconds": 3.87
+  },
+  {
+   "layer": 5,
+   "j": {
+    "Mars_rank": 161532,
+    "red_rank": 10106,
+    "top": [
+     "er",
+     "o",
+     "e",
+     "ed",
+     "i",
+     "an",
+     "a",
+     "en"
+    ]
+   },
+   "logit": {
+    "Mars_rank": 227048,
+    "red_rank": 131106,
+    "top": [
+     " In",
+     " I",
+     ")$,",
+     "\u88f5",
+     " and",
+     " is",
+     "zelfde",
+     "\u82b0"
+    ]
+   },
+   "seconds": 3.78
+  },
+  {
+   "layer": 6,
+   "j": {
+    "Mars_rank": 138769,
+    "red_rank": 7779,
+    "top": [
+     "o",
+     "er",
+     "e",
+     "ed",
+     "i",
+     "an",
+     "a",
+     "en"
+    ]
+   },
+   "logit": {
+    "Mars_rank": 206336,
+    "red_rank": 178615,
+    "top": [
+     " is",
+     " In",
+     ")$,",
+     " \u05d5",
+     " \u03b5\u03af\u03bd\u03b1\u03b9",
+     " and",
+     " \u0639\u0632\u06cc\u0632",
+     " in"
+    ]
+   },
+   "seconds": 3.74
+  },
+  {
+   "layer": 7,
+   "j": {
+    "Mars_rank": 105320,
+    "red_rank": 4301,
+    "top": [
+     "o",
+     "er",
+     "e",
+     "ed",
+     "i",
+     "a",
+     "an",
+     "en"
+    ]
+   },
+   "logit": {
+    "Mars_rank": 180525,
+    "red_rank": 140336,
+    "top": [
+     " is",
+     " In",
+     "\u82b0",
+     " and",
+     " has",
+     " in",
+     " \u05d5",
+     " Laufe"
+    ]
+   },
+   "seconds": 3.68
+  },
+  {
+   "layer": 8,
+   "j": {
+    "Mars_rank": 96831,
+    "red_rank": 4743,
+    "top": [
+     "o",
+     "ed",
+     "e",
+     "er",
+     "i",
+     "an",
+     "a",
+     "es"
+    ]
+   },
+   "logit": {
+    "Mars_rank": 177628,
+    "red_rank": 163912,
+    "top": [
+     " is",
+     "\u82b0",
+     " Laufe",
+     " In",
+     " has",
+     " and",
+     " \u0c26\u0c4d\u0c35\u0c3e\u0c30\u0c3e",
+     " \u0907\u0928"
+    ]
+   },
+   "seconds": 3.62
+  },
+  {
+   "layer": 9,
+   "j": {
+    "Mars_rank": 63264,
+    "red_rank": 4786,
+    "top": [
+     "o",
+     "e",
+     "ed",
+     "er",
+     "i",
+     "a",
+     "an",
+     "es"
+    ]
+   },
+   "logit": {
+    "Mars_rank": 198550,
+    "red_rank": 115283,
+    "top": [
+     " is",
+     " has",
+     " and",
+     " Laufe",
+     " \u03b5\u03af\u03bd\u03b1\u03b9",
+     "\u82b0",
+     " In",
+     " was"
+    ]
+   },
+   "seconds": 3.59
+  },
+  {
+   "layer": 10,
+   "j": {
+    "Mars_rank": 77862,
+    "red_rank": 9804,
+    "top": [
+     "o",
+     "e",
+     "ed",
+     "er",
+     "i",
+     "a",
+     "an",
+     "es"
+    ]
+   },
+   "logit": {
+    "Mars_rank": 184805,
+    "red_rank": 129399,
+    "top": [
+     " is",
+     " has",
+     "\u306b\u8fd1\u3044",
+     " was",
+     " and",
+     " in",
+     " In",
+     " \u0c26\u0c4d\u0c35\u0c3e\u0c30\u0c3e"
+    ]
+   },
+   "seconds": 3.52
+  },
+  {
+   "layer": 11,
+   "j": {
+    "Mars_rank": 88121,
+    "red_rank": 6415,
+    "top": [
+     "o",
+     "e",
+     "ed",
+     "er",
+     " color",
+     "i",
+     " colors",
+     "a"
+    ]
+   },
+   "logit": {
+    "Mars_rank": 162816,
+    "red_rank": 58382,
+    "top": [
+     " is",
+     " and",
+     " has",
+     " In",
+     "\u306b\u8fd1\u3044",
+     " \u0c26\u0c4d\u0c35\u0c3e\u0c30\u0c3e",
+     " in",
+     " was"
+    ]
+   },
+   "seconds": 3.46
+  },
+  {
+   "layer": 12,
+   "j": {
+    "Mars_rank": 86753,
+    "red_rank": 3227,
+    "top": [
+     " color",
+     "o",
+     " colors",
+     "e",
+     "ed",
+     " colored",
+     "er",
+     "i"
+    ]
+   },
+   "logit": {
+    "Mars_rank": 167409,
+    "red_rank": 18425,
+    "top": [
+     " and",
+     " is",
+     " has",
+     " In",
+     "\u306b\u8fd1\u3044",
+     " in",
+     " \u0c26\u0c4d\u0c35\u0c3e\u0c30\u0c3e",
+     " hues"
+    ]
+   },
+   "seconds": 3.41
+  },
+  {
+   "layer": 13,
+   "j": {
+    "Mars_rank": 31099,
+    "red_rank": 2553,
+    "top": [
+     " color",
+     " colors",
+     "o",
+     "ed",
+     "e",
+     " colored",
+     " pigment",
+     " pigments"
+    ]
+   },
+   "logit": {
+    "Mars_rank": 153504,
+    "red_rank": 18449,
+    "top": [
+     " and",
+     " is",
+     " has",
+     " or",
+     " hues",
+     " in",
+     " In",
+     " to"
+    ]
+   },
+   "seconds": 3.37
+  },
+  {
+   "layer": 14,
+   "j": {
+    "Mars_rank": 29342,
+    "red_rank": 3097,
+    "top": [
+     " color",
+     " colors",
+     "o",
+     "e",
+     "ed",
+     " colored",
+     " pigment",
+     " pigments"
+    ]
+   },
+   "logit": {
+    "Mars_rank": 105573,
+    "red_rank": 20697,
+    "top": [
+     " and",
+     " is",
+     " has",
+     " or",
+     " In",
+     " in",
+     " to",
+     " was"
+    ]
+   },
+   "seconds": 3.31
+  },
+  {
+   "layer": 15,
+   "j": {
+    "Mars_rank": 27842,
+    "red_rank": 4948,
+    "top": [
+     " colors",
+     " color",
+     "o",
+     " colored",
+     " hues",
+     "ed",
+     " pigments",
+     "e"
+    ]
+   },
+   "logit": {
+    "Mars_rank": 84410,
+    "red_rank": 25485,
+    "top": [
+     " and",
+     " is",
+     " has",
+     " In",
+     " was",
+     " or",
+     " to",
+     " \u10dd\u10e0\u10d2\u10d0\u10dc\u10dd"
+    ]
+   },
+   "seconds": 3.24
+  },
+  {
+   "layer": 16,
+   "j": {
+    "Mars_rank": 3276,
+    "red_rank": 5062,
+    "top": [
+     "o",
+     " colors",
+     "<start_of_image>",
+     " colours",
+     " color",
+     "colors",
+     "\u984f\u8272",
+     " hues"
+    ]
+   },
+   "logit": {
+    "Mars_rank": 83249,
+    "red_rank": 6681,
+    "top": [
+     " and",
+     " is",
+     " or",
+     " has",
+     " to",
+     " in",
+     " are",
+     " In"
+    ]
+   },
+   "seconds": 3.19
+  },
+  {
+   "layer": 17,
+   "j": {
+    "Mars_rank": 992,
+    "red_rank": 5292,
+    "top": [
+     " pigments",
+     "\u984f\u8272",
+     " colors",
+     "colors",
+     "\u989c\u8272",
+     " Earth",
+     " hues",
+     " pigment"
+    ]
+   },
+   "logit": {
+    "Mars_rank": 58090,
+    "red_rank": 9898,
+    "top": [
+     " and",
+     " is",
+     " has",
+     " or",
+     " to",
+     " craters",
+     " are",
+     " continents"
+    ]
+   },
+   "seconds": 3.13
+  },
+  {
+   "layer": 18,
+   "j": {
+    "Mars_rank": 920,
+    "red_rank": 7398,
+    "top": [
+     " pigments",
+     "\u989c\u8272",
+     "\u984f\u8272",
+     "colors",
+     " pigment",
+     " colours",
+     " hues",
+     " colors"
+    ]
+   },
+   "logit": {
+    "Mars_rank": 48202,
+    "red_rank": 6559,
+    "top": [
+     " is",
+     " has",
+     " and",
+     " to",
+     " craters",
+     " continents",
+     " pigments",
+     " hues"
+    ]
+   },
+   "seconds": 3.08
+  },
+  {
+   "layer": 19,
+   "j": {
+    "Mars_rank": 709,
+    "red_rank": 8952,
+    "top": [
+     " pigments",
+     "colors",
+     "\u989c\u8272",
+     "\u984f\u8272",
+     " colores",
+     " iridescent",
+     " hues",
+     "Earth"
+    ]
+   },
+   "logit": {
+    "Mars_rank": 19316,
+    "red_rank": 966,
+    "top": [
+     " and",
+     " to",
+     " or",
+     " is",
+     " billions",
+     " volcanoes",
+     " continents",
+     " billion"
+    ]
+   },
+   "seconds": 3.04
+  },
+  {
+   "layer": 20,
+   "j": {
+    "Mars_rank": 548,
+    "red_rank": 12710,
+    "top": [
+     "\u984f\u8272",
+     " pigments",
+     "colors",
+     "\u989c\u8272",
+     " colores",
+     " hues",
+     "Watercolor",
+     "\u8272\u5f69"
+    ]
+   },
+   "logit": {
+    "Mars_rank": 17432,
+    "red_rank": 115,
+    "top": [
+     " to",
+     " and",
+     " is",
+     " or",
+     " has",
+     " smog",
+     " are",
+     " cataracts"
+    ]
+   },
+   "seconds": 2.97
+  },
+  {
+   "layer": 21,
+   "j": {
+    "Mars_rank": 2198,
+    "red_rank": 32666,
+    "top": [
+     "\u984f\u8272",
+     " pigments",
+     "\u989c\u8272",
+     " colores",
+     " photosynthetic",
+     "colors",
+     " hues",
+     " \u0444\u043e\u0442\u043e\u0433\u0440\u0430\u0444\u0438\u0438"
+    ]
+   },
+   "logit": {
+    "Mars_rank": 9128,
+    "red_rank": 1168,
+    "top": [
+     " to",
+     " or",
+     " is",
+     " hues",
+     " algae",
+     " smog",
+     " cataracts",
+     " has"
+    ]
+   },
+   "seconds": 2.9
+  },
+  {
+   "layer": 22,
+   "j": {
+    "Mars_rank": 1736,
+    "red_rank": 36233,
+    "top": [
+     "\u984f\u8272",
+     " colores",
+     "colors",
+     "\u989c\u8272",
+     "Watercolor",
+     "\u56fe\u50cf",
+     " \u0438\u0437\u043e\u0431\u0440\u0430\u0436\u0435\u043d\u0438\u044f",
+     " pigments"
+    ]
+   },
+   "logit": {
+    "Mars_rank": 3913,
+    "red_rank": 1215,
+    "top": [
+     " algae",
+     " ",
+     " or",
+     "\u5b83\u4eec",
+     " to",
+     " hues",
+     "\u5b83\u4eec\u7684",
+     " smog"
+    ]
+   },
+   "seconds": 2.89
+  },
+  {
+   "layer": 23,
+   "j": {
+    "Mars_rank": 1683,
+    "red_rank": 65812,
+    "top": [
+     "Watercolor",
+     "Scientists",
+     "\u984f\u8272",
+     "asteroid",
+     "watercolor",
+     " pigments",
+     "painted",
+     "Colorful"
+    ]
+   },
+   "logit": {
+    "Mars_rank": 6378,
+    "red_rank": 1830,
+    "top": [
+     " ",
+     " algae",
+     " to",
+     " more",
+     " zebra",
+     " \"",
+     " just",
+     " because"
+    ]
+   },
+   "seconds": 2.78
+  },
+  {
+   "layer": 24,
+   "j": {
+    "Mars_rank": 2515,
+    "red_rank": 75484,
+    "top": [
+     "Watercolor",
+     "Scientists",
+     "Colorful",
+     "\u984f\u8272",
+     "watercolor",
+     " incroyable",
+     " prachtige",
+     " monta\u00f1as"
+    ]
+   },
+   "logit": {
+    "Mars_rank": 9240,
+    "red_rank": 3177,
+    "top": [
+     " ",
+     " algae",
+     " zebra",
+     " to",
+     " giant",
+     " just",
+     " often",
+     " more"
+    ]
+   },
+   "seconds": 2.75
+  },
+  {
+   "layer": 25,
+   "j": {
+    "Mars_rank": 2283,
+    "red_rank": 99937,
+    "top": [
+     "Colorful",
+     "Watercolor",
+     " prachtige",
+     "colorful",
+     "\u984f\u8272",
+     "painted",
+     " hermoso",
+     " incroyable"
+    ]
+   },
+   "logit": {
+    "Mars_rank": 3789,
+    "red_rank": 273,
+    "top": [
+     " ",
+     " algae",
+     "\n",
+     " green",
+     " \"",
+     " more",
+     " because",
+     " or"
+    ]
+   },
+   "seconds": 2.7
+  },
+  {
+   "layer": 26,
+   "j": {
+    "Mars_rank": 1155,
+    "red_rank": 140252,
+    "top": [
+     "Scientists",
+     " incroyable",
+     " hermoso",
+     "asteroid",
+     " prachtige",
+     " monta\u00f1as",
+     " asteroids",
+     " volcanoes"
+    ]
+   },
+   "logit": {
+    "Mars_rank": 2759,
+    "red_rank": 826,
+    "top": [
+     " ",
+     " almost",
+     " \"",
+     " purple",
+     " green",
+     " dark",
+     " algae",
+     " fluffy"
+    ]
+   },
+   "seconds": 2.63
+  },
+  {
+   "layer": 27,
+   "j": {
+    "Mars_rank": 294,
+    "red_rank": 60508,
+    "top": [
+     " asteroids",
+     " volcanoes",
+     "asteroid",
+     " rouge\u00e2tre",
+     " asteroid",
+     " plan\u00e8te",
+     "Colorful",
+     "Earth"
+    ]
+   },
+   "logit": {
+    "Mars_rank": 1076,
+    "red_rank": 417,
+    "top": [
+     " ",
+     " yellow",
+     " orange",
+     " \"",
+     " purple",
+     " sulfur",
+     " fourth",
+     " blue"
+    ]
+   },
+   "seconds": 2.6
+  },
+  {
+   "layer": 28,
+   "j": {
+    "Mars_rank": 169,
+    "red_rank": 18453,
+    "top": [
+     " yellowish",
+     "\u9ec4\u8272",
+     "purple",
+     " reddish",
+     " brownish",
+     " greenish",
+     " naranja",
+     " bluish"
+    ]
+   },
+   "logit": {
+    "Mars_rank": 486,
+    "red_rank": 163,
+    "top": [
+     " yellow",
+     " green",
+     " orange",
+     " ",
+     " brown",
+     " blue",
+     " red",
+     " black"
+    ]
+   },
+   "seconds": 2.54
+  },
+  {
+   "layer": 29,
+   "j": {
+    "Mars_rank": 205,
+    "red_rank": 11291,
+    "top": [
+     " yellowish",
+     " brownish",
+     " reddish",
+     " greenish",
+     " bluish",
+     "\u9ec4\u8272",
+     "Jupiter",
+     "purple"
+    ]
+   },
+   "logit": {
+    "Mars_rank": 384,
+    "red_rank": 120,
+    "top": [
+     " yellow",
+     " brown",
+     " blue",
+     " reddish",
+     " Jupiter",
+     " green",
+     " brownish",
+     " red"
+    ]
+   },
+   "seconds": 2.47
+  },
+  {
+   "layer": 30,
+   "j": {
+    "Mars_rank": 101,
+    "red_rank": 5372,
+    "top": [
+     "Earth",
+     " planet",
+     " Earth",
+     " plan\u00e8te",
+     "\u5730\u7403",
+     " Uranus",
+     "\u84dd\u8272",
+     " yellowish"
+    ]
+   },
+   "logit": {
+    "Mars_rank": 107,
+    "red_rank": 78,
+    "top": [
+     " Earth",
+     " planet",
+     " blue",
+     " yellow",
+     " brown",
+     " green",
+     " earth",
+     "Earth"
+    ]
+   },
+   "seconds": 2.43
+  },
+  {
+   "layer": 31,
+   "j": {
+    "Mars_rank": 68,
+    "red_rank": 1065,
+    "top": [
+     "Earth",
+     " yellowish",
+     " reddish",
+     " Uranus",
+     " brownish",
+     "\u84dd\u8272",
+     "\u9ec4\u8272",
+     " bluish"
+    ]
+   },
+   "logit": {
+    "Mars_rank": 99,
+    "red_rank": 36,
+    "top": [
+     " blue",
+     " brown",
+     " yellow",
+     " Earth",
+     " green",
+     " red",
+     " planet",
+     " purple"
+    ]
+   },
+   "seconds": 2.38
+  },
+  {
+   "layer": 32,
+   "j": {
+    "Mars_rank": 45,
+    "red_rank": 546,
+    "top": [
+     " bluish",
+     " reddish",
+     "\u84dd\u8272",
+     " yellowish",
+     "Earth",
+     " purple",
+     "purple",
+     " blue"
+    ]
+   },
+   "logit": {
+    "Mars_rank": 91,
+    "red_rank": 16,
+    "top": [
+     " blue",
+     " red",
+     " brown",
+     " Earth",
+     " green",
+     " purple",
+     "blue",
+     " reddish"
+    ]
+   },
+   "seconds": 2.32
+  },
+  {
+   "layer": 33,
+   "j": {
+    "Mars_rank": 23,
+    "red_rank": 395,
+    "top": [
+     "Earth",
+     " brownish",
+     " Earth",
+     " reddish",
+     " planet",
+     " bluish",
+     "Planet",
+     "planet"
+    ]
+   },
+   "logit": {
+    "Mars_rank": 40,
+    "red_rank": 13,
+    "top": [
+     " brown",
+     " blue",
+     " Earth",
+     "brown",
+     " planet",
+     "Earth",
+     " brownish",
+     " earth"
+    ]
+   },
+   "seconds": 2.25
+  },
+  {
+   "layer": 34,
+   "j": {
+    "Mars_rank": 1,
+    "red_rank": 197,
+    "top": [
+     "Mars",
+     " reddish",
+     " blue",
+     " Mars",
+     " bluish",
+     " Jupiter",
+     " Uranus",
+     " brownish"
+    ]
+   },
+   "logit": {
+    "Mars_rank": 12,
+    "red_rank": 20,
+    "top": [
+     " blue",
+     " brown",
+     " planet",
+     " red",
+     "brown",
+     "blue",
+     " Jupiter",
+     " Venus"
+    ]
+   },
+   "seconds": 2.2
+  },
+  {
+   "layer": 35,
+   "j": {
+    "Mars_rank": 13,
+    "red_rank": 161,
+    "top": [
+     " planet",
+     " planets",
+     "Planet",
+     " Planet",
+     "planet",
+     " blue",
+     " Jupiter",
+     " Planets"
+    ]
+   },
+   "logit": {
+    "Mars_rank": 20,
+    "red_rank": 29,
+    "top": [
+     " blue",
+     " planet",
+     " planets",
+     "blue",
+     " brown",
+     " Jupiter",
+     "Planet",
+     "planet"
+    ]
+   },
+   "seconds": 2.15
+  },
+  {
+   "layer": 36,
+   "j": {
+    "Mars_rank": 5,
+    "red_rank": 91,
+    "top": [
+     " planet",
+     " blue",
+     "Planet",
+     "planet",
+     "Mars",
+     " reddish",
+     "blue",
+     " planets"
+    ]
+   },
+   "logit": {
+    "Mars_rank": 13,
+    "red_rank": 21,
+    "top": [
+     " blue",
+     " planet",
+     " red",
+     " reddish",
+     " brown",
+     " Earth",
+     " planets",
+     "blue"
+    ]
+   },
+   "seconds": 2.1
+  },
+  {
+   "layer": 37,
+   "j": {
+    "Mars_rank": 2,
+    "red_rank": 32,
+    "top": [
+     " reddish",
+     "Mars",
+     " Mars",
+     " planet",
+     " blue",
+     " Earth",
+     "Earth",
+     "Planet"
+    ]
+   },
+   "logit": {
+    "Mars_rank": 8,
+    "red_rank": 7,
+    "top": [
+     " red",
+     " blue",
+     " reddish",
+     " Mars",
+     " Earth",
+     " planet",
+     "red",
+     "Mars"
+    ]
+   },
+   "seconds": 2.05
+  },
+  {
+   "layer": 38,
+   "j": {
+    "Mars_rank": 4,
+    "red_rank": 18,
+    "top": [
+     " blue",
+     " reddish",
+     "blue",
+     "Mars",
+     " Mars",
+     " bluish",
+     " red",
+     "Blue"
+    ]
+   },
+   "logit": {
+    "Mars_rank": 8,
+    "red_rank": 5,
+    "top": [
+     " blue",
+     " red",
+     " reddish",
+     "blue",
+     "red",
+     " Mars",
+     " bluish",
+     "Mars"
+    ]
+   },
+   "seconds": 1.98
+  },
+  {
+   "layer": 39,
+   "j": {
+    "Mars_rank": 22,
+    "red_rank": 7,
+    "top": [
+     " red",
+     " reddish",
+     "Red",
+     " Red",
+     "\u7ea2\u8272",
+     "\u7ea2",
+     "red",
+     " \u043a\u0440\u0430\u0441"
+    ]
+   },
+   "logit": {
+    "Mars_rank": 23,
+    "red_rank": 3,
+    "top": [
+     " red",
+     " reddish",
+     "red",
+     "Red",
+     " Red",
+     "\u7ea2",
+     " blue",
+     "\u7ea2\u8272"
+    ]
+   },
+   "seconds": 1.9
+  },
+  {
+   "layer": 40,
+   "j": {
+    "Mars_rank": 21,
+    "red_rank": 5,
+    "top": [
+     " red",
+     " reddish",
+     " Red",
+     "Red",
+     "red",
+     "\u7ea2",
+     " crimson",
+     "\u7ea2\u8272"
+    ]
+   },
+   "logit": {
+    "Mars_rank": 21,
+    "red_rank": 3,
+    "top": [
+     " red",
+     " reddish",
+     "red",
+     "Red",
+     " Red",
+     " blue",
+     "\u7ea2",
+     " RED"
+    ]
+   },
+   "seconds": 1.88
+  },
+  {
+   "layer": 41,
+   "j": {
+    "Mars_rank": 8,
+    "red_rank": 11,
+    "top": [
+     " blue",
+     " red",
+     " reddish",
+     " Mars",
+     "Red",
+     "blue",
+     "Blue",
+     "Mars"
+    ]
+   },
+   "logit": {
+    "Mars_rank": 12,
+    "red_rank": 5,
+    "top": [
+     " blue",
+     " red",
+     " reddish",
+     "blue",
+     "red",
+     "Red",
+     " Red",
+     "Blue"
+    ]
+   },
+   "seconds": 1.83
+  },
+  {
+   "layer": 42,
+   "j": {
+    "Mars_rank": 7,
+    "red_rank": 8,
+    "top": [
+     " red",
+     " blue",
+     " reddish",
+     " Mars",
+     " Red",
+     "Red",
+     "Mars",
+     "red"
+    ]
+   },
+   "logit": {
+    "Mars_rank": 9,
+    "red_rank": 3,
+    "top": [
+     " red",
+     " blue",
+     "red",
+     "blue",
+     "Red",
+     " reddish",
+     " Red",
+     " Mars"
+    ]
+   },
+   "seconds": 1.75
+  },
+  {
+   "layer": 43,
+   "j": {
+    "Mars_rank": 2,
+    "red_rank": 35,
+    "top": [
+     " Mars",
+     "Mars",
+     " Martian",
+     " \u041c\u0430\u0440",
+     "Mar",
+     " mars",
+     "\u041c\u0430\u0440",
+     " \u043c\u0430\u0440"
+    ]
+   },
+   "logit": {
+    "Mars_rank": 3,
+    "red_rank": 17,
+    "top": [
+     "Mar",
+     " Mars",
+     "Mars",
+     " mar",
+     "MAR",
+     " Mar",
+     "mar",
+     "\u041c\u0430\u0440"
+    ]
+   },
+   "seconds": 1.72
+  },
+  {
+   "layer": 44,
+   "j": {
+    "Mars_rank": 2,
+    "red_rank": 20,
+    "top": [
+     " Mars",
+     "Mars",
+     "Mar",
+     " Martian",
+     " \u041c\u0430\u0440",
+     "MAR",
+     " mars",
+     " MAR"
+    ]
+   },
+   "logit": {
+    "Mars_rank": 3,
+    "red_rank": 13,
+    "top": [
+     "Mar",
+     " Mars",
+     "Mars",
+     "MAR",
+     " \u041c\u0430\u0440",
+     " MAR",
+     " mar",
+     " Mar"
+    ]
+   },
+   "seconds": 1.65
+  },
+  {
+   "layer": 45,
+   "j": {
+    "Mars_rank": 16,
+    "red_rank": 1,
+    "top": [
+     "red",
+     " blue",
+     " red",
+     " Red",
+     " Mars",
+     " rusty",
+     "\n",
+     "Red"
+    ]
+   },
+   "logit": {
+    "Mars_rank": 8,
+    "red_rank": 2,
+    "top": [
+     "Red",
+     "red",
+     " Red",
+     " red",
+     " blue",
+     "\u84dd",
+     " rust",
+     "Blue"
+    ]
+   },
+   "seconds": 1.6
+  },
+  {
+   "layer": 46,
+   "j": {
+    "Mars_rank": 40,
+    "red_rank": 1,
+    "top": [
+     "red",
+     "\n",
+     "\u84dd",
+     " blue",
+     " red",
+     " reddish",
+     "\n\n",
+     "blue"
+    ]
+   },
+   "logit": {
+    "Mars_rank": 34,
+    "red_rank": 4,
+    "top": [
+     "\n",
+     "1",
+     "\n\n",
+     "8",
+     "2",
+     "red",
+     "\ufffd",
+     "5"
+    ]
+   },
+   "seconds": 1.54
+  },
+  {
+   "layer": 47,
+   "j": {
+    "Mars_rank": 132,
+    "red_rank": 81,
+    "top": [
+     "\n",
+     "1",
+     "8",
+     "2",
+     "\n\n",
+     "7",
+     "4",
+     "5"
+    ]
+   },
+   "logit": {
+    "Mars_rank": 132,
+    "red_rank": 81,
+    "top": [
+     "\n",
+     "1",
+     "8",
+     "2",
+     "\n\n",
+     "7",
+     "4",
+     "5"
+    ]
+   },
+   "seconds": 1.48
+  }
+ ]
+}

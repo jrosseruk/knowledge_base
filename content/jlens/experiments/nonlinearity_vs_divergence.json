@@ -1,0 +1,441 @@
+{
+ "model": "google/gemma-3-12b-it",
+ "corpus_sequences": 64,
+ "probes": 24,
+ "tuned_lens": "tuned_lens_ols.pt",
+ "note": "J_l == A_l identically whenever F_l is globally affine; the gap between cos_J_vs_regression and cos_J_splithalf is the measured departure from affineness.",
+ "rows": [
+  {
+   "layer": 0,
+   "cos_J_vs_regression": 0.1465534269809723,
+   "cos_J_splithalf": 0.7486755847930908,
+   "cos_J_vs_identity": -0.03150744363665581,
+   "cos_regression_vs_identity": 0.15788838267326355,
+   "norm_ratio_J_over_regression": 0.1342790573835373,
+   "seconds": 62.4
+  },
+  {
+   "layer": 1,
+   "cos_J_vs_regression": 0.14682257175445557,
+   "cos_J_splithalf": 0.7699151039123535,
+   "cos_J_vs_identity": -0.029866252094507217,
+   "cos_regression_vs_identity": 0.10185351222753525,
+   "norm_ratio_J_over_regression": 0.14347806572914124,
+   "seconds": 56.1
+  },
+  {
+   "layer": 2,
+   "cos_J_vs_regression": 0.19547049701213837,
+   "cos_J_splithalf": 0.8138107657432556,
+   "cos_J_vs_identity": -0.06852245330810547,
+   "cos_regression_vs_identity": -0.010890605859458447,
+   "norm_ratio_J_over_regression": 0.1438675820827484,
+   "seconds": 39.8
+  },
+  {
+   "layer": 3,
+   "cos_J_vs_regression": 0.22351178526878357,
+   "cos_J_splithalf": 0.7973698377609253,
+   "cos_J_vs_identity": -0.039834123104810715,
+   "cos_regression_vs_identity": 0.023237425833940506,
+   "norm_ratio_J_over_regression": 0.1427968144416809,
+   "seconds": 39.2
+  },
+  {
+   "layer": 4,
+   "cos_J_vs_regression": 0.2006409764289856,
+   "cos_J_splithalf": 0.7866711616516113,
+   "cos_J_vs_identity": -0.004109283443540335,
+   "cos_regression_vs_identity": 0.0012806493323296309,
+   "norm_ratio_J_over_regression": 0.1393580585718155,
+   "seconds": 25.3
+  },
+  {
+   "layer": 5,
+   "cos_J_vs_regression": 0.21210777759552002,
+   "cos_J_splithalf": 0.8084821105003357,
+   "cos_J_vs_identity": 0.038031645119190216,
+   "cos_regression_vs_identity": 0.06207391619682312,
+   "norm_ratio_J_over_regression": 0.13780930638313293,
+   "seconds": 16.7
+  },
+  {
+   "layer": 6,
+   "cos_J_vs_regression": 0.24010679125785828,
+   "cos_J_splithalf": 0.8160812854766846,
+   "cos_J_vs_identity": 0.06640933454036713,
+   "cos_regression_vs_identity": 0.07416176795959473,
+   "norm_ratio_J_over_regression": 0.14672434329986572,
+   "seconds": 16.5
+  },
+  {
+   "layer": 7,
+   "cos_J_vs_regression": 0.26335763931274414,
+   "cos_J_splithalf": 0.8096128702163696,
+   "cos_J_vs_identity": 0.06844103336334229,
+   "cos_regression_vs_identity": 0.003421510336920619,
+   "norm_ratio_J_over_regression": 0.14542709290981293,
+   "seconds": 16.2
+  },
+  {
+   "layer": 8,
+   "cos_J_vs_regression": 0.24944846332073212,
+   "cos_J_splithalf": 0.8521842956542969,
+   "cos_J_vs_identity": 0.05373019725084305,
+   "cos_regression_vs_identity": -0.044423770159482956,
+   "norm_ratio_J_over_regression": 0.16163530945777893,
+   "seconds": 16.0
+  },
+  {
+   "layer": 9,
+   "cos_J_vs_regression": 0.21102839708328247,
+   "cos_J_splithalf": 0.8793377876281738,
+   "cos_J_vs_identity": 0.09994837641716003,
+   "cos_regression_vs_identity": -0.05376695096492767,
+   "norm_ratio_J_over_regression": 0.17363375425338745,
+   "seconds": 15.7
+  },
+  {
+   "layer": 10,
+   "cos_J_vs_regression": 0.2623487114906311,
+   "cos_J_splithalf": 0.8784455060958862,
+   "cos_J_vs_identity": 0.12094154953956604,
+   "cos_regression_vs_identity": 0.04102708399295807,
+   "norm_ratio_J_over_regression": 0.18018358945846558,
+   "seconds": 15.5
+  },
+  {
+   "layer": 11,
+   "cos_J_vs_regression": 0.23408864438533783,
+   "cos_J_splithalf": 0.9014942049980164,
+   "cos_J_vs_identity": 0.15256047248840332,
+   "cos_regression_vs_identity": 0.05706701800227165,
+   "norm_ratio_J_over_regression": 0.1919310986995697,
+   "seconds": 15.2
+  },
+  {
+   "layer": 12,
+   "cos_J_vs_regression": 0.23979124426841736,
+   "cos_J_splithalf": 0.8949893712997437,
+   "cos_J_vs_identity": 0.07670898735523224,
+   "cos_regression_vs_identity": 0.10795599222183228,
+   "norm_ratio_J_over_regression": 0.19687806069850922,
+   "seconds": 15.0
+  },
+  {
+   "layer": 13,
+   "cos_J_vs_regression": 0.2942788004875183,
+   "cos_J_splithalf": 0.9024419784545898,
+   "cos_J_vs_identity": 0.22160916030406952,
+   "cos_regression_vs_identity": 0.21053186058998108,
+   "norm_ratio_J_over_regression": 0.19827952980995178,
+   "seconds": 14.7
+  },
+  {
+   "layer": 14,
+   "cos_J_vs_regression": 0.2645953595638275,
+   "cos_J_splithalf": 0.88717120885849,
+   "cos_J_vs_identity": 0.17657475173473358,
+   "cos_regression_vs_identity": 0.09338828176259995,
+   "norm_ratio_J_over_regression": 0.2099432647228241,
+   "seconds": 14.5
+  },
+  {
+   "layer": 15,
+   "cos_J_vs_regression": 0.25339025259017944,
+   "cos_J_splithalf": 0.867705762386322,
+   "cos_J_vs_identity": 0.21176064014434814,
+   "cos_regression_vs_identity": 0.18187710642814636,
+   "norm_ratio_J_over_regression": 0.21116995811462402,
+   "seconds": 14.3
+  },
+  {
+   "layer": 16,
+   "cos_J_vs_regression": 0.2437787503004074,
+   "cos_J_splithalf": 0.8850201368331909,
+   "cos_J_vs_identity": 0.12769266963005066,
+   "cos_regression_vs_identity": 0.1833885908126831,
+   "norm_ratio_J_over_regression": 0.22807341814041138,
+   "seconds": 14.0
+  },
+  {
+   "layer": 17,
+   "cos_J_vs_regression": 0.34138473868370056,
+   "cos_J_splithalf": 0.8848416209220886,
+   "cos_J_vs_identity": 0.20747467875480652,
+   "cos_regression_vs_identity": 0.18288454413414001,
+   "norm_ratio_J_over_regression": 0.24316927790641785,
+   "seconds": 13.8
+  },
+  {
+   "layer": 18,
+   "cos_J_vs_regression": 0.36564573645591736,
+   "cos_J_splithalf": 0.8704441785812378,
+   "cos_J_vs_identity": 0.16619247198104858,
+   "cos_regression_vs_identity": 0.19511793553829193,
+   "norm_ratio_J_over_regression": 0.24664688110351562,
+   "seconds": 13.5
+  },
+  {
+   "layer": 19,
+   "cos_J_vs_regression": 0.42445823550224304,
+   "cos_J_splithalf": 0.9051083326339722,
+   "cos_J_vs_identity": 0.11418858170509338,
+   "cos_regression_vs_identity": 0.15630219876766205,
+   "norm_ratio_J_over_regression": 0.2821323871612549,
+   "seconds": 13.3
+  },
+  {
+   "layer": 20,
+   "cos_J_vs_regression": 0.4000546932220459,
+   "cos_J_splithalf": 0.9325127601623535,
+   "cos_J_vs_identity": -0.01454489678144455,
+   "cos_regression_vs_identity": 0.06870431452989578,
+   "norm_ratio_J_over_regression": 0.3030642867088318,
+   "seconds": 13.0
+  },
+  {
+   "layer": 21,
+   "cos_J_vs_regression": 0.41567620635032654,
+   "cos_J_splithalf": 0.9364498853683472,
+   "cos_J_vs_identity": -0.04614962264895439,
+   "cos_regression_vs_identity": 0.1219923123717308,
+   "norm_ratio_J_over_regression": 0.33377140760421753,
+   "seconds": 12.8
+  },
+  {
+   "layer": 22,
+   "cos_J_vs_regression": 0.4888302683830261,
+   "cos_J_splithalf": 0.9512612819671631,
+   "cos_J_vs_identity": 0.13207978010177612,
+   "cos_regression_vs_identity": 0.1346624791622162,
+   "norm_ratio_J_over_regression": 0.39164814352989197,
+   "seconds": 12.5
+  },
+  {
+   "layer": 23,
+   "cos_J_vs_regression": 0.5174883604049683,
+   "cos_J_splithalf": 0.9639467000961304,
+   "cos_J_vs_identity": 0.4269697070121765,
+   "cos_regression_vs_identity": 0.21855390071868896,
+   "norm_ratio_J_over_regression": 0.4297274053096771,
+   "seconds": 12.3
+  },
+  {
+   "layer": 24,
+   "cos_J_vs_regression": 0.4898352026939392,
+   "cos_J_splithalf": 0.973432719707489,
+   "cos_J_vs_identity": 0.49675893783569336,
+   "cos_regression_vs_identity": 0.3264097273349762,
+   "norm_ratio_J_over_regression": 0.5440462827682495,
+   "seconds": 12.0
+  },
+  {
+   "layer": 25,
+   "cos_J_vs_regression": 0.5453388094902039,
+   "cos_J_splithalf": 0.9823963046073914,
+   "cos_J_vs_identity": 0.5703507661819458,
+   "cos_regression_vs_identity": 0.35722655057907104,
+   "norm_ratio_J_over_regression": 0.5925920009613037,
+   "seconds": 11.8
+  },
+  {
+   "layer": 26,
+   "cos_J_vs_regression": 0.5900285243988037,
+   "cos_J_splithalf": 0.9818915128707886,
+   "cos_J_vs_identity": 0.5431615710258484,
+   "cos_regression_vs_identity": 0.38115280866622925,
+   "norm_ratio_J_over_regression": 0.5875773429870605,
+   "seconds": 11.6
+  },
+  {
+   "layer": 27,
+   "cos_J_vs_regression": 0.6050432920455933,
+   "cos_J_splithalf": 0.9843449592590332,
+   "cos_J_vs_identity": 0.5227627754211426,
+   "cos_regression_vs_identity": 0.3822349011898041,
+   "norm_ratio_J_over_regression": 0.619407057762146,
+   "seconds": 11.3
+  },
+  {
+   "layer": 28,
+   "cos_J_vs_regression": 0.6076643466949463,
+   "cos_J_splithalf": 0.982195258140564,
+   "cos_J_vs_identity": 0.5192574858665466,
+   "cos_regression_vs_identity": 0.36733660101890564,
+   "norm_ratio_J_over_regression": 0.6314725279808044,
+   "seconds": 11.1
+  },
+  {
+   "layer": 29,
+   "cos_J_vs_regression": 0.6426388621330261,
+   "cos_J_splithalf": 0.9843918085098267,
+   "cos_J_vs_identity": 0.5087175369262695,
+   "cos_regression_vs_identity": 0.39926421642303467,
+   "norm_ratio_J_over_regression": 0.6735012531280518,
+   "seconds": 10.8
+  },
+  {
+   "layer": 30,
+   "cos_J_vs_regression": 0.6463340520858765,
+   "cos_J_splithalf": 0.9863518476486206,
+   "cos_J_vs_identity": 0.4738926291465759,
+   "cos_regression_vs_identity": 0.3705032765865326,
+   "norm_ratio_J_over_regression": 0.7013088464736938,
+   "seconds": 10.6
+  },
+  {
+   "layer": 31,
+   "cos_J_vs_regression": 0.6664968729019165,
+   "cos_J_splithalf": 0.9875274896621704,
+   "cos_J_vs_identity": 0.5126094818115234,
+   "cos_regression_vs_identity": 0.38173770904541016,
+   "norm_ratio_J_over_regression": 0.7212757468223572,
+   "seconds": 10.3
+  },
+  {
+   "layer": 32,
+   "cos_J_vs_regression": 0.6727339625358582,
+   "cos_J_splithalf": 0.9886395335197449,
+   "cos_J_vs_identity": 0.5523027181625366,
+   "cos_regression_vs_identity": 0.36508888006210327,
+   "norm_ratio_J_over_regression": 0.7571029663085938,
+   "seconds": 10.1
+  },
+  {
+   "layer": 33,
+   "cos_J_vs_regression": 0.6327077150344849,
+   "cos_J_splithalf": 0.9897775053977966,
+   "cos_J_vs_identity": 0.5765727758407593,
+   "cos_regression_vs_identity": 0.38581782579421997,
+   "norm_ratio_J_over_regression": 0.7511407732963562,
+   "seconds": 9.8
+  },
+  {
+   "layer": 34,
+   "cos_J_vs_regression": 0.6511660814285278,
+   "cos_J_splithalf": 0.991196870803833,
+   "cos_J_vs_identity": 0.574892520904541,
+   "cos_regression_vs_identity": 0.33520039916038513,
+   "norm_ratio_J_over_regression": 0.7848441004753113,
+   "seconds": 9.6
+  },
+  {
+   "layer": 35,
+   "cos_J_vs_regression": 0.6845482587814331,
+   "cos_J_splithalf": 0.9920661449432373,
+   "cos_J_vs_identity": 0.5796055793762207,
+   "cos_regression_vs_identity": 0.3587397038936615,
+   "norm_ratio_J_over_regression": 0.8406785726547241,
+   "seconds": 9.3
+  },
+  {
+   "layer": 36,
+   "cos_J_vs_regression": 0.69906085729599,
+   "cos_J_splithalf": 0.992470383644104,
+   "cos_J_vs_identity": 0.583915650844574,
+   "cos_regression_vs_identity": 0.35503333806991577,
+   "norm_ratio_J_over_regression": 0.837276816368103,
+   "seconds": 9.1
+  },
+  {
+   "layer": 37,
+   "cos_J_vs_regression": 0.7010918855667114,
+   "cos_J_splithalf": 0.9934042692184448,
+   "cos_J_vs_identity": 0.6152137517929077,
+   "cos_regression_vs_identity": 0.38644975423812866,
+   "norm_ratio_J_over_regression": 0.8740188479423523,
+   "seconds": 8.8
+  },
+  {
+   "layer": 38,
+   "cos_J_vs_regression": 0.7348389625549316,
+   "cos_J_splithalf": 0.9939975142478943,
+   "cos_J_vs_identity": 0.6409724354743958,
+   "cos_regression_vs_identity": 0.39942261576652527,
+   "norm_ratio_J_over_regression": 0.9034120440483093,
+   "seconds": 8.6
+  },
+  {
+   "layer": 39,
+   "cos_J_vs_regression": 0.7119292616844177,
+   "cos_J_splithalf": 0.9950868487358093,
+   "cos_J_vs_identity": 0.7042614817619324,
+   "cos_regression_vs_identity": 0.41428670287132263,
+   "norm_ratio_J_over_regression": 0.9671363830566406,
+   "seconds": 8.4
+  },
+  {
+   "layer": 40,
+   "cos_J_vs_regression": 0.7401692271232605,
+   "cos_J_splithalf": 0.9961960315704346,
+   "cos_J_vs_identity": 0.751696765422821,
+   "cos_regression_vs_identity": 0.4699287414550781,
+   "norm_ratio_J_over_regression": 0.988905668258667,
+   "seconds": 8.1
+  },
+  {
+   "layer": 41,
+   "cos_J_vs_regression": 0.7666915655136108,
+   "cos_J_splithalf": 0.9965146780014038,
+   "cos_J_vs_identity": 0.786888599395752,
+   "cos_regression_vs_identity": 0.5349642634391785,
+   "norm_ratio_J_over_regression": 0.997687041759491,
+   "seconds": 7.9
+  },
+  {
+   "layer": 42,
+   "cos_J_vs_regression": 0.7912225723266602,
+   "cos_J_splithalf": 0.9966058731079102,
+   "cos_J_vs_identity": 0.8123873472213745,
+   "cos_regression_vs_identity": 0.5684444308280945,
+   "norm_ratio_J_over_regression": 0.9997057914733887,
+   "seconds": 7.6
+  },
+  {
+   "layer": 43,
+   "cos_J_vs_regression": 0.8163902163505554,
+   "cos_J_splithalf": 0.9965680837631226,
+   "cos_J_vs_identity": 0.8198920488357544,
+   "cos_regression_vs_identity": 0.590801477432251,
+   "norm_ratio_J_over_regression": 0.9876022338867188,
+   "seconds": 7.4
+  },
+  {
+   "layer": 44,
+   "cos_J_vs_regression": 0.8554273843765259,
+   "cos_J_splithalf": 0.9980821013450623,
+   "cos_J_vs_identity": 0.8317652940750122,
+   "cos_regression_vs_identity": 0.6291824579238892,
+   "norm_ratio_J_over_regression": 0.951874852180481,
+   "seconds": 7.1
+  },
+  {
+   "layer": 45,
+   "cos_J_vs_regression": 0.9326607584953308,
+   "cos_J_splithalf": 0.9993583559989929,
+   "cos_J_vs_identity": 0.8649766445159912,
+   "cos_regression_vs_identity": 0.7721232175827026,
+   "norm_ratio_J_over_regression": 0.9372677803039551,
+   "seconds": 6.9
+  },
+  {
+   "layer": 46,
+   "cos_J_vs_regression": 0.9701141119003296,
+   "cos_J_splithalf": 0.9996535181999207,
+   "cos_J_vs_identity": 0.8733963370323181,
+   "cos_regression_vs_identity": 0.8326458930969238,
+   "norm_ratio_J_over_regression": 0.9573683142662048,
+   "seconds": 6.6
+  },
+  {
+   "layer": 47,
+   "cos_J_vs_regression": 0.9995678663253784,
+   "cos_J_splithalf": 1.0,
+   "cos_J_vs_identity": 0.9999991655349731,
+   "cos_regression_vs_identity": 0.9995688199996948,
+   "norm_ratio_J_over_regression": 1.0161805152893066,
+   "seconds": 6.4
+  }
+ ]
+}
