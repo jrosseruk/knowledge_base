@@ -608,7 +608,104 @@ So there is a real trade-off, and no single fit gives both:
 """)
 
 md(r"""
-## 8. Verdict
+## 8. One knob instead of two lenses
+
+Sections 5–7 treat the J-lens and the Tuned Lens as two methods to be compared.
+They are better understood as **two ends of one continuum**. Define the best
+linear map at intervention scale $\sigma$:
+
+$$
+A_{\ell,\sigma} \;=\; \arg\min_A \;
+\mathbb{E}_{h,\;\delta\sim q_\sigma}
+\big\lVert F_\ell(h+\delta) - F_\ell(h) - A\delta \big\rVert^2
+$$
+
+As $\sigma\to0$ this is the J-lens, $\mathbb{E}_h[J_\ell(h)]$. With
+$\delta = h' - h$ for independent natural states it is the least-squares
+tuned-lens analogue $\operatorname{Cov}(F(h),h)\operatorname{Cov}(h)^{-1}$.
+
+**And the whole family costs what the J-lens costs.** By the fundamental theorem
+of calculus $F(h+\delta)-F(h) = \bar J(h,\delta)\,\delta$ exactly, with
+$\bar J(h,\delta)=\int_0^1 J(h+\alpha\delta)\,d\alpha$. For isotropic
+$\delta$ the minimiser is $\mathbb{E}[\bar J]$, and
+
+$$
+\mathbb{E}_{h,\delta}\big[\bar J(h,\delta)\big]
+= \mathbb{E}_{h,\delta,\alpha}\big[J(h+\alpha\delta)\big]
+= \mathbb{E}_{h'\sim p_\sigma}\big[J(h')\big]
+$$
+
+where $p_\sigma$ is the activation distribution **smeared at scale $\sigma$**.
+So the scale-$\sigma$ lens is just the existing Jacobian estimator run over
+perturbed activations — one extra term in the injection hook, no extra forward
+passes, and $\sigma=0$ reduces to the estimator we already validated.
+""")
+
+code(r"""
+%run experiments/integrated_lens.py
+""")
+
+code(r"""
+Image("experiments/fig_integrated_lens.png")
+""")
+
+md(r"""
+At $\sigma=0$ the lens reads the **bridge entity** and is nearly blind to the
+answer — `8` sits at rank 676 for the spider prompt. By $\sigma\approx0.35$–$0.5$
+the readout has **flipped**: the answer is top-10 and the bridge has faded. The
+crossover happens at a consistent scale on all three probes, and past
+$\sigma\approx0.75$ both degrade as the smearing starts averaging Jacobians over
+states the model never visits.
+
+So "reads current content" versus "skips to the output" is not a property of two
+different methods. It is a property of **how far you push the representation
+before looking**.
+
+We also tried the obvious alternative — making the lens itself nonlinear, as
+$A h + b + \sum_k v_k\,\sigma(w_k\!\cdot\!h + c_k)$ with $K=64$ gated units
+fitted to the linear lens's residual. It fails: held-out $R^2$ is slightly
+*worse* than the plain linear lens on both a web corpus (0.459 vs 0.463) and a
+counting-domain corpus (0.898 vs 0.900), and the units decode as noise
+(`experiments/gated_lens.py`).
+
+The diagnosis is worth keeping. A gate is one direction, on one relation, in one
+context. Fitted capacity goes to whatever explains the most *global* variance,
+and that is never the spider-legs threshold. The integrated lens works because
+it never has to **find** the gate — sweeping $\sigma$ traverses it by
+construction. Probing at a chosen scale beats fitting nonlinearity into a
+general-purpose lens.
+""")
+
+md(r"""
+## 9. Which computations gate at all?
+
+Not many, it turns out. Interpolating between length-matched prompt pairs and
+requiring the intervention to be *causally effective* — swinging
+$\text{logit}(B')-\text{logit}(B)$ by at least 4 nats **and** flipping its sign —
+gives 10 scorable items (`experiments/effective_gate_test.py`):
+
+```
+numeric     : 0.250  0.333  0.333  0.350  0.433     (legs, polygon sides,
+non-numeric : 0.550  0.583  0.633  0.667  0.800      basketball players, wheels)
+```
+
+Perfectly separated, exact permutation $p=0.024$, and numeric items sharpen
+3–4× more against their own late-layer control. Antonyms and biological class
+have small closed answer spaces and still behave like colour, so what gates is
+**counting**, not small answer sets in general.
+
+This precondition matters more than it sounds. Without it, three of four
+non-numeric items in an earlier pass had swings under 8 nats that never flipped
+the sign — flat responses that measured noise, not the model. That earlier
+conclusion was withdrawn; `experiments/LOG.md` records it.
+""")
+
+code(r"""
+Image("experiments/fig_effective_gate.png")
+""")
+
+md(r"""
+## 10. Verdict
 
 | claim | verdict |
 |---|---|
@@ -618,7 +715,9 @@ md(r"""
 | $F_\ell$ is nonlinear, so a local Jacobian and a global regression *can* differ | **holds** — $\cos(J,A)=0.65$ at L34 against a 0.99 noise ceiling, and exactly 1.000 at L47 |
 | the tuned lens behaves as a regression chord across a gate | **holds, conditionally** — within 1.6% of the chord when fitted on a corpus that straddles the gate; not at all on web text |
 | a gate-like circuit converting `Mars` to `red` is what drives the difference | **fails** — that response is linear to $R^2=0.995$; the gating example is `spider -> 8`, not Mars |
-| gate-like transitions exist in the workspace band generally | **suggestive** — sharper at the workspace layer on 6/7 items, $p=0.016$, but $n=7$ after 67% attrition |
+| gate-like transitions exist in the workspace band generally | **holds, for counting** — 5 numeric items at widths 0.25–0.43 against 5 non-numeric at 0.55–0.80, perfectly separated, $p=0.024$ |
+| the two lenses are one continuum in intervention scale | **holds** — sweeping $\\sigma$ flips the readout from bridge to answer on all three probes at a consistent scale |
+| a nonlinear lens fitted on a corpus captures the gate | **fails** — 64 gated units are beaten by the plain linear lens on held-out data in both corpora |
 
 Neel's explanation splits into a premise and a mechanism, and both survive, but
 with conditions worth stating.
