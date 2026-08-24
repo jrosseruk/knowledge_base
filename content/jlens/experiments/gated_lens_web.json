@@ -1,0 +1,196 @@
+{
+ "model": "google/gemma-3-12b-it",
+ "layer": 34,
+ "k": 64,
+ "heldout_r2_linear": 0.4626433253288269,
+ "heldout_r2_gated": 0.4591222405433655,
+ "probes": [
+  {
+   "name": "legs-spider-dog",
+   "gates": true,
+   "shape_r2_linear": 0.807685375213623,
+   "shape_r2_gated": 0.806327223777771
+  },
+  {
+   "name": "sides-triangle-square",
+   "gates": true,
+   "shape_r2_linear": 0.9014848470687866,
+   "shape_r2_gated": 0.9018710851669312
+  },
+  {
+   "name": "antonym-up-wet",
+   "gates": false,
+   "shape_r2_linear": 0.987857460975647,
+   "shape_r2_gated": 0.9877967238426208
+  },
+  {
+   "name": "capital-language",
+   "gates": false,
+   "shape_r2_linear": 0.9753305315971375,
+   "shape_r2_gated": 0.9753313064575195
+  }
+ ],
+ "units": [
+  {
+   "unit": 3,
+   "fires_on": [
+    " Xcode",
+    " NSLog",
+    " Configuring",
+    " debugging",
+    " NSString",
+    " whitespace"
+   ],
+   "writes": [
+    "\u0440\u044b\u0439",
+    "\ue808",
+    " shampoos",
+    " \u042d\u0442\u0438",
+    " pamo",
+    "\u043e\u043d\u044b"
+   ],
+   "activity_mean": 0.19275692105293274
+  },
+  {
+   "unit": 54,
+   "fires_on": [
+    " workpiece",
+    " dielectric",
+    " electrically",
+    " stator",
+    " voltage",
+    " FIG"
+   ],
+   "writes": [
+    "\u0442\u044c\u0441\u044f",
+    " stargazerCount",
+    "nian",
+    " przez",
+    "\u0e22\u0e19\u0e15\u0e4c",
+    "\u0bae\u0bcd\u0baa"
+   ],
+   "activity_mean": 0.18837514519691467
+  },
+  {
+   "unit": 4,
+   "fires_on": [
+    " solenoid",
+    " stator",
+    " waveguide",
+    " voltage",
+    " dielectric",
+    " axially"
+   ],
+   "writes": [
+    " \u0438\u0441\u043f\u043e\u043b\u044c\u0437\u0443",
+    "\ud835\ude9e",
+    "\u7f2c",
+    " especialistas",
+    "\ud835\ude92",
+    "it"
+   ],
+   "activity_mean": 0.13930685818195343
+  },
+  {
+   "unit": 46,
+   "fires_on": [
+    "mselves",
+    "oretically",
+    "ophylline",
+    " same",
+    " proverbial",
+    "same"
+   ],
+   "writes": [
+    " plabic",
+    "\ud835\udc26",
+    "refixer",
+    "chenk",
+    "musik",
+    "cusson"
+   ],
+   "activity_mean": 0.14321763813495636
+  },
+  {
+   "unit": 1,
+   "fires_on": [
+    "Votre",
+    "Pale",
+    "Vous",
+    "Allemagne",
+    "Nicht",
+    "Cette"
+   ],
+   "writes": [
+    "s",
+    " the",
+    "ars",
+    "\u06cc\u0646",
+    " in",
+    " a"
+   ],
+   "activity_mean": 0.10130637884140015
+  },
+  {
+   "unit": 55,
+   "fires_on": [
+    " the",
+    "l",
+    "r",
+    " outliers",
+    "n",
+    " tumors"
+   ],
+   "writes": [
+    "\u0645",
+    "\u092e",
+    " d\u00e9mar",
+    " dommages",
+    "extern",
+    "\u30b9\u30e1"
+   ],
+   "activity_mean": 0.09815552830696106
+  },
+  {
+   "unit": 32,
+   "fires_on": [
+    " butterflies",
+    " innovative",
+    " butterfly",
+    " extraordinarily",
+    " affirmation",
+    " roses"
+   ],
+   "writes": [
+    " Covers",
+    "\u0627",
+    " luscious",
+    " deeds",
+    "Filed",
+    "oed"
+   ],
+   "activity_mean": 0.08460039645433426
+  },
+  {
+   "unit": 35,
+   "fires_on": [
+    "3",
+    "0",
+    " ",
+    "Ge",
+    "2",
+    "5"
+   ],
+   "writes": [
+    " \u05e8\u05d1\u05d9\u05dd",
+    "\u0e4c",
+    " Muitos",
+    " inv\u00e1l",
+    "yz",
+    " \uc77c\ubd80"
+   ],
+   "activity_mean": 0.09069497138261795
+  }
+ ],
+ "n_train_tokens": 28416
+}

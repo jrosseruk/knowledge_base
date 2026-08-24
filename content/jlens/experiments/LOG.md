@@ -743,3 +743,55 @@ all near-linear: antonyms (up/wet, fast/light), biological class
 Remaining attrition is behavioural and worth recording: Gemma answers colour
 questions with hedges ("90% yellow", "not always green"), gives Italian in
 Chinese, and answers "At room temperature, water is a" with a density.
+
+### The gated lens: a clear negative, and why it fails
+
+`gated_lens.py` (Addendum 7). `F_l(h) ~= A h + b + sum_k v_k sigmoid(w_k.h + c_k)`,
+with `A, b` the closed-form OLS lens and `K = 64` units fitted to its residual on
+cached activations. Cheap as advertised: no model forwards beyond the caching
+pass, 0.5M extra parameters against the linear map's 14.7M.
+
+**All three preregistered criteria fail, on both corpora.**
+
+| fit corpus | linear held-out R^2 | gated held-out R^2 |
+|---|---|---|
+| web text | 0.4626 | 0.4591 |
+| counting domain | 0.8996 | 0.8982 |
+
+The units never earn their parameters -- held-out fit is slightly *worse* in
+both cases. A first attempt also collapsed every unit onto one shared direction;
+PCA initialisation, an orthogonality penalty and held-out early stopping fixed
+the collapse without changing the conclusion.
+
+The learned units are not interpretable either. Decoded through the unembedding
+they fire on unrelated clusters (` Xcode`, ` solenoid`, ` stator`) and write
+what looks like multilingual noise, in both the web and domain fits.
+
+**A flaw in my own metric, recorded.** I scored "shape R^2" after allowing a
+best affine rescaling of each lens's prediction. Under that rescaling *every*
+linear lens collapses to the same best-fit straight line, so the statistic
+cannot discriminate among linear lenses at all -- it only measures how well a
+straight line fits the model's actual response. That is why the linear column
+reads 0.808 / 0.901 / 0.988 / 0.975 identically across two quite different
+fits. It is still a valid ceiling for "what any linear lens can do", but it was
+not the comparison I described it as.
+
+Read correctly, the gated lens matching that ceiling *exactly* is the finding:
+its units contribute essentially nothing along the probe path.
+
+**Why it fails, and what this implies.** The gate is low-dimensional and
+task-specific -- one direction, on one relation, in one context. Fitted
+capacity, whether 64 sigmoid units or a linear map, goes to whatever explains
+the most *global* variance, and that is never the spider-legs threshold.
+Widening the corpus to the counting domain does not help, because even there
+the gate direction is a small share of total variance.
+
+This is the useful contrast with the integrated lens. The integrated lens
+succeeds at exactly what the gated lens fails at, and the reason is that it
+never has to **find** the gate: sweeping `sigma` traverses the nonlinearity by
+construction, and reads off what changes. Fitting nonlinearity into a
+general-purpose lens competes against global variance; probing at a chosen
+scale does not.
+
+So for "cheap but nonlinear", the scale-family is the better answer of the two
+tried here, and its cost is a single extra term in the injection hook.

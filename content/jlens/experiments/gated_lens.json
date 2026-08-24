@@ -1,0 +1,196 @@
+{
+ "model": "google/gemma-3-12b-it",
+ "layer": 34,
+ "k": 64,
+ "heldout_r2_linear": 0.4626433253288269,
+ "heldout_r2_gated": 0.45773929357528687,
+ "probes": [
+  {
+   "name": "legs-spider-dog",
+   "gates": true,
+   "shape_r2_linear": 0.807685375213623,
+   "shape_r2_gated": 0.8084664344787598
+  },
+  {
+   "name": "sides-triangle-square",
+   "gates": true,
+   "shape_r2_linear": 0.9014848470687866,
+   "shape_r2_gated": 0.9008597135543823
+  },
+  {
+   "name": "antonym-up-wet",
+   "gates": false,
+   "shape_r2_linear": 0.987857460975647,
+   "shape_r2_gated": 0.9878314137458801
+  },
+  {
+   "name": "capital-language",
+   "gates": false,
+   "shape_r2_linear": 0.9753305315971375,
+   "shape_r2_gated": 0.9753772020339966
+  }
+ ],
+ "units": [
+  {
+   "unit": 61,
+   "fires_on": [
+    " workpiece",
+    " stator",
+    " axially",
+    " dielectric",
+    " electrically",
+    " protruding"
+   ],
+   "writes": [
+    "\u043b\u0443",
+    "\uc5ec\ub7ec",
+    "\u0437\u0430",
+    "\u0441\u044b",
+    "\u0434\u043e",
+    "\u0440\u043e"
+   ],
+   "activity_mean": 0.1968015879392624
+  },
+  {
+   "unit": 2,
+   "fires_on": [
+    " hysteresis",
+    " workpiece",
+    " solenoid",
+    " elastomer",
+    " axially",
+    " waveguide"
+   ],
+   "writes": [
+    "c",
+    "kt",
+    "\u3105",
+    "Blend",
+    "\u06f1",
+    "n"
+   ],
+   "activity_mean": 0.1746058464050293
+  },
+  {
+   "unit": 25,
+   "fires_on": [
+    " stator",
+    " solenoid",
+    " axially",
+    " workpiece",
+    " voltage",
+    " waveguide"
+   ],
+   "writes": [
+    "sorry",
+    "Pr\u00e9s",
+    "\u672c\u673a",
+    "\u5038",
+    "Acts",
+    "\ud835\udcf0"
+   ],
+   "activity_mean": 0.17588390409946442
+  },
+  {
+   "unit": 54,
+   "fires_on": [
+    " solenoid",
+    " axially",
+    " stator",
+    " waveguide",
+    " workpiece",
+    " hysteresis"
+   ],
+   "writes": [
+    "\u1873",
+    "\u1547",
+    " Specialized",
+    "ivasena",
+    " \u03bf\u03b9",
+    " \uc0b0"
+   ],
+   "activity_mean": 0.16558893024921417
+  },
+  {
+   "unit": 48,
+   "fires_on": [
+    " stator",
+    " solenoid",
+    " axially",
+    " waveguide",
+    " workpiece",
+    " voltage"
+   ],
+   "writes": [
+    " \u0445\u0440\u0438\u0441\u0442\u0438\u0430\u043d",
+    " \u043e\u0441\u0442\u0430\u043b\u044c\u043d\u044b\u0445",
+    "\ufe9d",
+    " \u043d\u043e\u0432\u044b\u0445",
+    "\ufeaa",
+    " traslado"
+   ],
+   "activity_mean": 0.16035732626914978
+  },
+  {
+   "unit": 45,
+   "fires_on": [
+    " stator",
+    " solenoid",
+    " waveguide",
+    " voltage",
+    " workpiece",
+    " axially"
+   ],
+   "writes": [
+    " programmatic",
+    "\u0442\u0435\u043b\u043d\u043e",
+    " impor",
+    " pollution",
+    "\u3044\u305f\u3089",
+    "\u0439\u043d\u043e"
+   ],
+   "activity_mean": 0.16657651960849762
+  },
+  {
+   "unit": 36,
+   "fires_on": [
+    " waveguide",
+    " solenoid",
+    " stator",
+    " workpiece",
+    " voltage",
+    " dielectric"
+   ],
+   "writes": [
+    "s",
+    "k",
+    "a",
+    "S",
+    "m",
+    "e"
+   ],
+   "activity_mean": 0.15777955949306488
+  },
+  {
+   "unit": 63,
+   "fires_on": [
+    " solenoid",
+    " waveguide",
+    " stator",
+    " axially",
+    " dielectric",
+    " coaxial"
+   ],
+   "writes": [
+    " v\u00e9g\u00e9taux",
+    " \u0440\u043e\u043a\u0430\u0445",
+    "\u0643",
+    "\u043b\u0430\u0440\u0433\u0430",
+    "\u0442\u0443\u0432\u0430\u0442\u0438",
+    "ictured"
+   ],
+   "activity_mean": 0.15464429557323456
+  }
+ ],
+ "n_train_tokens": 28416
+}

@@ -445,3 +445,57 @@ With effective interventions on both sides, the numeric group keeps its sharp
 transitions. The open question is what the non-numeric group does, and this
 time it will be a real test rather than an artefact. No prediction is offered
 for it; the point of the rerun is that Addendum 5 could not answer it.
+
+---
+
+# Addendum 7: a gated lens -- cheap to fit, able to represent a threshold
+
+Written 2026-08-24, before running.
+
+## Motivation
+
+Every lens so far is a single linear map, so none can represent the thing we
+measured: a sigmoid. The integrated lens (Addendum 4/§integrated) handles this
+by *indexing a family* with an intervention scale, which is diagnostic but still
+gives a linear readout at each scale.
+
+The measured structure is specific and simple. Along a direction, the response
+is flat, then rises sharply, then saturates. That is exactly one sigmoid unit.
+So the minimal extension that can represent what the model does is
+
+    F_l(h)  ~  A h + b + sum_{k=1..K} v_k * sigmoid(w_k . h + c_k)
+
+with `K` small. `A` is the ordinary linear lens; each extra unit is a
+**detector direction** `w_k` with a threshold, writing a **write direction**
+`v_k` when it fires.
+
+## Why this is cheap
+
+Fitting needs no additional model forward passes beyond the single pass that
+caches `(h_l, h_final)` pairs, which the tuned lens already requires. `A` is
+solved in closed form by OLS as before; the `K` units are then fitted to the
+*residual* `F_l(h) - (A h + b)` by SGD on cached tensors. The extra parameters
+are `2 K d` -- for `K = 64` that is 0.5M against the linear map's 14.7M, so the
+nonlinear part is 3% of the size of the lens it corrects. This is cheaper than
+an EKFAC block-diagonal Hessian, which needs per-layer factor estimation.
+
+## What it buys, and the criteria
+
+1. **Held-out fit.** The gated lens should explain a materially larger share of
+   the residual-stream variance on held-out text than the linear lens alone.
+   Reported as held-out `R^2`; the linear lens is the baseline to beat.
+2. **The decisive test -- can it represent the gate?** Along the
+   `spider -> dog` interpolation, the linear lens is a straight line while the
+   model's response is a sigmoid. The gated lens should track the sigmoid.
+   Scored as `R^2` of each lens's prediction against the model's actual
+   response along that path, and against the four non-gating items as a
+   control, where both lenses should do equally well.
+3. **Interpretability is retained or it is not worth it.** Each fitted unit has
+   a detector direction `w_k` and a write direction `v_k`, both decodable
+   through the unembedding. If the units are interpretable, the lens reports
+   not just what is represented but *what would happen if it got stronger* --
+   which is the question the J-lens was built to ask.
+
+A negative result -- no held-out improvement, or units that decode as noise --
+is reported as such. The linear lens is a strong baseline and there is no
+guarantee `K` sigmoid units beat it on generic text.
