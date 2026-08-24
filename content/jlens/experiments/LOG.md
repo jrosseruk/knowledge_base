@@ -968,3 +968,48 @@ against 164/89), with `ant -> bird` the exception where the J-lens puts `ant` at
 58,159. Comparing rows shows the trade-off found earlier: domain fitting
 improves the geometry and degrades the J-lens readout (spider 8 -> 11, answer
 582 -> 81).
+
+### Final grid: every probe two-hop
+
+Rebuilt so the bridge entity is never named in any probe, which is the setting
+the J-lens is designed for. Three items had to be reconstructed and each new
+prompt was checked behaviourally before use:
+
+* sides: "the shape of a stop sign" (8) against "the shape of a slice of pizza" (3)
+* players: "the sport LeBron James plays" (5) against "the sport Wayne Gretzky played" (6)
+* wheels: "the vehicle you pedal to work" (2) against "the vehicle commuters drive to work" (4)
+
+`ant -> bird` was replaced by `frog -> bee`; the old item was also the one where
+the J-lens failed worst (`ant` at rank 58,159), so it was a poor showcase.
+
+A suggested "2D cross-section of a Quality Street tin" was tried and rejected:
+Gemma answers 12 under one phrasing and 8 under another, and 12 is multi-token.
+
+| item | two-hop | one-hop | mixed | web |
+|---|---|---|---|---|
+| legs: spider -> dog | **0.77** | 0.58 | 0.69 | 0.25 |
+| legs: frog -> bee | **0.49** | 0.38 | 0.40 | 0.30 |
+| sides: stop sign -> pizza slice | 0.66 | 0.27 | **0.79** | 0.19 |
+| players: LeBron -> Gretzky | **0.46** | 0.40 | 0.42 | 0.01 |
+| wheels: pedal -> commute | 0.59 | **0.72** | 0.58 | 0.44 |
+| colour: Mars -> Earth (no gate) | 0.71 | **1.10** | 0.81 | 0.88 |
+
+* **Any domain corpus beats web text: 6/6.** Unchanged by every rebuild of this
+  experiment, and the one part of the Addendum 4 story that has never wobbled.
+* **Two-hop corpus beats one-hop: 4/6**, and 4/5 among the gating items, with
+  `wheels` the sole exception. Still short of significance at this n.
+* `players: LeBron -> Gretzky` on web text reads 0.01 -- the deployed regression
+  predicts essentially none of that item's answer switch.
+
+### Figure legibility
+
+`fig_lens_grid.png` reworked after the first version proved unreadable:
+
+* headers now print both prompts in full with the answer each produces, as
+  `alpha=0 "..." -> 8` over `alpha=1 "...suffix" -> 4`, plus the unstated bridge
+  entity, instead of an inline `[ A | B ]` diff that collided between columns;
+* the y label says what the number means -- "how far the answer has switched
+  (1 = the model's full switch)" -- rather than "in units of the chord";
+* the corpus name moved to a rotated label outside the axes so it no longer
+  competes with the units;
+* lens colours are J-lens orange, tuned blue, logit green throughout.

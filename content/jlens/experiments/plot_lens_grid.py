@@ -27,6 +27,8 @@ import json
 import sys
 from pathlib import Path
 
+import textwrap
+
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -42,6 +44,22 @@ ROWS = (("two_hop", "corpus: two-hop\n(entity described)"),
         ("web", "corpus: web text\n(as deployed)"))
 
 
+def prompt_header(record) -> str:
+    """Both prompts written out, one per line, with the answer each produces."""
+    a = record["prompt_a"].strip().removeprefix("Fact:").strip()
+    b = record["prompt_b"].strip().removeprefix("Fact:").strip()
+    # show B only from where it starts to differ, so the change is obvious
+    shared = 0
+    while shared < min(len(a), len(b)) and a[shared] == b[shared]:
+        shared += 1
+    shared = a.rfind(" ", 0, shared + 1) + 1
+    tail = b[shared:]
+    first = textwrap.fill(f'\u03b1=0   "{a}"', 34, subsequent_indent="         ")
+    second = textwrap.fill(f'\u03b1=1   "\u2026{tail}"', 34, subsequent_indent="         ")
+    return (f"{first}\n           \u2192  {record['answer']}\n"
+            f"{second}\n           \u2192  {record['counter_answer']}")
+
+
 def main() -> None:
     data = json.loads((HERE / "lens_grid.json").read_text())
     records = data["records"]
@@ -49,8 +67,8 @@ def main() -> None:
 
     n = len(records)
     figure, axes = plt.subplots(
-        2 * len(ROWS), n, figsize=(3.15 * n, 5.4 * len(ROWS)),
-        gridspec_kw={"height_ratios": [2.5, 1.25] * len(ROWS), "hspace": 0.38},
+        2 * len(ROWS), n, figsize=(3.35 * n, 5.9 * len(ROWS)),
+        gridspec_kw={"height_ratios": [2.5, 1.25] * len(ROWS), "hspace": 0.45},
     )
 
     for column, record in enumerate(records):
@@ -111,17 +129,28 @@ def main() -> None:
                 bar_axis.set_yticklabels([])
 
             if column == 0:
-                curve_axis.set_ylabel(row_label + "\n\nreadout, in units of the chord",
-                                      fontsize=9)
+                curve_axis.set_ylabel(
+                    "how far the answer has switched\n"
+                    "(1 = the model's full switch)", fontsize=8.5)
             if corpus == record["probe_framing"]:
                 for spine in curve_axis.spines.values():
                     spine.set_edgecolor(jp.LENS_COLORS["tuned"])
                     spine.set_linewidth(1.8)
+        named = record["probe_framing"] == "one_hop"
         axes[0][column].set_title(
-            record["name"].replace("  (no gate)", "\n(no gate)")
-            + f"\nbridge '{record['bridge']}'  ·  answer '{record['answer']}'"
-            + f"\nprobe is {record['probe_framing'].replace('_', '-')}",
-            fontsize=9.5)
+            record["name"].replace("  (no gate)", "   (no gate)") + "\n"
+            + f"bridge '{record['bridge']}'"
+            + (" — named in prompt" if named else " — never named") + "\n\n"
+            + prompt_header(record),
+            fontsize=8.2, linespacing=1.55, pad=12, loc="left")
+
+    # corpus label for each row block, out to the left of the axes
+    for block, (_, row_label) in enumerate(ROWS):
+        box = axes[block * 2][0].get_position()
+        bars = axes[block * 2 + 1][0].get_position()
+        figure.text(0.006, (box.y1 + bars.y0) / 2, row_label,
+                    rotation=90, va="center", ha="left", fontsize=10.5,
+                    color=jp.INK, weight="semibold")
 
     handles, labels = axes[0][0].get_legend_handles_labels()
     order = [labels.index(x) for x in ("model", "chord over [0,1]", "tangent at $\\alpha$=0",
@@ -134,12 +163,13 @@ def main() -> None:
     figure.legend(handles, labels, frameon=False, fontsize=9.5, ncol=8,
                   loc="lower center", bbox_to_anchor=(0.5, -0.018))
     figure.suptitle(
-        "Each panel scaled by its own chord, so the model always ends at 1 and only shape differs.  "
-        "Every domain corpus lifts the regression above web text (6/6); the row whose framing "
-        "matches the probe is outlined, and wins on 4/6.",
-        fontsize=11.5, y=0.962,
+        "Each column interpolates the layer-34 residual between two prompts the model answers correctly.\n"
+        "The black curve is the model; the dashed lines are what each lens predicts. "
+        "Every domain corpus lifts the regression above web text (6/6); "
+        "the row whose framing matches the prompt is outlined, and wins on 4/6.",
+        fontsize=11.5, y=0.985, linespacing=1.55,
     )
-    figure.subplots_adjust(top=0.945)
+    figure.subplots_adjust(top=0.888, left=0.075, wspace=0.16)
     figure.savefig(HERE / "fig_lens_grid.png", bbox_inches="tight")
     plt.close(figure)
     print("wrote fig_lens_grid.png")
