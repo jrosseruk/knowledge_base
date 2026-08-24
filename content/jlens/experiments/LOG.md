@@ -795,3 +795,54 @@ scale does not.
 
 So for "cheap but nonlinear", the scale-family is the better answer of the two
 tried here, and its cost is a single extra term in the injection hook.
+
+### Where are the gates?
+
+`gate_localization.py`. In a Gemma 3 block the two residual writes are exactly
+the post-norm outputs, so the readout decomposes without approximation:
+
+    s(alpha) = <w, h_34(alpha)> + sum_{l>=35} ( <w, attn_l(alpha)> + <w, mlp_l(alpha)> )
+
+Every term is a scalar function of alpha, so the sigmoid must be attributable.
+The `base` term is exactly linear in alpha by construction, and measures 0.000
+nonlinearity in every item -- the sanity check that the decomposition is right.
+
+**The gate is not a switch and not in one place.** Taking the readout after each
+successive layer and measuring the nonlinearity of the running curve:
+
+| readout after layer | legs | sides | basketball | capital-language |
+|---|---|---|---|---|
+| 35 | 0.001 | 0.000 | 0.007 | 0.003 |
+| 39 | 0.032 | 0.012 | 0.013 | 0.039 |
+| 43 | 0.101 | 0.079 | 0.055 | 0.065 |
+| 46 | **0.193** | **0.129** | **0.114** | 0.032 |
+| 47 | 0.193 | 0.099 | 0.093 | **0.025** |
+
+Nonlinearity accumulates smoothly across layers 39-46 while the transition width
+falls from ~0.78 to ~0.25 in step with it. No single component supplies more
+than about 20% of the total nonlinear signal.
+
+**The control does something different and more interesting than being flat.**
+`capital-language` builds *transient* nonlinearity, peaking at 0.065 around
+layer 43, and then **cancels it back down to 0.025** by the output; its width
+sharpens to 0.40 and then widens again to 0.58. So the distinction between
+gating and non-gating relations is not that one is nonlinear and the other is
+linear all the way. Both bend in the middle. Only the counting relations keep
+the bend.
+
+**Which components.** Ranking by `nonlinearity x |swing|`, the nonlinear signal
+sits in the late MLPs (43, 44, 41, 40, 45, 47) with `attn47` the single largest
+contributor. The largest *swings* are earlier (mlp40 writes 34,205 on the legs
+item) but are nearly linear -- the big writes and the bending are done by
+different layers.
+
+**Neuron level.** Inside the most nonlinear MLP, the top neurons by
+`|swing|` decode as answer-specific number writers. For basketball at layer 46:
+n5225 writes `['6', ' Sixth', ' SIX']`, n12378 writes `[' five', ' Five', '五']`,
+n9476 writes `['5', ' five']`. For the legs item: n4470 writes
+`[' Four', ' four', ' FOUR']`, n10966 writes `['3', ' three']`. Their individual
+nonlinearity is modest (0.1-0.5), consistent with the distributed picture: many
+number-writing neurons each bending a little, rather than one threshold unit.
+
+Descriptive localisation, not a hypothesis test. What it rules out is the
+picture the toy model suggests -- a single sigmoid at a particular place.

@@ -282,6 +282,7 @@ def _main() -> None:
     figure_in_domain()
     figure_integrated()
     figure_effective_gate()
+    figure_gate_depth()
 
 
 def figure_shape() -> None:
@@ -480,6 +481,67 @@ def figure_effective_gate() -> None:
     figure.savefig(HERE / "fig_effective_gate.png")
     plt.close(figure)
     print("wrote fig_effective_gate.png")
+
+
+
+def figure_gate_depth() -> None:
+    profile_path = HERE / "gate_depth_profile.json"
+    local_path = HERE / "gate_localization.json"
+    if not (profile_path.exists() and local_path.exists()):
+        return
+    profile = json.loads(profile_path.read_text())
+    local = json.loads(local_path.read_text())
+    gates = {r["name"]: r["gates"] for r in local["results"]}
+    palette = [jp.LENS_COLORS["j"], jp.LENS_COLORS["tuned"], jp.LENS_COLORS["logit"], jp.INK]
+
+    figure, axes = plt.subplots(1, 3, figsize=(14.4, 4.2))
+
+    for index, (name, rows) in enumerate(profile.items()):
+        layers = [r[0] for r in rows]
+        style = "-" if gates[name] else "--"
+        colour = palette[index % len(palette)]
+        label = f"{name}" + ("" if gates[name] else "  (no gate)")
+        axes[0].plot(layers, [r[1] for r in rows], style, color=colour, lw=2.2, label=label)
+        axes[1].plot(layers, [r[2] for r in rows], style, color=colour, lw=2.2, label=label)
+
+    axes[0].set_xlabel("readout taken after layer")
+    axes[0].set_ylabel("nonlinearity of the running readout\n$1-R^2$ of a straight-line fit")
+    axes[0].set_title("(a) The gate builds up; it is not a switch", fontsize=10)
+    axes[0].grid(alpha=0.7)
+    axes[0].legend(frameon=False, fontsize=8)
+
+    axes[1].set_xlabel("readout taken after layer")
+    axes[1].set_ylabel("10–90% transition width")
+    axes[1].set_title("(b) …and the transition sharpens with it", fontsize=10)
+    axes[1].grid(alpha=0.7)
+    axes[1].invert_yaxis()
+
+    # (c) where the nonlinear signal sits, by component
+    axis = axes[2]
+    record = next(r for r in local["results"] if r["gates"])
+    components = sorted(record["components"],
+                        key=lambda c: -abs(c["swing"]) * c["nonlinearity"])[:10]
+    names = [c["component"] for c in components]
+    values = [abs(c["swing"]) * c["nonlinearity"] for c in components]
+    colours = [jp.LENS_COLORS["tuned"] if n.startswith("mlp") else jp.LENS_COLORS["j"]
+               for n in names]
+    axis.barh(range(len(names))[::-1], values, color=colours)
+    axis.set_yticks(range(len(names))[::-1], names, fontsize=8)
+    axis.set_xlabel("nonlinearity $\\times$ |swing|")
+    axis.set_title(f"(c) Which components, for {record['name']}", fontsize=10)
+    axis.grid(axis="x", alpha=0.7)
+    for patch, colour, tag in ((plt.Rectangle((0, 0), 1, 1, color=jp.LENS_COLORS["tuned"]), None, "MLP"),
+                               (plt.Rectangle((0, 0), 1, 1, color=jp.LENS_COLORS["j"]), None, "attention")):
+        axis.plot([], [], "s", color=patch.get_facecolor(), label=tag)
+    axis.legend(frameon=False, fontsize=8.5, loc="lower right")
+
+    figure.suptitle(
+        "Where the gate is: distributed over the last eight layers, mostly in MLPs",
+        fontsize=11.5, y=1.02,
+    )
+    figure.savefig(HERE / "fig_gate_depth.png")
+    plt.close(figure)
+    print("wrote fig_gate_depth.png")
 
 if __name__ == "__main__":
     _main()
