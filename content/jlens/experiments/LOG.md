@@ -529,3 +529,64 @@ Caveats, all material:
   every item, rather than chosen per item.
 * Sharper transitions at mid-depth are consistent with gating but do not
   identify a circuit. Nothing here localises the mechanism.
+
+### Addendum 4 result: the fitting distribution is what produces tangent-vs-chord
+
+`in_domain_lenses.py`. Layer 34, spider -> dog path. Both lenses refitted with
+the same estimators on a corpus of 375 two-hop animal-property prompts, versus
+the deployed fit on pile-10k web text.
+
+Reference quantities, both properties of the curve itself:
+
+```
+tangent of F at alpha = 0 :   4,315
+chord of F over [0, 1]    :  40,911      (a factor of 9.5 -- the gate)
+```
+
+| corpus | J-lens slope | tuned slope | tuned / J | OLS R^2 | fit tokens |
+|---|---|---|---|---|---|
+| web text | 11,013 | 9,622 | 0.87 | 0.858 | 7,104 |
+| in-domain | 26,570 | **41,564** | **1.56** | 0.918 | 18,315 |
+
+* **Prediction 1 confirmed, and tightly.** Refit in-domain, the regression lands
+  at 41,564 against a chord of 40,911 -- within 1.6%. Fit on a distribution that
+  straddles the gate, the tuned lens *is* the chord. Neel's mechanism, in a real
+  model.
+* **Prediction 3 confirmed.** The tuned/J ratio moves 0.87 -> 1.56; the two
+  lenses genuinely separate.
+* **Prediction 2 fails as written.** The J-lens was predicted to stay near the
+  tangent; it moved 11,013 -> 26,570, about 65% of the chord. The reason is
+  structural rather than surprising: notebook 01's toy deliberately clusters its
+  corpus *away* from the gate (mass at 0.25 and 1.75, gate at 1.0), so its
+  average tangent stays small. The animal corpus spreads across the leg-count
+  axis, putting substantial mass *on* the gate, so the average tangent is large.
+  Separation of the two lenses needs the corpus to be in-domain **and** to avoid
+  the gate -- being in-domain alone is not enough.
+
+### An unpredicted cost: in-domain fitting degrades the J-lens readout
+
+Full-vocabulary ranks at the unmodified spider state:
+
+| lens | corpus | `spider` | `8` |
+|---|---|---|---|
+| J | web | **7** | 638 |
+| J | in-domain | 14 | **53** |
+| tuned | web | 119 | 6 |
+| tuned | in-domain | 49 | 1 |
+
+The web-fit J-lens separates bridge from answer by a factor of ~90 in rank. The
+in-domain J-lens collapses that to ~4, and starts reporting the answer.
+
+This is consistent with Neel's account rather than against it. The Jacobian is
+supposed to ask what the model would say "on an arbitrary prompt"; averaging it
+over a task-specific corpus reintroduces exactly the predictive correlations
+that genericity was there to strip out. So there is a real trade-off:
+
+* **generic corpus** -> the J-lens reports current content (good for Claim 1),
+  but neither lens exhibits the tangent/chord geometry;
+* **in-domain corpus** -> the geometry appears cleanly (good for Claim 2), but
+  the J-lens loses the readout specificity that makes it useful.
+
+Answering the question that prompted this: fitting in-corpus does *not* simply
+make the lenses "work better". It makes them behave like the toy, at the cost of
+the property the J-lens is actually for.

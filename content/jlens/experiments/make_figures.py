@@ -279,6 +279,7 @@ def _main() -> None:
     figure_nonlinearity()
     figure_sweep()
     figure_shape()
+    figure_in_domain()
 
 
 def figure_shape() -> None:
@@ -332,6 +333,50 @@ def figure_shape() -> None:
     plt.close(figure)
     print("wrote fig_shape_paired.png")
 
+
+
+
+def figure_in_domain() -> None:
+    path = HERE / "in_domain_lenses.json"
+    if not path.exists():
+        return
+    data = json.loads(path.read_text())
+    alphas = np.array(data["alphas"])
+    actual = np.array(data["actual"])
+    zero = int(np.argmin(np.abs(alphas)))
+    tangent, chord = data["tangent_slope"], data["chord_slope"]
+
+    figure, axes = plt.subplots(1, 2, figsize=(12.4, 4.4), sharey=True)
+    titles = {"web": "lenses fitted on web text\n(as deployed)",
+              "in_domain": "lenses refitted on the animal family\n(corpus straddles the gate)"}
+    for axis, corpus in zip(axes, ("web", "in_domain")):
+        axis.axhline(0, color=jp.MUTED, lw=0.8)
+        axis.plot(alphas, actual - actual[zero], color=jp.INK, lw=2.6, zorder=5,
+                  label="network  (the real $F_\\ell$)")
+        axis.plot(alphas, tangent * alphas, ":", lw=1.8, color=jp.INK,
+                  label=f"tangent at $\\alpha$=0  ({tangent:,.0f})")
+        axis.plot(alphas, chord * alphas, "-.", lw=1.8, color=jp.MUTED,
+                  label=f"chord over [0,1]  ({chord:,.0f})")
+        axis.plot(alphas, np.array(data[corpus]["j_line"]) - data[corpus]["j_line"][zero],
+                  "--", lw=2.2, color=jp.LENS_COLORS["j"],
+                  label=f"J-lens  ({data[corpus]['j_slope']:,.0f})")
+        axis.plot(alphas, np.array(data[corpus]["tuned_line"]) - data[corpus]["tuned_line"][zero],
+                  "--", lw=2.2, color=jp.LENS_COLORS["tuned"],
+                  label=f"tuned lens  ({data[corpus]['tuned_slope']:,.0f})")
+        axis.plot(alphas, np.array(data["logit_line"]) - data["logit_line"][zero],
+                  "--", lw=1.6, color=jp.LENS_COLORS["logit"], alpha=0.8, label="logit lens")
+        axis.set_xlabel("interpolation $\\alpha$   (0 = spider, 1 = dog)")
+        axis.set_title(titles[corpus], fontsize=10)
+        axis.grid(axis="y", alpha=0.7)
+        axis.legend(frameon=False, fontsize=8, loc="upper left")
+    axes[0].set_ylabel("change in readout of\nlogit(4) $-$ logit(8)")
+    figure.suptitle(
+        "Refit the regression where the gate actually lives, and it becomes the chord",
+        fontsize=11.5, y=1.02,
+    )
+    figure.savefig(HERE / "fig_in_domain.png")
+    plt.close(figure)
+    print("wrote fig_in_domain.png")
 
 if __name__ == "__main__":
     _main()

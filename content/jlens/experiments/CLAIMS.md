@@ -261,3 +261,58 @@ Secondary: report the fraction of items whose workspace-layer width falls below
 
 A null result — widths no smaller at the workspace layer — means the sigmoid in
 `animal-legs` is idiosyncratic and no general gating claim is supported.
+
+---
+
+# Addendum 4: do the lenses behave as tangent and chord when fitted in-domain?
+
+Written 2026-08-23, before running.
+
+## Why
+
+On the `spider -> 8` / `dog -> 4` path at layer 34, the model's response is a
+clean sigmoid, but all three deployed lenses have nearly the same shallow slope
+(J 11013, tuned 9524, logit 12838, against a network chord of 40911). So the
+tuned lens is *not* acting as the chord of this curve.
+
+Notebook 01's toy gets the tangent/chord separation because its fitting corpus
+is two clusters straddling the gate **along the swept axis**. The deployed
+lenses are fitted on pile-10k web text, which never explores the
+spider-versus-dog direction. The separation may therefore be absent here
+because of the fitting distribution rather than because the mechanism is wrong.
+
+## The test
+
+Refit both lenses at layer 34 on an **in-domain** corpus: a few hundred
+two-hop animal-property prompts, so that the layer-34 activations genuinely
+vary along the "which animal" direction with mass either side of the gate.
+Same estimators, same code, only the corpus changes. Then re-measure the slope
+along the spider -> dog path against two quantities that are properties of the
+curve itself:
+
+* the **tangent**, `d/dalpha s(F(h(alpha)))` at `alpha = 0`, by JVP;
+* the **chord**, `s(F(h(1))) - s(F(h(0)))`.
+
+The regression compared is ordinary least squares in closed form for both
+corpora, since OLS is the object Neel's argument names.
+
+## Predictions, fixed before running
+
+1. **Tuned lens moves toward the chord.** Its in-domain slope should be
+   substantially larger than its web-text slope of 9524 and closer to 40911.
+2. **J-lens does not.** Its in-domain slope should stay well below the chord
+   and nearer the local tangent, because even in-domain most corpus mass sits
+   off the narrow gate.
+3. **They separate.** The ratio (tuned slope / J slope) should be clearly
+   greater in-domain than the current 0.86.
+
+If both move together, or neither moves, the locality account does not survive
+this test and prediction 3 is the one that matters.
+
+## The obvious objection, stated up front
+
+Fitting a lens on the distribution it is then probed against is circular in the
+sense that it constructs the toy. That is the point: it isolates whether the
+*fitting distribution* is what produces the tangent/chord separation. It does
+not show that the deployed lenses behave this way on web text -- we have
+already measured that they do not.

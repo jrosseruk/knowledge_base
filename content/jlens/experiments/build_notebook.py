@@ -55,10 +55,12 @@ nonlinear. So this notebook keeps two things apart:
   the computation downstream of the layer.
 
 Claim 1 is reported in the paper; we reproduce it in an open 12B model. Claim 2
-is not isolated by the paper's comparison and needs its own experiment. The
-short version of what follows: **Claim 1 partly replicates, Claim 2's premise is
-confirmed as a property of the map, and Claim 2's mechanism story fails on the
-very example it is usually told with.**
+is not isolated by the paper's comparison and needs its own experiment.
+
+The short version of what follows: **Claim 1 partly replicates. Claim 2's
+premise holds and is measurable exactly. Claim 2's mechanism reproduces
+cleanly — but only once the lens is fitted on a corpus that contains the gate,
+and not on the `Mars -> red` example the story is usually told with.**
 """)
 
 md(r"""
@@ -538,37 +540,106 @@ Image("experiments/fig_shape_paired.png")
 """)
 
 md(r"""
-## 7. Verdict
+## 7. Where the lenses' behaviour actually comes from
+
+Section 6 left a puzzle. The downstream computation gates hard — the tangent at
+$\alpha=0$ is 4,315 and the chord over $[0,1]$ is 40,911, a factor of nine —
+yet all three deployed lenses have nearly the same shallow slope along that
+path. So the tuned lens is not acting as the chord of this curve.
+
+The toy in section 1 gets the tangent/chord separation because its fitting
+corpus is two clusters **straddling the gate along the swept axis**. The
+deployed lenses are fitted on web text, which never explores the
+spider-versus-dog direction. So the missing separation may be a fact about the
+fitting distribution rather than about $F_\ell$.
+
+That is testable: refit both lenses, same estimators, on a corpus of two-hop
+animal-property prompts instead of web text.
+""")
+
+code(r"""
+%run experiments/in_domain_lenses.py
+""")
+
+code(r"""
+Image("experiments/fig_in_domain.png")
+""")
+
+md(r"""
+| corpus | J-lens slope | tuned slope | tuned / J |
+|---|---|---|---|
+| web text | 11,013 | 9,622 | 0.87 |
+| **in-domain** | **26,570** | **41,564** | **1.56** |
+
+against a tangent of 4,315 and a chord of **40,911**.
+
+Refit where the gate lives, the regression lands within **1.6%** of the chord.
+That is Neel's mechanism reproduced in a real model, and it says the flat result
+above was a fact about the corpus, not about the computation.
+
+Two things complicate the happy reading.
+
+**The J-lens moves too**, from 11,013 to 26,570 — about 65% of the chord, not
+the tangent. The toy keeps its average tangent small by clustering corpus mass
+*away* from the gate; the animal corpus spreads across the leg-count axis and
+puts plenty of mass *on* it. Separation needs the corpus to be in-domain **and**
+to avoid the gate. In-domain alone is not enough.
+
+**And fitting in-domain costs the J-lens the thing it is for.** Full-vocabulary
+ranks at the unmodified spider state:
+
+| lens | corpus | `spider` | `8` |
+|---|---|---|---|
+| J | web | **7** | 638 |
+| J | in-domain | 14 | **53** |
+
+A ~90x bridge-over-answer rank gap collapses to ~4x, and the lens starts
+reporting the answer. This is consistent with the account rather than against
+it: the Jacobian is meant to ask what the model would say *on an arbitrary
+prompt*, and averaging it over a task-specific corpus reintroduces exactly the
+predictive correlations that genericity strips out.
+
+So there is a real trade-off, and no single fit gives both:
+
+* **generic corpus** — the J-lens reports current content, Claim 1 works, and
+  neither lens shows the tangent/chord geometry;
+* **in-domain corpus** — the geometry appears cleanly, Claim 2 works, and the
+  J-lens loses its readout specificity.
+""")
+
+md(r"""
+## 8. Verdict
 
 | claim | verdict |
 |---|---|
-| J-lens surfaces the bridge entity at a layer where the model has not said it | **holds** — `Mars` at full-vocabulary rank 1, layer 34 |
+| J-lens surfaces the bridge entity at a layer where the model has not said it | **holds** — `Mars` at full-vocabulary rank 1 (L34); `spider` at rank 7 against `8` at 638 |
 | J-lens beats logit and tuned lenses at recovering it | **partly** — best at pass@1 (0.60 vs 0.46 vs 0.24) and median rank; logit lens edges it at pass@5/10, so the preregistered criterion fails |
 | Tuned Lens skips ahead to the answer | **holds** — ranks B above A on 57% of items where the J-lens ranks A above B on 75% |
 | $F_\ell$ is nonlinear, so a local Jacobian and a global regression *can* differ | **holds** — $\cos(J,A)=0.65$ at L34 against a 0.99 noise ceiling, and exactly 1.000 at L47 |
-| a gate-like circuit converting `Mars` to `red` is what drives the difference | **fails** — the response is linear to $R^2=0.995$ at adequate intervention scale |
-| gate-like transitions exist somewhere in the workspace band | **suggestive** — sharper at the workspace layer on 6/7 items, $p=0.016$, but $n=7$ after 67% attrition |
+| the tuned lens behaves as a regression chord across a gate | **holds, conditionally** — within 1.6% of the chord when fitted on a corpus that straddles the gate; not at all on web text |
+| a gate-like circuit converting `Mars` to `red` is what drives the difference | **fails** — that response is linear to $R^2=0.995$; the gating example is `spider -> 8`, not Mars |
+| gate-like transitions exist in the workspace band generally | **suggestive** — sharper at the workspace layer on 6/7 items, $p=0.016$, but $n=7$ after 67% attrition |
 
-The useful conclusion is that Neel's explanation splits into a premise and a
-mechanism, and they come apart empirically. The **premise** — that $F_\ell$ is
-nonlinear enough for a local Jacobian and a global regression to summarise it
-differently — is confirmed, and confirmed by a measurement that is exact rather
-than suggestive, since $J_\ell = A_\ell$ is *forced* when $F_\ell$ is affine.
+Neel's explanation splits into a premise and a mechanism, and both survive, but
+with conditions worth stating.
 
-The **mechanism** — that a specific gate converting A into B is what the two
-lenses disagree about — is not established, and on `Mars → red` it is
-positively contradicted. The gating we can find lives in items with numeric
-answers, where the model must commit to one of a small ordered set. Whether that
-is what drives the lens divergence anywhere is open.
+The **premise** — that $F_\ell$ is nonlinear enough for a local Jacobian and a
+global regression to summarise it differently — is confirmed by a measurement
+that is exact rather than suggestive, since $J_\ell = A_\ell$ is *forced* when
+$F_\ell$ is affine, and the measurement returns exactly 1.000 at the layer
+where that holds.
 
-The project brief anticipated this: *"Mars-to-red could be implemented
-approximately linearly after Mars is represented [...] do not present it as
-evidence for Claim 2 unless the causal sweep actually establishes a nonlinear
-transition."* It does not, so we do not.
+The **mechanism** — regression-as-chord, Jacobian-as-tangent — reproduces
+cleanly, but only once the lens is fitted where the gate is. On the corpus the
+lenses are actually deployed with, the geometry is absent. And the example the
+story is usually told with, `Mars -> red`, has no gate at all: it is linear to
+$R^2 = 0.995$ under an intervention thirty times larger than the paper's swap.
+The project brief anticipated exactly this and asked that it not be presented as
+Claim 2 evidence, so it is not.
 
-Full chronology, including three implementation bugs found and fixed along the
-way and every criterion that failed, is in `experiments/LOG.md`; the
-preregistered criteria are in `experiments/CLAIMS.md`.
+Full chronology, including three implementation bugs and every criterion that
+failed, is in `experiments/LOG.md`; the four preregistrations are in
+`experiments/CLAIMS.md`.
 """)
 
 # ---------------------------------------------------------------------------
