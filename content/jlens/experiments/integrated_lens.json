@@ -1,0 +1,399 @@
+{
+ "model": "google/gemma-3-12b-it",
+ "layer": 34,
+ "reference_norm": 76586.5390625,
+ "probes": [
+  {
+   "name": "spider-legs",
+   "bridge": "spider",
+   "answer": "8",
+   "bridge_id": 48587,
+   "answer_id": 236828
+  },
+  {
+   "name": "mars-colour",
+   "bridge": "Mars",
+   "answer": "red",
+   "bridge_id": 81522,
+   "answer_id": 1192
+  },
+  {
+   "name": "basketball",
+   "bridge": "basketball",
+   "answer": "5",
+   "bridge_id": 85832,
+   "answer_id": 236810
+  }
+ ],
+ "rows": [
+  {
+   "sigma": 0.0,
+   "probes": {
+    "spider-legs": {
+     "bridge_rank": 8,
+     "answer_rank": 676,
+     "top": [
+      " legs",
+      "legs",
+      " Legs",
+      "Spider",
+      " eight",
+      " spiders"
+     ]
+    },
+    "mars-colour": {
+     "bridge_rank": 1,
+     "answer_rank": 193,
+     "top": [
+      "Mars",
+      " reddish",
+      " blue",
+      " bluish",
+      " Mars",
+      " brownish"
+     ]
+    },
+    "basketball": {
+     "bridge_rank": 4,
+     "answer_rank": 2103,
+     "top": [
+      " basketball",
+      "Basketball",
+      " Basketball",
+      "basketball",
+      " players",
+      " jogadores"
+     ]
+    }
+   }
+  },
+  {
+   "sigma": 0.05,
+   "probes": {
+    "spider-legs": {
+     "bridge_rank": 8,
+     "answer_rank": 631,
+     "top": [
+      " legs",
+      "legs",
+      " Legs",
+      " spiders",
+      " eight",
+      "Spider"
+     ]
+    },
+    "mars-colour": {
+     "bridge_rank": 1,
+     "answer_rank": 202,
+     "top": [
+      "Mars",
+      " blue",
+      " bluish",
+      " Mars",
+      " reddish",
+      " Jupiter"
+     ]
+    },
+    "basketball": {
+     "bridge_rank": 3,
+     "answer_rank": 1524,
+     "top": [
+      " basketball",
+      "Basketball",
+      "basketball",
+      " Basketball",
+      " players",
+      " jogadores"
+     ]
+    }
+   }
+  },
+  {
+   "sigma": 0.1,
+   "probes": {
+    "spider-legs": {
+     "bridge_rank": 6,
+     "answer_rank": 342,
+     "top": [
+      " legs",
+      "legs",
+      " Legs",
+      " eight",
+      " spiders",
+      " spider"
+     ]
+    },
+    "mars-colour": {
+     "bridge_rank": 2,
+     "answer_rank": 178,
+     "top": [
+      " blue",
+      "Mars",
+      " bluish",
+      " Mars",
+      " reddish",
+      " Jupiter"
+     ]
+    },
+    "basketball": {
+     "bridge_rank": 3,
+     "answer_rank": 732,
+     "top": [
+      " basketball",
+      "Basketball",
+      "basketball",
+      " Basketball",
+      " players",
+      "\u7bee\u7403"
+     ]
+    }
+   }
+  },
+  {
+   "sigma": 0.2,
+   "probes": {
+    "spider-legs": {
+     "bridge_rank": 6,
+     "answer_rank": 43,
+     "top": [
+      " legs",
+      "legs",
+      " Legs",
+      " eight",
+      " spider",
+      "spider"
+     ]
+    },
+    "mars-colour": {
+     "bridge_rank": 12,
+     "answer_rank": 54,
+     "top": [
+      " blue",
+      " brown",
+      " reddish",
+      " planet",
+      " Mars",
+      " bluish"
+     ]
+    },
+    "basketball": {
+     "bridge_rank": 7,
+     "answer_rank": 66,
+     "top": [
+      " basketball",
+      " players",
+      " five",
+      " four",
+      " Basketball",
+      "Basketball"
+     ]
+    }
+   }
+  },
+  {
+   "sigma": 0.35,
+   "probes": {
+    "spider-legs": {
+     "bridge_rank": 27,
+     "answer_rank": 8,
+     "top": [
+      " legs",
+      "legs",
+      " eight",
+      " Legs",
+      " four",
+      " six"
+     ]
+    },
+    "mars-colour": {
+     "bridge_rank": 9,
+     "answer_rank": 5,
+     "top": [
+      "brown",
+      " brown",
+      " blue",
+      " Martian",
+      "red",
+      "blue"
+     ]
+    },
+    "basketball": {
+     "bridge_rank": 7,
+     "answer_rank": 20,
+     "top": [
+      " five",
+      " four",
+      " basketball",
+      ".",
+      " Basketball",
+      "four"
+     ]
+    }
+   }
+  },
+  {
+   "sigma": 0.5,
+   "probes": {
+    "spider-legs": {
+     "bridge_rank": 38,
+     "answer_rank": 4,
+     "top": [
+      " legs",
+      " ",
+      " eight",
+      "8",
+      "4",
+      " four"
+     ]
+    },
+    "mars-colour": {
+     "bridge_rank": 35,
+     "answer_rank": 8,
+     "top": [
+      "\n",
+      " brown",
+      " blue",
+      "\n\n",
+      "  ",
+      " "
+     ]
+    },
+    "basketball": {
+     "bridge_rank": 17,
+     "answer_rank": 13,
+     "top": [
+      " ",
+      " four",
+      " basketball",
+      " five",
+      "\n",
+      "."
+     ]
+    }
+   }
+  },
+  {
+   "sigma": 0.75,
+   "probes": {
+    "spider-legs": {
+     "bridge_rank": 10,
+     "answer_rank": 8,
+     "top": [
+      " legs",
+      " eight",
+      " six",
+      "legs",
+      " four",
+      " "
+     ]
+    },
+    "mars-colour": {
+     "bridge_rank": 18,
+     "answer_rank": 5,
+     "top": [
+      " blue",
+      " brown",
+      " red",
+      "brown",
+      "red",
+      " orange"
+     ]
+    },
+    "basketball": {
+     "bridge_rank": 5,
+     "answer_rank": 29,
+     "top": [
+      " basketball",
+      " five",
+      " four",
+      " ",
+      "basketball",
+      " players"
+     ]
+    }
+   }
+  },
+  {
+   "sigma": 1.0,
+   "probes": {
+    "spider-legs": {
+     "bridge_rank": 10,
+     "answer_rank": 20,
+     "top": [
+      " legs",
+      " eight",
+      " six",
+      "legs",
+      " four",
+      " spider"
+     ]
+    },
+    "mars-colour": {
+     "bridge_rank": 14,
+     "answer_rank": 8,
+     "top": [
+      " blue",
+      " brown",
+      " red",
+      "brown",
+      " orange",
+      " planet"
+     ]
+    },
+    "basketball": {
+     "bridge_rank": 4,
+     "answer_rank": 47,
+     "top": [
+      " basketball",
+      " five",
+      " four",
+      "basketball",
+      " players",
+      " six"
+     ]
+    }
+   }
+  },
+  {
+   "sigma": 1.5,
+   "probes": {
+    "spider-legs": {
+     "bridge_rank": 13,
+     "answer_rank": 36,
+     "top": [
+      " legs",
+      " eight",
+      " six",
+      "legs",
+      " four",
+      " spider"
+     ]
+    },
+    "mars-colour": {
+     "bridge_rank": 17,
+     "answer_rank": 11,
+     "top": [
+      " blue",
+      " brown",
+      " red",
+      "brown",
+      " planet",
+      " orange"
+     ]
+    },
+    "basketball": {
+     "bridge_rank": 4,
+     "answer_rank": 93,
+     "top": [
+      " basketball",
+      " five",
+      " four",
+      "basketball",
+      " players",
+      " six"
+     ]
+    }
+   }
+  }
+ ]
+}

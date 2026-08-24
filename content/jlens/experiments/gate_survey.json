@@ -1,0 +1,614 @@
+{
+ "model": "google/gemma-3-12b-it",
+ "layer": 34,
+ "control_layer": 46,
+ "summary": {
+  "numeric": {
+   "n": 7,
+   "median_width": 0.38333332538604736,
+   "median_control_width": 0.7333333343267441,
+   "median_gate_strength": 6.273556592381645,
+   "median_ratio_web": 1.5070817840295483,
+   "median_ratio_domain": 1.3683009266651383
+  },
+  "discrete": {
+   "n": 2,
+   "median_width": 0.7749999975785613,
+   "median_control_width": 0.7666666358709335,
+   "median_gate_strength": 2.8914621847906035,
+   "median_ratio_web": 0.732361569509545,
+   "median_ratio_domain": 1.2091695157489641
+  },
+  "graded": {
+   "n": 2,
+   "median_width": 0.7583332993090153,
+   "median_control_width": 0.7666666507720947,
+   "median_gate_strength": 1.002463203503748,
+   "median_ratio_web": 0.7750620076948735,
+   "median_ratio_domain": 0.3384869954404268
+  }
+ },
+ "rows": [
+  {
+   "family": "animal-legs",
+   "group": "numeric",
+   "name": "spider-dog",
+   "answer": "8",
+   "counter_answer": "4",
+   "behaviour": {
+    "base": "8.\n\nThis is a",
+    "counter": "4.\n\nThis is a"
+   },
+   "layers": {
+    "workspace": {
+     "width": 0.21666660904884338,
+     "tangent": 3472.265380859375,
+     "chord": 40646.73046875,
+     "gate_strength": 11.706112871675165,
+     "logit_difference": [
+      -8.375,
+      5.25
+     ],
+     "slopes": {
+      "j_web": 11007.533203125,
+      "j_domain": 19125.8359375,
+      "tuned_web": 9621.54296875,
+      "tuned_domain": 13566.107421875,
+      "logit": 12838.064453125
+     }
+    },
+    "control": {
+     "width": 0.6999999582767487,
+     "tangent": 26260.544921875,
+     "chord": 51755.796875,
+     "gate_strength": 1.970857688938796,
+     "logit_difference": [
+      -8.5,
+      8.625
+     ],
+     "slopes": {
+      "j_web": 71400.6640625,
+      "j_domain": 74500.3359375,
+      "tuned_web": 70763.421875,
+      "tuned_domain": 58591.25390625,
+      "logit": 80842.8828125
+     }
+    }
+   },
+   "ratio_web": 0.8740871175404202,
+   "ratio_domain": 0.709307946915719
+  },
+  {
+   "family": "animal-legs",
+   "group": "numeric",
+   "name": "ant-bird",
+   "answer": "6",
+   "counter_answer": "2",
+   "behaviour": {
+    "base": "6.\n\nWhat insect is",
+    "counter": "2.\n\nThe animal that"
+   },
+   "layers": {
+    "workspace": {
+     "width": 0.24999994039535522,
+     "tangent": 5035.78076171875,
+     "chord": 50488.4453125,
+     "gate_strength": 10.025941894910435,
+     "logit_difference": [
+      -7.5,
+      8.125
+     ],
+     "slopes": {
+      "j_web": 10049.3662109375,
+      "j_domain": 16054.751953125,
+      "tuned_web": 24775.013671875,
+      "tuned_domain": 13268.4208984375,
+      "logit": 10838.08203125
+     }
+    },
+    "control": {
+     "width": 0.7166666388511658,
+     "tangent": 32132.341796875,
+     "chord": 50069.4609375,
+     "gate_strength": 1.558226327045029,
+     "logit_difference": [
+      -7.375,
+      8.375
+     ],
+     "slopes": {
+      "j_web": 72023.3203125,
+      "j_domain": 74039.203125,
+      "tuned_web": 67228.015625,
+      "tuned_domain": 58840.1640625,
+      "logit": 79198.21875
+     }
+    }
+   },
+   "ratio_web": 2.46533096235566,
+   "ratio_domain": 0.8264482028235166
+  },
+  {
+   "family": "animal-legs",
+   "group": "numeric",
+   "name": "spider-bee",
+   "answer": "8",
+   "counter_answer": "6",
+   "behaviour": {
+    "base": "8.\n\nThis is a",
+    "counter": "6.\n\nThis is a"
+   },
+   "layers": {
+    "workspace": {
+     "width": 0.44999995827674866,
+     "tangent": 12389.4130859375,
+     "chord": 48103.125,
+     "gate_strength": 3.8825991728856835,
+     "logit_difference": [
+      -8.625,
+      7.625
+     ],
+     "slopes": {
+      "j_web": 6122.9150390625,
+      "j_domain": 10482.001953125,
+      "tuned_web": 11026.86328125,
+      "tuned_domain": 17506.111328125,
+      "logit": 7401.4599609375
+     }
+    },
+    "control": {
+     "width": 0.7333332896232605,
+     "tangent": 43273.00390625,
+     "chord": 53423.66015625,
+     "gate_strength": 1.2345724893975738,
+     "logit_difference": [
+      -8.625,
+      9.125
+     ],
+     "slopes": {
+      "j_web": 75179.7578125,
+      "j_domain": 76241.9296875,
+      "tuned_web": 70273.3125,
+      "tuned_domain": 59879.421875,
+      "logit": 82756.4140625
+     }
+    }
+   },
+   "ratio_web": 1.800917244629669,
+   "ratio_domain": 1.6701114354310822
+  },
+  {
+   "family": "geometry-sides",
+   "group": "numeric",
+   "name": "triangle-square",
+   "answer": "3",
+   "counter_answer": "4",
+   "behaviour": {
+    "base": "3.\n\nThis is a",
+    "counter": "4.\n\nThe statement \""
+   },
+   "layers": {
+    "workspace": {
+     "width": 0.28333327174186707,
+     "tangent": -4267.03076171875,
+     "chord": 49556.15234375,
+     "gate_strength": 11.613732150313558,
+     "logit_difference": [
+      -11.5,
+      4.625
+     ],
+     "slopes": {
+      "j_web": 23165.798828125,
+      "j_domain": 24026.603515625,
+      "tuned_web": 30298.55078125,
+      "tuned_domain": 29113.296875,
+      "logit": 26365.453125
+     }
+    },
+    "control": {
+     "width": 0.7333333343267441,
+     "tangent": 49515.93359375,
+     "chord": 59655.08203125,
+     "gate_strength": 1.2047653694805784,
+     "logit_difference": [
+      -11.5,
+      7.75
+     ],
+     "slopes": {
+      "j_web": 71224.2265625,
+      "j_domain": 73152.6171875,
+      "tuned_web": 67027.5,
+      "tuned_domain": 63407.5390625,
+      "logit": 80115.65625
+     }
+    }
+   },
+   "ratio_web": 1.3079001076563486,
+   "ratio_domain": 1.2117108794036169
+  },
+  {
+   "family": "geometry-sides",
+   "group": "numeric",
+   "name": "pentagon-hexagon",
+   "answer": "5",
+   "counter_answer": "6",
+   "behaviour": {
+    "base": "5.\n\nThe number of",
+    "counter": "6.\n\nLet's"
+   },
+   "layers": {
+    "workspace": {
+     "width": 0.38333332538604736,
+     "tangent": 7859.41357421875,
+     "chord": 46885.3359375,
+     "gate_strength": 5.9655005420885425,
+     "logit_difference": [
+      -9.875,
+      4.125
+     ],
+     "slopes": {
+      "j_web": 12780.498046875,
+      "j_domain": 19192.435546875,
+      "tuned_web": 17203.0234375,
+      "tuned_domain": 26261.02734375,
+      "logit": 16675.71875
+     }
+    },
+    "control": {
+     "width": 0.75,
+     "tangent": 48465.69921875,
+     "chord": 57455.0703125,
+     "gate_strength": 1.1854790344234272,
+     "logit_difference": [
+      -9.875,
+      7.375
+     ],
+     "slopes": {
+      "j_web": 68306.0,
+      "j_domain": 71903.984375,
+      "tuned_web": 61110.84375,
+      "tuned_domain": 59055.01171875,
+      "logit": 79679.359375
+     }
+    }
+   },
+   "ratio_web": 1.3460370147082308,
+   "ratio_domain": 1.3683009266651383
+  },
+  {
+   "family": "sport-counts",
+   "group": "numeric",
+   "name": "basketball-volleyball",
+   "answer": "5",
+   "counter_answer": "6",
+   "behaviour": {
+    "base": "5.\n\nThe number of",
+    "counter": "6.\n\nThe number of"
+   },
+   "layers": {
+    "workspace": {
+     "width": 0.38333332538604736,
+     "tangent": -7425.23388671875,
+     "chord": 46582.625,
+     "gate_strength": 6.273556592381645,
+     "logit_difference": [
+      -9.625,
+      4.5
+     ],
+     "slopes": {
+      "j_web": 1541.098876953125,
+      "j_domain": 4107.93212890625,
+      "tuned_web": 2857.48974609375,
+      "tuned_domain": 13493.681640625,
+      "logit": 2572.09521484375
+     }
+    },
+    "control": {
+     "width": 0.7499999552965164,
+     "tangent": 54445.42578125,
+     "chord": 53088.421875,
+     "gate_strength": 0.97507588770263,
+     "logit_difference": [
+      -9.5,
+      6.5
+     ],
+     "slopes": {
+      "j_web": 70963.6015625,
+      "j_domain": 73609.25,
+      "tuned_web": 63734.828125,
+      "tuned_domain": 58237.59375,
+      "logit": 81892.6328125
+     }
+    }
+   },
+   "ratio_web": 1.8541897530567502,
+   "ratio_domain": 3.2847868993925506
+  },
+  {
+   "family": "sport-counts",
+   "group": "numeric",
+   "name": "arc-inside",
+   "answer": "3",
+   "counter_answer": "2",
+   "behaviour": {
+    "base": "3.\n\nThe statement is",
+    "counter": "2.\n\nThis is a"
+   },
+   "layers": {
+    "workspace": {
+     "width": 0.4833333194255829,
+     "tangent": 16868.318359375,
+     "chord": 42313.6171875,
+     "gate_strength": 2.508466836232263,
+     "logit_difference": [
+      -9.625,
+      4.25
+     ],
+     "slopes": {
+      "j_web": 4727.6884765625,
+      "j_domain": 7094.1064453125,
+      "tuned_web": 7125.01318359375,
+      "tuned_domain": 13989.2275390625,
+      "logit": 5292.064453125
+     }
+    },
+    "control": {
+     "width": 0.7666666656732559,
+     "tangent": 40913.19921875,
+     "chord": 48810.953125,
+     "gate_strength": 1.193036820807466,
+     "logit_difference": [
+      -9.5,
+      6.125
+     ],
+     "slopes": {
+      "j_web": 66311.0234375,
+      "j_domain": 64951.5,
+      "tuned_web": 60492.46875,
+      "tuned_domain": 51182.3046875,
+      "logit": 72791.0859375
+     }
+    }
+   },
+   "ratio_web": 1.5070817840295483,
+   "ratio_domain": 1.9719506109618665
+  },
+  {
+   "family": "antonym",
+   "group": "discrete",
+   "name": "up-wet",
+   "answer": "down",
+   "counter_answer": "dry",
+   "behaviour": {
+    "base": "\ndown. \n ",
+    "counter": "\ndry. \n "
+   },
+   "layers": {
+    "workspace": {
+     "width": 0.7333333324640989,
+     "tangent": 5642.57763671875,
+     "chord": 5030.701171875,
+     "gate_strength": 0.8915608248148862,
+     "logit_difference": [
+      -13.046875,
+      -13.703125
+     ],
+     "slopes": {
+      "j_web": 23536.271484375,
+      "j_domain": 25919.53515625,
+      "tuned_web": 19909.859375,
+      "tuned_domain": 23599.7421875,
+      "logit": 13302.6630859375
+     }
+    },
+    "control": {
+     "width": 0.7666666358709335,
+     "tangent": 47475.69921875,
+     "chord": 50977.1171875,
+     "gate_strength": 1.0737517935779481,
+     "logit_difference": [
+      -13.2421875,
+      10.46875
+     ],
+     "slopes": {
+      "j_web": 49878.94921875,
+      "j_domain": 52396.44140625,
+      "tuned_web": 46566.421875,
+      "tuned_domain": 46641.31640625,
+      "logit": 48033.1875
+     }
+    }
+   },
+   "ratio_web": 0.8459224048387417,
+   "ratio_domain": 0.9105002094070879
+  },
+  {
+   "family": "antonym",
+   "group": "discrete",
+   "name": "light-fast",
+   "answer": "dark",
+   "counter_answer": "slow",
+   "behaviour": {
+    "base": "\ndark. \n\nBut",
+    "counter": "\nslow. \n<end_of_turn>"
+   },
+   "layers": {
+    "workspace": {
+     "width": 0.8166666626930237,
+     "tangent": 1235.1561279296875,
+     "chord": 6041.59765625,
+     "gate_strength": 4.891363544766321,
+     "logit_difference": [
+      -12.9609375,
+      -10.4375
+     ],
+     "slopes": {
+      "j_web": 8403.8232421875,
+      "j_domain": 11152.17578125,
+      "tuned_web": 5200.2919921875,
+      "tuned_domain": 16815.68359375,
+      "logit": 5093.623046875
+     }
+    },
+    "control": {
+     "width": 0.7666666358709335,
+     "tangent": 43578.51171875,
+     "chord": 55529.53125,
+     "gate_strength": 1.2742411124175215,
+     "logit_difference": [
+      -12.9921875,
+      12.44140625
+     ],
+     "slopes": {
+      "j_web": 56534.921875,
+      "j_domain": 57634.5703125,
+      "tuned_web": 53574.30078125,
+      "tuned_domain": 56010.13671875,
+      "logit": 55602.6015625
+     }
+    }
+   },
+   "ratio_web": 0.6188007341803483,
+   "ratio_domain": 1.5078388220908405
+  },
+  {
+   "family": "planet-colour",
+   "group": "graded",
+   "name": "mars-earth",
+   "answer": "red",
+   "counter_answer": "blue",
+   "behaviour": {
+    "base": "\nred.\n\nThis is",
+    "counter": "\nblue.\n\nThis is"
+   },
+   "layers": {
+    "workspace": {
+     "width": 0.8333333060145378,
+     "tangent": 10966.2666015625,
+     "chord": 4784.56787109375,
+     "gate_strength": 0.4362987008187484,
+     "logit_difference": [
+      -0.9375,
+      1.0
+     ],
+     "slopes": {
+      "j_web": 1918.7611083984375,
+      "j_domain": 3064.046630859375,
+      "tuned_web": 1953.94921875,
+      "tuned_domain": -653.75146484375,
+      "logit": 2340.01904296875
+     }
+    },
+    "control": {
+     "width": 0.7666666656732559,
+     "tangent": 7346.07373046875,
+     "chord": 10913.47265625,
+     "gate_strength": 1.485619809529684,
+     "logit_difference": [
+      -0.9375,
+      3.0625
+     ],
+     "slopes": {
+      "j_web": 20066.3203125,
+      "j_domain": 19968.41796875,
+      "tuned_web": 18346.169921875,
+      "tuned_domain": 16145.4091796875,
+      "logit": 19899.873046875
+     }
+    }
+   },
+   "ratio_web": 1.0183389741419835,
+   "ratio_domain": -0.2133621134415934
+  },
+  {
+   "family": "capital-language",
+   "group": "graded",
+   "name": "paris-madrid",
+   "answer": "French",
+   "counter_answer": "Spanish",
+   "behaviour": {
+    "base": "\nFrench.\n\nThis is",
+    "counter": "\nSpanish.\n\nThis is"
+   },
+   "layers": {
+    "workspace": {
+     "width": 0.6833332926034927,
+     "tangent": 12304.9208984375,
+     "chord": 19301.83984375,
+     "gate_strength": 1.5686277061887477,
+     "logit_difference": [
+      -9.40625,
+      -1.375
+     ],
+     "slopes": {
+      "j_web": 35426.63671875,
+      "j_domain": 34316.6796875,
+      "tuned_web": 18839.35546875,
+      "tuned_domain": 30553.37890625,
+      "logit": 19776.73046875
+     }
+    },
+    "control": {
+     "width": 0.7666666358709335,
+     "tangent": 29802.185546875,
+     "chord": 37066.6484375,
+     "gate_strength": 1.2437560453141578,
+     "logit_difference": [
+      -9.40625,
+      6.5625
+     ],
+     "slopes": {
+      "j_web": 46940.5078125,
+      "j_domain": 44152.0,
+      "tuned_web": 42088.68359375,
+      "tuned_domain": 41008.98046875,
+      "logit": 46190.328125
+     }
+    }
+   },
+   "ratio_web": 0.5317850412477635,
+   "ratio_domain": 0.890336104322447
+  }
+ ],
+ "skipped": [
+  [
+   "antonym",
+   "hot-large",
+   "behaviour {'base': '\\ncold. \\n ', 'counter': '\\n(a) small\\n'}"
+  ],
+  [
+   "state-of-matter",
+   "water-iron",
+   "behaviour {'base': '1.00 g/', 'counter': '\\nsolid.\\n\\nTrue or'}"
+  ],
+  [
+   "state-of-matter",
+   "oxygen-gold",
+   "behaviour {'base': '2-atom molecule (O', 'counter': '24 karat metal.\\n\\n'}"
+  ],
+  [
+   "parity",
+   "seven-eight",
+   "behaviour {'base': '7.\\n\\nThis is a', 'counter': '8.\\n\\nThis is a'}"
+  ],
+  [
+   "parity",
+   "thirteen-twenty",
+   "behaviour {'base': '13.\\n\\nThis is', 'counter': '20.\\n\\nThis is'}"
+  ],
+  [
+   "animal-class",
+   "snake-salmon",
+   "behaviour {'base': '\\nsnake. \\n\\nTrue', 'counter': '\u9c7c (y\u00fa).\\n\\n'}"
+  ],
+  [
+   "animal-class",
+   "bat-eagle",
+   "behaviour {'base': '\ud83e\udd87.\\n\\nBats are the', 'counter': '\\neagle.\\n\\nTrue or'}"
+  ],
+  [
+   "capital-language",
+   "rome-berlin",
+   "behaviour {'base': '\u610f\u5927\u5229\u8bed (Italian).\\n\\n', 'counter': '\\nGerman.\\n\\nThis is'}"
+  ]
+ ]
+}

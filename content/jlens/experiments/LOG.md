@@ -590,3 +590,102 @@ that genericity was there to strip out. So there is a real trade-off:
 Answering the question that prompted this: fitting in-corpus does *not* simply
 make the lenses "work better". It makes them behave like the toy, at the cost of
 the property the J-lens is actually for.
+
+## 2026-08-24
+
+### Gate survey across relation families
+
+`gate_survey.py`. Layer 34, control 46, interpolation between two real internal
+states, 10-90 transition width. 21 candidate items, 11 scored.
+
+| group | n | median width | control width | median gate strength |
+|---|---|---|---|---|
+| **numeric** | 7 | **0.383** | 0.733 | **x6.3** |
+| discrete non-numeric | 2 | 0.775 | 0.767 | x2.9 |
+| graded categorical | 2 | 0.758 | 0.767 | x1.0 |
+
+Per item, the numeric group is uniformly sharp and includes Neel's basketball:
+
+```
+spider-dog            0.217  (gate x11.7)
+ant-bird              0.250  (x10.0)
+triangle-square       0.283  (x11.6)
+pentagon-hexagon      0.383  (x6.0)
+basketball-volleyball 0.383  (x6.3)
+spider-bee            0.450  (x3.9)
+arc-inside            0.483  (x2.5)
+--
+up-wet                0.733  (x0.9)     discrete
+light-fast            0.817  (x4.9)     discrete
+paris-madrid          0.683  (x1.6)     graded
+mars-earth            0.833  (x0.4)     graded
+```
+
+**H-numeric is supported over H-discrete.** Answers drawn from a small closed
+set do not gate merely for being discrete: antonyms (a binary answer space)
+behave like colour, not like counts. What gates is *counting*.
+
+Caveat that limits this: the discrete group is n = 2 after 6 of 8 items were
+dropped. Gemma answers those prompts by echoing the entity ("snake" for the
+class of a snake, "7" for the parity of seven), with an emoji, or in Chinese.
+The comparison that decides between the two hypotheses is therefore the
+weakest-powered one in the survey. A follow-up with few-shot framing should fix
+the behaviour and is the obvious next step.
+
+Also fixed here: the first run gave each family only ~20 sequences (~2,200 token
+positions) to fit a 3840-dimensional OLS, which is decided entirely by the ridge
+term. Corpora are now sized to 170 sequences (~19k positions). The
+`spider-dog` in-domain ratio read 0.85 under the broken sizing and 1.56 in the
+correctly-sized dedicated run.
+
+### The integrated lens: one knob spanning J-lens and Tuned Lens
+
+Following a suggestion to extend the J-lens from infinitesimal to finite
+interventions. Define
+
+    A_{l,sigma} = argmin_A E_{h, delta ~ q_sigma} ||F(h+delta) - F(h) - A delta||^2
+
+so that sigma -> 0 gives the J-lens and delta = h' - h over natural pairs gives
+the least-squares tuned-lens analogue.
+
+**The implementation shortcut.** By the fundamental theorem of calculus,
+`F(h+delta) - F(h) = J_bar(h,delta) delta` exactly, with
+`J_bar(h,delta) = int_0^1 J(h + alpha delta) d alpha`. For isotropic `delta`
+independent of `h`, the minimiser is `E[J_bar]`, and
+
+    E_{h,delta}[J_bar(h,delta)] = E_{h,delta,alpha}[J(h + alpha delta)]
+                                = E_{h' ~ p_sigma}[J(h')]
+
+where `p_sigma` is the activation distribution smeared at scale sigma. So the
+scale-sigma lens is the *existing* Jacobian estimator run over perturbed
+activations -- one extra term in the injection hook, no extra forward passes,
+no matched dataset. Implemented as `integrated_lens.transport_at_scale`.
+
+Validation: at `sigma = 0` it reproduces `jlens_core.transport` to **max abs
+difference 0.0** (identical code path), and moves away smoothly -- 7% relative
+change at sigma = 0.02, 87% at sigma = 1.0.
+
+**Result.** Sweeping sigma at layer 34, full-vocabulary ranks:
+
+| sigma | spider | 8 | Mars | red | basketball | 5 |
+|---|---|---|---|---|---|---|
+| 0.00 | **8** | 676 | **1** | 193 | **4** | 2103 |
+| 0.10 | **6** | 342 | **2** | 178 | **3** | 732 |
+| 0.20 | **6** | 43 | 12 | 54 | 7 | 66 |
+| 0.35 | 27 | **8** | 9 | **5** | 7 | 20 |
+| 0.50 | 38 | **4** | 35 | 8 | 17 | **13** |
+| 1.50 | 13 | 36 | 17 | 11 | 4 | 93 |
+
+At `sigma = 0` the lens reads the bridge entity and is nearly blind to the
+answer; by `sigma ~ 0.35-0.5` the readout has flipped, on all three probes, at
+a consistent scale. Past `sigma ~ 0.75` both degrade as the smearing starts
+averaging Jacobians over states the model never visits.
+
+So the J-lens/Tuned-lens distinction is not two methods but **one continuum
+parameterised by intervention scale**, and the transition point is measurable.
+
+Note `Mars -> red` shows the flip (193 -> 5) even though its interpolation path
+was linear. There is no contradiction: sigma-smearing explores all directions,
+not just the Mars-to-Earth chord, so it can reach nonlinearity that the single
+chord misses. That also explains why the Addendum-2 result was a statement about
+one path rather than about the layer.

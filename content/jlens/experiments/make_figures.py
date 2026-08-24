@@ -280,6 +280,7 @@ def _main() -> None:
     figure_sweep()
     figure_shape()
     figure_in_domain()
+    figure_integrated()
 
 
 def figure_shape() -> None:
@@ -377,6 +378,48 @@ def figure_in_domain() -> None:
     figure.savefig(HERE / "fig_in_domain.png")
     plt.close(figure)
     print("wrote fig_in_domain.png")
+
+
+
+def figure_integrated() -> None:
+    path = HERE / "integrated_lens.json"
+    if not path.exists():
+        return
+    data = json.loads(path.read_text())
+    sigmas = [r["sigma"] for r in data["rows"]]
+    probes = data["probes"]
+
+    figure, axes = plt.subplots(1, len(probes), figsize=(4.5 * len(probes), 4.1),
+                               sharey=True, squeeze=False)
+    for axis, probe in zip(axes[0], probes):
+        name = probe["name"]
+        bridge = [r["probes"][name]["bridge_rank"] for r in data["rows"]]
+        answer = [r["probes"][name]["answer_rank"] for r in data["rows"]]
+        axis.plot(sigmas, bridge, "-o", color=jp.LENS_COLORS["j"], ms=5,
+                  label=f"bridge  '{probe['bridge']}'")
+        axis.plot(sigmas, answer, "-o", color=jp.LENS_COLORS["tuned"], ms=5,
+                  label=f"answer  '{probe['answer']}'")
+        # where the readout flips from current content to eventual output
+        crossings = [s for s, b, a in zip(sigmas, bridge, answer) if a < b]
+        if crossings:
+            axis.axvline(min(crossings), color=jp.MUTED, lw=0.9, ls=":")
+            axis.annotate("readout flips", (min(crossings), 1.6), fontsize=8,
+                          color=jp.MUTED, ha="center")
+        axis.set_yscale("log")
+        axis.invert_yaxis()
+        axis.set_xlabel("intervention scale $\\sigma$")
+        axis.set_title(name, fontsize=10)
+        axis.grid(axis="y", alpha=0.7)
+        axis.legend(frameon=False, fontsize=8.5, loc="lower right")
+    axes[0][0].set_ylabel("full-vocabulary rank\n(lower is better)")
+    figure.suptitle(
+        "One knob spans the two lenses: $\\sigma\\to0$ reads current content, "
+        "finite $\\sigma$ reads the eventual output",
+        fontsize=11, y=1.02,
+    )
+    figure.savefig(HERE / "fig_integrated_lens.png")
+    plt.close(figure)
+    print("wrote fig_integrated_lens.png")
 
 if __name__ == "__main__":
     _main()
