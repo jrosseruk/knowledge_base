@@ -1,0 +1,27 @@
+{
+ "chord": 40646.73046875,
+ "variants": {
+  "two-hop  (matches the probe)": {
+   "lines": 50,
+   "tokens": 18870,
+   "tuned_over_chord": 1.1381477388585317,
+   "j_over_chord": 0.6796954667421647
+  },
+  "one-hop  (direct naming)": {
+   "lines": 75,
+   "tokens": 18870,
+   "tuned_over_chord": 0.8318210172770084,
+   "j_over_chord": 0.5818973946916663
+  },
+  "mixed  (half each)": {
+   "lines": 125,
+   "tokens": 18870,
+   "tuned_over_chord": 1.083027415239329,
+   "j_over_chord": 0.644961065537732
+  },
+  "web text": {
+   "tuned_over_chord": 0.25102286632640636,
+   "j_over_chord": 0.27999386001507076
+  }
+ }
+}

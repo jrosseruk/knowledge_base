@@ -12,9 +12,9 @@ import matplotlib.pyplot as plt
 
 # Categorical slots 1-3, validated all-pairs in both light and dark modes.
 LENS_COLORS = {
-    "j": "#2a78d6",       # slot 1, blue
-    "tuned": "#eb6834",   # slot 2, orange
-    "logit": "#1baf7a",   # slot 3, aqua
+    "j": "#eb6834",       # slot 2, orange
+    "tuned": "#2a78d6",   # slot 1, blue
+    "logit": "#1baf7a",   # slot 3, green
 }
 LENS_LABELS = {"j": "J-lens", "tuned": "Tuned lens", "logit": "Logit lens"}
 INK = "#0b0b0b"

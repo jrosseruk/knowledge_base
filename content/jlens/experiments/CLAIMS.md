@@ -499,3 +499,56 @@ an EKFAC block-diagonal Hessian, which needs per-layer factor estimation.
 A negative result -- no held-out improvement, or units that decode as noise --
 is reported as such. The linear lens is a strong baseline and there is no
 guarantee `K` sigmoid units beat it on generic text.
+
+---
+
+# Addendum 8: it is the framing, not the topic
+
+Written 2026-08-24, before running the multi-framing grid.
+
+## What prompted it
+
+`fig_in_domain.png` reported the tuned lens landing on the chord for
+`spider -> dog` (1.02x); the lens grid, same item and estimator, reported 0.60x.
+The corpora differed only in construction: 60% two-hop
+("the animal that spins webs") against 13%. Isolating that one variable:
+
+| corpus for `spider -> dog` | tuned/chord | J/chord |
+|---|---|---|
+| two-hop, matching the probe | **1.14** | 0.68 |
+| mixed | 1.08 | 0.64 |
+| one-hop, direct naming | 0.83 | 0.58 |
+| web text | 0.25 | 0.28 |
+
+So "in-domain" is not about topic. All three domain corpora are about animals
+and legs; they differ in whether the entity is *named* or *described*, and that
+alone moves the regression from 0.83 to 1.14 times the chord.
+
+## The sharper prediction
+
+The probes in the grid are not all two-hop:
+
+* **two-hop probes** (entity described): `legs: spider -> dog`,
+  `legs: ant -> bird`, `colour: Mars -> Earth`;
+* **one-hop probes** (entity named): `sides: triangle -> square`,
+  `players: basketball -> volleyball`, `wheels: bicycle -> car`.
+
+If what matters is *matching the probe's construction* rather than two-hop being
+intrinsically better, then **the one-hop corpus should win on the one-hop
+probes**. If instead two-hop framing is simply richer, two-hop corpora should win
+everywhere.
+
+## Design
+
+Each item gets four corpora -- one-hop, two-hop, mixed, and web text -- with the
+probe held fixed. Reported per item: tuned-lens and J-lens slopes as fractions
+of that item's chord, plus full-vocabulary ranks of the bridge entity and the
+answer under each lens.
+
+## Prediction, fixed before running
+
+The corpus whose framing matches the probe gives the largest tuned/chord, item
+by item. Concretely: two-hop wins on legs, ant and Mars; one-hop wins on sides,
+basketball and wheels. A result where two-hop wins everywhere refutes the
+matching account in favour of "two-hop corpora are just better", and is equally
+reportable.

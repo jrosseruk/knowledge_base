@@ -5,7 +5,70 @@
   {
    "name": "legs: spider \u2192 dog",
    "gates": true,
+   "family": "animals",
+   "probe_framing": "two_hop",
+   "bridge": "spider",
+   "answer": "8",
    "swing": 13.625,
+   "ranks": {
+    "two_hop": {
+     "j": {
+      "bridge": 11,
+      "answer": 81
+     },
+     "tuned": {
+      "bridge": 159,
+      "answer": 7
+     },
+     "logit": {
+      "bridge": 21,
+      "answer": 82
+     }
+    },
+    "one_hop": {
+     "j": {
+      "bridge": 15,
+      "answer": 51
+     },
+     "tuned": {
+      "bridge": 156,
+      "answer": 9
+     },
+     "logit": {
+      "bridge": 21,
+      "answer": 82
+     }
+    },
+    "mixed": {
+     "j": {
+      "bridge": 15,
+      "answer": 53
+     },
+     "tuned": {
+      "bridge": 102,
+      "answer": 10
+     },
+     "logit": {
+      "bridge": 21,
+      "answer": 82
+     }
+    },
+    "web": {
+     "j": {
+      "bridge": 8,
+      "answer": 582
+     },
+     "tuned": {
+      "bridge": 122,
+      "answer": 5
+     },
+     "logit": {
+      "bridge": 21,
+      "answer": 82
+     }
+    }
+   },
+   "best_framing": "two_hop",
    "alphas": [
     0.0,
     0.01666666753590107,
@@ -135,9 +198,13 @@
    "tangent": 4314.501953125,
    "chord": 40646.73046875,
    "slopes": {
-    "j_domain": 21780.21484375,
+    "j_two_hop": 25117.2890625,
+    "tuned_two_hop": 31303.6953125,
+    "j_one_hop": 21833.09765625,
+    "tuned_one_hop": 23732.203125,
+    "j_mixed": 23839.55078125,
+    "tuned_mixed": 28098.763671875,
     "j_web": 11380.8349609375,
-    "tuned_domain": 24256.603515625,
     "tuned_web": 10203.2587890625,
     "logit": 12838.064453125
    }
@@ -145,7 +212,70 @@
   {
    "name": "legs: ant \u2192 bird",
    "gates": true,
+   "family": "animals",
+   "probe_framing": "two_hop",
+   "bridge": "ant",
+   "answer": "6",
    "swing": 15.625,
+   "ranks": {
+    "two_hop": {
+     "j": {
+      "bridge": 2395,
+      "answer": 115
+     },
+     "tuned": {
+      "bridge": 487,
+      "answer": 7
+     },
+     "logit": {
+      "bridge": 7171,
+      "answer": 35
+     }
+    },
+    "one_hop": {
+     "j": {
+      "bridge": 2984,
+      "answer": 68
+     },
+     "tuned": {
+      "bridge": 935,
+      "answer": 6
+     },
+     "logit": {
+      "bridge": 7171,
+      "answer": 35
+     }
+    },
+    "mixed": {
+     "j": {
+      "bridge": 2500,
+      "answer": 72
+     },
+     "tuned": {
+      "bridge": 211,
+      "answer": 4
+     },
+     "logit": {
+      "bridge": 7171,
+      "answer": 35
+     }
+    },
+    "web": {
+     "j": {
+      "bridge": 58159,
+      "answer": 743
+     },
+     "tuned": {
+      "bridge": 959,
+      "answer": 2
+     },
+     "logit": {
+      "bridge": 7171,
+      "answer": 35
+     }
+    }
+   },
+   "best_framing": "two_hop",
    "alphas": [
     0.0,
     0.01666666753590107,
@@ -275,9 +405,13 @@
    "tangent": 2156.01025390625,
    "chord": 50488.4453125,
    "slopes": {
-    "j_domain": 17241.23046875,
+    "j_two_hop": 18766.181640625,
+    "tuned_two_hop": 32993.6328125,
+    "j_one_hop": 17428.611328125,
+    "tuned_one_hop": 20497.88671875,
+    "j_mixed": 18403.388671875,
+    "tuned_mixed": 28544.29296875,
     "j_web": 10557.4912109375,
-    "tuned_domain": 26716.19140625,
     "tuned_web": 18180.224609375,
     "logit": 10838.08203125
    }
@@ -285,7 +419,70 @@
   {
    "name": "sides: triangle \u2192 square",
    "gates": true,
+   "family": "polygons",
+   "probe_framing": "one_hop",
+   "bridge": "triangle",
+   "answer": "3",
    "swing": 16.125,
+   "ranks": {
+    "two_hop": {
+     "j": {
+      "bridge": 16,
+      "answer": 131
+     },
+     "tuned": {
+      "bridge": 471,
+      "answer": 69
+     },
+     "logit": {
+      "bridge": 27,
+      "answer": 14
+     }
+    },
+    "one_hop": {
+     "j": {
+      "bridge": 27,
+      "answer": 129
+     },
+     "tuned": {
+      "bridge": 416,
+      "answer": 6
+     },
+     "logit": {
+      "bridge": 27,
+      "answer": 14
+     }
+    },
+    "mixed": {
+     "j": {
+      "bridge": 22,
+      "answer": 130
+     },
+     "tuned": {
+      "bridge": 166,
+      "answer": 6
+     },
+     "logit": {
+      "bridge": 27,
+      "answer": 14
+     }
+    },
+    "web": {
+     "j": {
+      "bridge": 10,
+      "answer": 188
+     },
+     "tuned": {
+      "bridge": 50,
+      "answer": 1
+     },
+     "logit": {
+      "bridge": 27,
+      "answer": 14
+     }
+    }
+   },
+   "best_framing": "mixed",
    "alphas": [
     0.0,
     0.01666666753590107,
@@ -415,9 +612,13 @@
    "tangent": 6804.625,
    "chord": 49556.15234375,
    "slopes": {
-    "j_domain": 25220.90234375,
+    "j_two_hop": 30280.701171875,
+    "tuned_two_hop": 24969.1328125,
+    "j_one_hop": 24524.740234375,
+    "tuned_one_hop": 38239.203125,
+    "j_mixed": 26747.1328125,
+    "tuned_mixed": 45920.328125,
     "j_web": 23544.0,
-    "tuned_domain": 47375.921875,
     "tuned_web": 32625.681640625,
     "logit": 26365.453125
    }
@@ -425,7 +626,70 @@
   {
    "name": "players: basketball \u2192 volleyball",
    "gates": true,
+   "family": "sports",
+   "probe_framing": "one_hop",
+   "bridge": "basketball",
+   "answer": "5",
    "swing": 14.125,
+   "ranks": {
+    "two_hop": {
+     "j": {
+      "bridge": 38,
+      "answer": 259
+     },
+     "tuned": {
+      "bridge": 1606,
+      "answer": 48
+     },
+     "logit": {
+      "bridge": 6,
+      "answer": 130
+     }
+    },
+    "one_hop": {
+     "j": {
+      "bridge": 31,
+      "answer": 100
+     },
+     "tuned": {
+      "bridge": 185,
+      "answer": 4
+     },
+     "logit": {
+      "bridge": 6,
+      "answer": 130
+     }
+    },
+    "mixed": {
+     "j": {
+      "bridge": 33,
+      "answer": 132
+     },
+     "tuned": {
+      "bridge": 334,
+      "answer": 3
+     },
+     "logit": {
+      "bridge": 6,
+      "answer": 130
+     }
+    },
+    "web": {
+     "j": {
+      "bridge": 3,
+      "answer": 1996
+     },
+     "tuned": {
+      "bridge": 64,
+      "answer": 5
+     },
+     "logit": {
+      "bridge": 6,
+      "answer": 130
+     }
+    }
+   },
+   "best_framing": "mixed",
    "alphas": [
     0.0,
     0.01666666753590107,
@@ -555,9 +819,13 @@
    "tangent": 6873.9267578125,
    "chord": 46582.625,
    "slopes": {
-    "j_domain": 6258.115234375,
+    "j_two_hop": 3764.60400390625,
+    "tuned_two_hop": 13603.416015625,
+    "j_one_hop": 6386.1787109375,
+    "tuned_one_hop": 26875.92578125,
+    "j_mixed": 5530.40966796875,
+    "tuned_mixed": 28017.6328125,
     "j_web": 1663.33251953125,
-    "tuned_domain": 21507.5390625,
     "tuned_web": 1059.8411865234375,
     "logit": 2572.09521484375
    }
@@ -565,7 +833,70 @@
   {
    "name": "wheels: bicycle \u2192 car",
    "gates": true,
+   "family": "vehicles",
+   "probe_framing": "one_hop",
+   "bridge": "bicycle",
+   "answer": "2",
    "swing": 16.125,
+   "ranks": {
+    "two_hop": {
+     "j": {
+      "bridge": 9,
+      "answer": 229
+     },
+     "tuned": {
+      "bridge": 4742,
+      "answer": 11
+     },
+     "logit": {
+      "bridge": 39,
+      "answer": 138
+     }
+    },
+    "one_hop": {
+     "j": {
+      "bridge": 11,
+      "answer": 143
+     },
+     "tuned": {
+      "bridge": 1396,
+      "answer": 29
+     },
+     "logit": {
+      "bridge": 39,
+      "answer": 138
+     }
+    },
+    "mixed": {
+     "j": {
+      "bridge": 8,
+      "answer": 181
+     },
+     "tuned": {
+      "bridge": 1930,
+      "answer": 11
+     },
+     "logit": {
+      "bridge": 39,
+      "answer": 138
+     }
+    },
+    "web": {
+     "j": {
+      "bridge": 26,
+      "answer": 812
+     },
+     "tuned": {
+      "bridge": 188,
+      "answer": 1
+     },
+     "logit": {
+      "bridge": 39,
+      "answer": 138
+     }
+    }
+   },
+   "best_framing": "two_hop",
    "alphas": [
     0.0,
     0.01666666753590107,
@@ -695,9 +1026,13 @@
    "tangent": 12688.5595703125,
    "chord": 51817.6796875,
    "slopes": {
-    "j_domain": 20632.646484375,
+    "j_two_hop": 19887.9453125,
+    "tuned_two_hop": 29525.486328125,
+    "j_one_hop": 19995.830078125,
+    "tuned_one_hop": 21547.63671875,
+    "j_mixed": 20156.19921875,
+    "tuned_mixed": 23956.94140625,
     "j_web": 13517.9912109375,
-    "tuned_domain": 20151.578125,
     "tuned_web": 22955.6640625,
     "logit": 14814.125
    }
@@ -705,7 +1040,70 @@
   {
    "name": "colour: Mars \u2192 Earth  (no gate)",
    "gates": false,
+   "family": "planets",
+   "probe_framing": "two_hop",
+   "bridge": "Mars",
+   "answer": "red",
    "swing": 1.9375,
+   "ranks": {
+    "two_hop": {
+     "j": {
+      "bridge": 125,
+      "answer": 26
+     },
+     "tuned": {
+      "bridge": 1390,
+      "answer": 2935
+     },
+     "logit": {
+      "bridge": 12,
+      "answer": 20
+     }
+    },
+    "one_hop": {
+     "j": {
+      "bridge": 146,
+      "answer": 19
+     },
+     "tuned": {
+      "bridge": 178,
+      "answer": 1471
+     },
+     "logit": {
+      "bridge": 12,
+      "answer": 20
+     }
+    },
+    "mixed": {
+     "j": {
+      "bridge": 163,
+      "answer": 19
+     },
+     "tuned": {
+      "bridge": 1209,
+      "answer": 3473
+     },
+     "logit": {
+      "bridge": 12,
+      "answer": 20
+     }
+    },
+    "web": {
+     "j": {
+      "bridge": 1,
+      "answer": 155
+     },
+     "tuned": {
+      "bridge": 164,
+      "answer": 89
+     },
+     "logit": {
+      "bridge": 12,
+      "answer": 20
+     }
+    }
+   },
+   "best_framing": "one_hop",
    "alphas": [
     0.0,
     0.01666666753590107,
@@ -835,9 +1233,13 @@
    "tangent": 7577.66162109375,
    "chord": 4784.56787109375,
    "slopes": {
-    "j_domain": 2741.931640625,
+    "j_two_hop": 3582.1416015625,
+    "tuned_two_hop": 3390.89599609375,
+    "j_one_hop": 2521.84814453125,
+    "tuned_one_hop": 5240.36376953125,
+    "j_mixed": 3116.34765625,
+    "tuned_mixed": 3860.82763671875,
     "j_web": 2080.586181640625,
-    "tuned_domain": 5556.79345703125,
     "tuned_web": 4204.4375,
     "logit": 2340.01904296875
    }

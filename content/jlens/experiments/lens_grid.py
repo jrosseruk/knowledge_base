@@ -46,88 +46,140 @@ os.environ.setdefault("TOKENIZERS_PARALLELISM", "false")
 
 HERE = Path(__file__).resolve().parent
 
-# Domain corpora. These must be *diverse*, not one sentence repeated: a
-# 3840-dimensional least-squares fit on a low-rank activation cloud is decided
-# by the ridge term. Each family crosses entities with several frames, giving a
-# few hundred distinct lines.
+# Domain corpora, in two framings per family. "In-domain" turns out to mean the
+# prompt *construction*, not the topic (CLAIMS.md Addendum 8), so each family
+# supplies a one-hop set (entity named) and a two-hop set (entity described).
+# Corpora must also be diverse: a 3840-dimensional least-squares fit on a
+# low-rank activation cloud is decided by the ridge term.
 
-def _cross(entities, frames):
-    return [f.format(e) for e in entities for f in frames]
+def _cross(items, frames):
+    return [f.format(i) for i in items for f in frames]
 
 
-ANIMAL_LEGS = _cross(
-    ("spider", "ant", "bee", "dog", "cat", "horse", "cow", "bird", "beetle", "octopus",
-     "crab", "sheep", "pig", "frog", "chicken", "wasp", "moth", "goat", "duck", "mouse",
-     "tarantula", "scorpion", "centipede", "lobster", "grasshopper"),
-    ("The number of legs on a {} is .", "A {} walks on this many legs: .",
-     "Counting the legs of a {} gives .", "How many legs does a {} have? .",
-     "A {} is an animal with legs.", "The legs of a {} number .",
-     "Biologists note that a {} has legs.", "If you count every leg on a {}, you get ."),
-) + _cross(
-    ("spins webs", "barks and fetches sticks", "buzzes and makes honey",
-     "marches in colonies", "purrs and chases mice", "lays eggs and has feathers",
-     "grazes and moos", "gallops and neighs", "croaks by the pond", "scuttles sideways"),
-    ("The animal that {} is a .", "The number of legs on the animal that {} is .",
-     "An animal that {} has legs."),
-)
+FAMILIES = {
+    "animals": {
+        "named": ("spider", "ant", "bee", "dog", "cat", "horse", "cow", "bird", "beetle",
+                  "octopus", "crab", "sheep", "pig", "frog", "chicken", "wasp", "moth",
+                  "goat", "duck", "mouse", "tarantula", "scorpion", "lobster", "grasshopper"),
+        "described": ("spins webs", "barks and fetches sticks", "buzzes and makes honey",
+                      "marches in colonies", "purrs and chases mice",
+                      "lays eggs and has feathers", "grazes and moos", "gallops and neighs",
+                      "roots in mud", "croaks by the pond", "scuttles sideways on the beach",
+                      "gives us wool"),
+        "one_hop": ("The number of legs on a {} is .", "A {} walks on this many legs: .",
+                    "Counting the legs of a {} gives .", "How many legs does a {} have? .",
+                    "A {} is an animal with legs.", "The legs of a {} number .",
+                    "If you count every leg on a {}, you get ."),
+        "two_hop": ("The number of legs on the animal that {} is .",
+                    "The animal that {} walks on this many legs: .",
+                    "Counting the legs of the creature that {} gives .",
+                    "The creature that {} has legs.",
+                    "How many legs has the animal that {}? .",
+                    "If you count the legs on the animal that {}, you get ."),
+    },
+    "polygons": {
+        "named": ("triangle", "square", "pentagon", "hexagon", "heptagon", "octagon",
+                  "rectangle", "rhombus", "trapezoid", "nonagon", "decagon", "quadrilateral",
+                  "parallelogram", "dodecagon"),
+        "described": ("a stop sign has", "a chessboard cell has", "a slice of pizza has",
+                      "the Pentagon building has", "a honeycomb cell has",
+                      "a yield sign has", "a football pitch has", "a snowflake arm traces"),
+        "one_hop": ("The number of sides on a {} is .", "A {} has this many sides: .",
+                    "Counting the edges of a {} gives .", "How many sides does a {} have? .",
+                    "A {} is a polygon with sides.", "The vertices of a {} number .",
+                    "Drawing a {} needs straight lines."),
+        "two_hop": ("The number of sides on the shape that {} is .",
+                    "The shape that {} has this many sides: .",
+                    "Counting the edges of the shape that {} gives .",
+                    "The shape that {} is a polygon with sides.",
+                    "How many sides has the shape that {}? .",
+                    "The figure that {} is bounded by segments."),
+    },
+    "sports": {
+        "named": ("basketball", "volleyball", "soccer", "hockey", "baseball", "cricket",
+                  "rugby", "netball", "handball", "lacrosse", "polo", "badminton", "tennis"),
+        "described": ("is played with an orange ball and a hoop",
+                      "is played by spiking a ball over a high net",
+                      "is played by kicking a ball into a goal",
+                      "is played on ice with sticks and a puck",
+                      "is played with a bat and nine innings",
+                      "is played with a bat and wickets",
+                      "is played with an oval ball and scrums"),
+        "one_hop": ("The number of players on a {} team is .",
+                    "A {} team fields this many players: .",
+                    "How many players per side in {}? .",
+                    "In {}, each team has players on the field.",
+                    "The starting lineup in {} is players.",
+                    "Teams in {} play with a side of ."),
+        "two_hop": ("The number of players on a team in the sport that {} is .",
+                    "The sport that {} fields this many players: .",
+                    "In the sport that {}, each side has players.",
+                    "How many players per side in the game that {}? .",
+                    "The game that {} is played by teams of ."),
+    },
+    "vehicles": {
+        "named": ("bicycle", "car", "tricycle", "truck", "motorcycle", "bus", "unicycle",
+                  "van", "trailer", "scooter", "tractor", "wagon", "sedan", "lorry"),
+        "described": ("you pedal with two feet", "commuters drive to work",
+                      "a toddler rides with three wheels", "hauls freight on motorways",
+                      "carries schoolchildren in the morning", "a circus performer balances on",
+                      "ploughs a field"),
+        "one_hop": ("The number of wheels on a {} is .", "A {} rolls on this many wheels: .",
+                    "How many wheels does a {} have? .", "A {} is a vehicle with wheels.",
+                    "Counting the wheels of a {} gives .", "A {} needs tyres."),
+        "two_hop": ("The number of wheels on the vehicle that {} is .",
+                    "The vehicle that {} rolls on this many wheels: .",
+                    "How many wheels has the vehicle that {}? .",
+                    "The vehicle that {} is fitted with tyres.",
+                    "Counting the wheels of the vehicle that {} gives ."),
+    },
+    "planets": {
+        "named": ("Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune"),
+        "described": ("is fourth from the Sun", "is third from the Sun",
+                      "is second from the Sun", "is closest to the Sun",
+                      "is sixth from the Sun and has rings", "is largest in the solar system",
+                      "is eighth from the Sun", "is seventh from the Sun"),
+        "one_hop": ("The color of the planet {} is .", "Seen from space, {} appears .",
+                    "Astronomers describe {} as .", "The surface of {} looks .",
+                    "Through a telescope {} is .", "Photographs of {} show a world."),
+        "two_hop": ("The color of the planet that {} is .",
+                    "The planet that {} appears .",
+                    "Seen from space, the planet that {} looks .",
+                    "Astronomers describe the planet that {} as .",
+                    "Through a telescope the planet that {} is ."),
+    },
+}
 
-POLYGONS = _cross(
-    ("triangle", "square", "pentagon", "hexagon", "heptagon", "octagon", "rectangle",
-     "rhombus", "trapezoid", "nonagon", "decagon", "quadrilateral", "parallelogram",
-     "dodecagon", "kite"),
-    ("The number of sides on a {} is .", "A {} has this many sides: .",
-     "Counting the edges of a {} gives .", "How many sides does a {} have? .",
-     "A {} is a polygon with sides.", "The vertices of a {} number .",
-     "Drawing a {} requires straight lines.", "A {} is bounded by segments."),
-)
 
-SPORTS = _cross(
-    ("basketball", "volleyball", "soccer", "hockey", "baseball", "cricket", "rugby",
-     "netball", "handball", "lacrosse", "polo", "badminton", "tennis", "football"),
-    ("The number of players on a {} team is .", "A {} team fields this many players: .",
-     "How many players per side in {}? .", "In {}, each team has players on the field.",
-     "A full {} squad on the court numbers .", "The starting lineup in {} is players.",
-     "Teams in {} play with a side of .", "Counting one {} team gives players."),
-)
+def family_corpus(family: str, framing: str) -> list[str]:
+    spec = FAMILIES[family]
+    if framing == "one_hop":
+        return _cross(spec["named"], spec["one_hop"])
+    if framing == "two_hop":
+        return _cross(spec["described"], spec["two_hop"])
+    return _cross(spec["named"], spec["one_hop"]) + _cross(spec["described"], spec["two_hop"])
 
-VEHICLES = _cross(
-    ("bicycle", "car", "tricycle", "truck", "motorcycle", "bus", "unicycle", "van",
-     "trailer", "scooter", "tractor", "wagon", "rickshaw", "sedan", "lorry"),
-    ("The number of wheels on a {} is .", "A {} rolls on this many wheels: .",
-     "How many wheels does a {} have? .", "A {} is a vehicle with wheels.",
-     "Counting the wheels of a {} gives .", "The axles of a {} carry wheels.",
-     "To ride a {} you balance on wheels.", "A {} needs tyres."),
-)
 
-PLANETS = _cross(
-    ("Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune"),
-    ("The color of the planet {} is .", "Seen from space, {} appears .",
-     "Astronomers describe {} as .", "The surface of {} looks .",
-     "{} is known for its colour.", "Through a telescope {} is .",
-     "The atmosphere of {} gives it a tint.", "Photographs of {} show a world."),
-) + _cross(
-    ("first", "second", "third", "fourth", "fifth", "sixth", "seventh", "eighth"),
-    ("The planet {} from the Sun is .", "Counting outward, the {} planet is .",
-     "The {} orbit from the Sun belongs to ."),
-)
+FRAMINGS = ("two_hop", "one_hop", "mixed", "web")
 
+# (name, gates, family, probe framing, bridge, prompt A, answer A, prompt B, answer B)
 ITEMS = [
-    ("legs: spider → dog", True, ANIMAL_LEGS,
+    ("legs: spider → dog", True, "animals", "two_hop", "spider",
      "Fact: The number of legs on the animal that spins webs is ", "8",
      "Fact: The number of legs on the animal that barks and fetches sticks is ", "4"),
-    ("legs: ant → bird", True, ANIMAL_LEGS,
+    ("legs: ant → bird", True, "animals", "two_hop", "ant",
      "Fact: The number of legs on the insect that marches in colonies is ", "6",
      "Fact: The number of legs on the animal that lays eggs and has feathers is ", "2"),
-    ("sides: triangle → square", True, POLYGONS,
+    ("sides: triangle → square", True, "polygons", "one_hop", "triangle",
      "Fact: The number of sides on a triangle is ", "3",
      "Fact: The number of sides on a square is ", "4"),
-    ("players: basketball → volleyball", True, SPORTS,
+    ("players: basketball → volleyball", True, "sports", "one_hop", "basketball",
      "Fact: The number of players from one team on a basketball court is ", "5",
      "Fact: The number of players from one team on a volleyball court is ", "6"),
-    ("wheels: bicycle → car", True, VEHICLES,
+    ("wheels: bicycle → car", True, "vehicles", "one_hop", "bicycle",
      "Fact: The number of wheels on a bicycle is ", "2",
      "Fact: The number of wheels on a car is ", "4"),
-    ("colour: Mars → Earth  (no gate)", False, PLANETS,
+    ("colour: Mars → Earth  (no gate)", False, "planets", "two_hop", "Mars",
      "Fact: The color of the planet fourth from the Sun is ", "red",
      "Fact: The color of the planet third from the Sun is ", "blue"),
 ]
@@ -168,8 +220,9 @@ def fit_ols(model, batches, layer, ridge):
     weight = torch.linalg.solve(
         cov_xx + ridge * scale * torch.eye(model.d_model, dtype=torch.float64, device=model.device),
         cov_yx.T,
-    ).T.float()
-    return weight
+    ).T
+    bias = (mean_y - weight @ mean_x).float()
+    return weight.float(), bias
 
 
 def main() -> None:
@@ -203,11 +256,11 @@ def main() -> None:
     web = jc.corpus_batches(tokenizer, dataset["text"], n_sequences=args.corpus_sequences,
                             seq_len=args.seq_len, batch_size=2, seed=5)
     print("fitting the web-text lens ...", flush=True)
-    web_weight = fit_ols(model, web, layer, args.ridge)
+    web_weight, web_bias = fit_ols(model, web, layer, args.ridge)
 
     corpus_cache: dict[int, list] = {}
     records = []
-    for name, gates, lines, base, answer, counter, counter_answer in ITEMS:
+    for name, gates, family, probe_framing, bridge, base, answer, counter, counter_answer in ITEMS:
         token_a, token_b = single(answer), single(counter_answer)
         enc_a = tokenizer(base, return_tensors="pt").to(device)
         enc_b = tokenizer(counter, return_tensors="pt").to(device)
@@ -275,72 +328,58 @@ def main() -> None:
         tangent = float(tangent_vector[0] @ w_diff)
         chord = float(actual[-1] - actual[0])
 
-        key = id(lines)
-        if key not in corpus_cache:
-            print(f"building + fitting domain corpus for {name} ...", flush=True)
-            batches = build_corpus(tokenizer, lines, args.seq_len, device, args.corpus_sequences)
-            corpus_cache[key] = (batches, fit_ols(model, batches, layer, args.ridge))
-        domain_batches, domain_weight = corpus_cache[key]
+        # one lens pair per framing, plus web text
+        slopes, ranks = {}, {}
+        bridge_id = single(bridge)
+        for framing in FRAMINGS:
+            if framing == "web":
+                batches, weight, bias = web, web_weight, web_bias
+            else:
+                key = (family, framing)
+                if key not in corpus_cache:
+                    lines = family_corpus(family, framing)
+                    print(f"  fitting {family}/{framing} ({len(lines)} lines) ...", flush=True)
+                    batches = build_corpus(tokenizer, lines, args.seq_len, device,
+                                           args.corpus_sequences)
+                    corpus_cache[key] = (batches, *fit_ols(model, batches, layer, args.ridge))
+                batches, weight, bias = corpus_cache[key]
 
-        probe = delta[None]
-        slopes = {
-            "j_domain": float(jc.transport(model, layer, probe, domain_batches)[0] @ w_diff),
-            "j_web": float(jc.transport(model, layer, probe, web)[0] @ w_diff),
-            "tuned_domain": float((delta @ domain_weight.T) @ w_diff),
-            "tuned_web": float((delta @ web_weight.T) @ w_diff),
-            "logit": float(delta @ w_diff),
-        }
-        records.append({"name": name, "gates": gates, "swing": swing,
+            probe_direction = torch.stack([delta, start])
+            transported = jc.transport(model, layer, probe_direction, batches)
+            slopes[f"j_{framing}"] = float(transported[0] @ w_diff)
+            slopes[f"tuned_{framing}"] = float((delta @ weight.T) @ w_diff)
+            scores = {
+                "j": model.unembed(transported[1]).squeeze(),
+                "tuned": model.unembed(start @ weight.T + bias).squeeze(),
+                "logit": model.unembed(start).squeeze(),
+            }
+            ranks[framing] = {
+                lens: {"bridge": jc.rank_of(value, bridge_id),
+                       "answer": jc.rank_of(value, token_a)}
+                for lens, value in scores.items()
+            }
+            print(f"  {framing:8s} tuned/chord {slopes[f'tuned_{framing}'] / chord:5.2f}   "
+                  f"J/chord {slopes[f'j_{framing}'] / chord:5.2f}   "
+                  f"J ranks {ranks[framing]['j']['bridge']}/{ranks[framing]['j']['answer']}  "
+                  f"tuned {ranks[framing]['tuned']['bridge']}/{ranks[framing]['tuned']['answer']}",
+                  flush=True)
+        slopes["logit"] = float(delta @ w_diff)
+
+        best = max(FRAMINGS, key=lambda f: slopes[f"tuned_{f}"] / chord)
+        records.append({"name": name, "gates": gates, "family": family,
+                        "probe_framing": probe_framing, "bridge": bridge, "answer": answer,
+                        "swing": swing, "ranks": ranks, "best_framing": best,
                         "alphas": alphas.tolist(), "actual": actual.tolist(),
                         "tangent": tangent, "chord": chord, "slopes": slopes})
-        print(f"{name:36s} swing {swing:6.2f}  tangent {tangent:9.0f}  chord {chord:9.0f}  "
-              f"| domain J {slopes['j_domain']:9.0f} tuned {slopes['tuned_domain']:9.0f}  "
-              f"| web J {slopes['j_web']:9.0f} tuned {slopes['tuned_web']:9.0f}", flush=True)
+        print(f"  -> probe is {probe_framing}; best corpus is {best}"
+              f"  {'MATCH' if best == probe_framing else 'no match'}\n", flush=True)
 
     (HERE / args.out).write_text(json.dumps(
         {"model": args.model, "layer": layer, "records": records}, indent=1))
 
-    # ---------------- the grid ----------------------------------------------
-    jp.use_style()
-    n = len(records)
-    figure, axes = plt.subplots(2, n, figsize=(3.5 * n, 7.4), sharex=True)
-    for column, record in enumerate(records):
-        alphas_np = np.array(record["alphas"])
-        actual = np.array(record["actual"]) - record["actual"][0]
-        for row, corpus in enumerate(("domain", "web")):
-            axis = axes[row][column]
-            axis.axhline(0, color=jp.MUTED, lw=0.8)
-            axis.plot(alphas_np, actual, color=jp.INK, lw=2.5, zorder=5, label="model")
-            axis.plot(alphas_np, record["tangent"] * alphas_np, ":", lw=1.7, color=jp.INK,
-                      label="tangent at $\\alpha$=0")
-            axis.plot(alphas_np, record["chord"] * alphas_np, "-.", lw=1.7, color=jp.MUTED,
-                      label="chord over [0,1]")
-            axis.plot(alphas_np, record["slopes"][f"j_{corpus}"] * alphas_np, "--", lw=2.1,
-                      color=jp.LENS_COLORS["j"], label="J-lens")
-            axis.plot(alphas_np, record["slopes"][f"tuned_{corpus}"] * alphas_np, "--", lw=2.1,
-                      color=jp.LENS_COLORS["tuned"], label="tuned lens")
-            axis.plot(alphas_np, record["slopes"]["logit"] * alphas_np, "--", lw=1.5,
-                      color=jp.LENS_COLORS["logit"], alpha=0.85, label="logit lens")
-            span = max(abs(actual).max(), abs(record["chord"])) * 1.35
-            axis.set_ylim(-0.45 * span, span)
-            axis.grid(axis="y", alpha=0.7)
-            if row == 0:
-                axis.set_title(record["name"], fontsize=9.5)
-            if row == 1:
-                axis.set_xlabel("interpolation $\\alpha$")
-            if column == 0:
-                axis.set_ylabel(
-                    ("lenses fitted on the\nrelation's own corpus" if corpus == "domain"
-                     else "lenses fitted on\nweb text (as deployed)")
-                    + "\n\nchange in readout", fontsize=9)
-    axes[0][0].legend(frameon=False, fontsize=7.5, loc="upper left", ncol=2)
-    figure.suptitle(
-        "Refit on the relation's own corpus (top) and the regression tracks the chord; "
-        "on web text (bottom) it does not",
-        fontsize=12, y=1.0,
-    )
-    figure.savefig(HERE / "fig_lens_grid.png")
-    print("wrote fig_lens_grid.png")
+    matched = sum(r["best_framing"] == r["probe_framing"] for r in records)
+    print(f"\nbest corpus framing matched the probe's on {matched}/{len(records)} items")
+    print("run plot_lens_grid.py to render")
 
 
 if __name__ == "__main__":

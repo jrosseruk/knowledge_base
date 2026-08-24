@@ -899,3 +899,72 @@ by the ridge term, and every domain slope came out shrunk (spider -> dog read
 0.31 of the chord). The corpora here cross entities with 8 frames to give
 88-230 distinct lines. This is the third time in this project that an
 under-powered least-squares fit has produced a confidently wrong number.
+
+### It is the framing, not the topic (Addendum 8)
+
+The `fig_in_domain` / `lens_grid` discrepancy on `spider -> dog` -- tuned/chord
+1.02 against 0.60 -- traced to corpus *construction*. The first corpus was 60%
+two-hop ("the animal that spins webs"), matching the probe; the second was 13%.
+`corpus_framing_test.py` isolates that one variable on that item:
+
+| corpus | tuned/chord | J/chord |
+|---|---|---|
+| two-hop, matching the probe | **1.14** | 0.68 |
+| mixed | 1.08 | 0.64 |
+| one-hop, direct naming | 0.83 | 0.58 |
+| web text | 0.25 | 0.28 |
+
+All three domain corpora are about animals and legs. They differ only in whether
+the entity is named or described, and that alone moves the regression from 0.83
+to 1.14 times the chord.
+
+### The framing prediction, tested across six items
+
+`lens_grid.py` now fits four corpora per item -- two-hop, one-hop, mixed, web --
+with the probe held fixed. The probes are deliberately not all the same shape:
+`legs`, `ant` and `Mars` describe the entity, while `sides`, `players` and
+`wheels` name it. If matching matters, one-hop corpora should win on the
+one-hop probes.
+
+| item | probe | two-hop | one-hop | mixed | web | matched wins |
+|---|---|---|---|---|---|---|
+| legs: spider -> dog | two-hop | **0.77** | 0.58 | 0.69 | 0.25 | yes |
+| legs: ant -> bird | two-hop | **0.65** | 0.41 | 0.57 | 0.36 | yes |
+| sides: triangle -> square | one-hop | 0.50 | **0.77** | 0.93 | 0.66 | yes |
+| players: basketball | one-hop | 0.29 | **0.58** | 0.60 | 0.02 | yes |
+| wheels: bicycle -> car | one-hop | 0.57 | 0.42 | 0.46 | 0.44 | **no** |
+| colour: Mars -> Earth | two-hop | 0.71 | 1.10 | 0.81 | 0.88 | **no** |
+
+* **Robust: every domain corpus beats web text, 6 of 6.** That part of the
+  Addendum 4 story survives everything thrown at it.
+* **Suggestive but unproven: the matching framing beats the mismatched one on
+  4 of 6** (binomial p = 0.34). The clean single-item result does not generalise
+  reliably.
+* **The preregistered form of the prediction fails.** Addendum 8 predicted the
+  matching corpus would be best of all four; `mixed` wins twice. In hindsight
+  that was the wrong statistic -- `mixed` contains the matching framing *and*
+  more data, so it should win. The pairwise matched-versus-mismatched comparison
+  is the test that has any power, and it should have been the preregistered one.
+
+Note also the spread: `spider -> dog` reads 1.14, 0.83, 0.77, 0.60 or 0.25 for
+the same item, layer and estimator depending only on the corpus. **The
+tuned/chord ratio is a property of the corpus at least as much as of the
+model**, which is worth stating plainly, because the striking version of this
+result came from one corpus on one item.
+
+### Figures
+
+`fig_lens_grid.png` is now four corpus rows x six items, each row a response
+panel over a rank-bar panel. Panels are normalised by each item's own chord, so
+every model curve ends at 1.0, the chord is the same unit diagonal everywhere,
+and lens slopes read directly as fractions of the chord -- raw units cannot be
+shared because the chord is ~50,000 on counting items and ~4,800 on colour. The
+row whose framing matches the probe is outlined.
+
+The bar panels also make the Claim 1 result visible in the deployed (web) row:
+the J-lens reads the bridge and the tuned lens reads the answer on 5 of 6 items
+(spider 8/582 against tuned 122/5; basketball 3/1996 against 64/5; Mars 1/155
+against 164/89), with `ant -> bird` the exception where the J-lens puts `ant` at
+58,159. Comparing rows shows the trade-off found earlier: domain fitting
+improves the geometry and degrades the J-lens readout (spider 8 -> 11, answer
+582 -> 81).
