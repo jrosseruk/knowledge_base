@@ -316,3 +316,74 @@ sense that it constructs the toy. That is the point: it isolates whether the
 *fitting distribution* is what produces the tangent/chord separation. It does
 not show that the deployed lenses behave this way on web text -- we have
 already measured that they do not.
+
+---
+
+# Addendum 5: which relations gate, and does an in-domain corpus rescue the rest?
+
+Written 2026-08-24, before running. Revised once before running, to fold in the
+in-domain question from Addendum 4.
+
+## What prompted it
+
+The paired shape test found sharp transitions on every item whose answer was
+**numeric** (legs x3, sides of a triangle, moons of a planet; 10-90 widths
+0.22-0.45) and on neither item whose answer was **categorical** (planet colour
+0.83, capital-to-language 0.68). Five items against two, consistent with at
+least two readings:
+
+* **H-numeric** -- counting is special: producing a count means selecting one
+  element of a small *ordered* set, and that selection is thresholded.
+* **H-discrete** -- nothing to do with number: any relation whose answer comes
+  from a small closed set is thresholded, and colour and language gate less
+  because their answer spaces are large and graded.
+
+They differ on families whose answers are discrete and small but not numeric --
+a **first letter**, a **state of matter**. H-numeric predicts those behave like
+colour; H-discrete predicts they behave like counts.
+
+## The second question
+
+Addendum 4 showed the tuned lens becomes the chord (within 1.6%) once fitted on
+a corpus that straddles the gate. That invites the hope that fitting in-domain
+simply makes the lenses work everywhere. It should not, and the reason is
+arithmetic: **if `F` is linear along the path, its tangent and its chord are
+identically equal**, so there is nothing for a Jacobian and a regression to
+separate into, whatever corpus either is fitted on.
+
+## Design
+
+Families, each with several items and its own generated in-domain corpus:
+
+| group | families |
+|---|---|
+| numeric | animal legs, geometric sides, sport team size and scoring |
+| discrete non-numeric | first letter, state of matter |
+| graded categorical | planet colour, capital-to-language (the France case) |
+
+For each item, at layer 34 with layer 46 as the within-item control:
+
+1. the model's response curve -- tangent at `alpha=0`, chord over `[0,1]`,
+   10-90 transition width;
+2. the J-lens and least-squares slopes along the same path, fitted **twice**:
+   once on web text and once on that family's own corpus.
+
+Because both lenses are linear, a slope is `<w, M delta>` and needs a single
+transported direction, not the whole path.
+
+Both members of a pair must be answered correctly under greedy decoding and
+both answers must be single tokens. Attrition is reported.
+
+## Predictions, fixed before running
+
+1. The numeric group reproduces its sharp transitions; the graded categorical
+   group does not.
+2. **The discriminating test**: where the discrete non-numeric group's median
+   width falls decides between H-numeric and H-discrete.
+3. **The conditional-rescue test**: in-domain fitting raises the tuned/J slope
+   ratio **only for items whose response gates**. Concretely, the change in
+   that ratio from web to in-domain should track the item's gate strength
+   (chord / tangent), and should be near zero for the graded categorical items.
+
+Reported as measured. If families do not separate at all, the earlier 5-vs-2
+split was noise, and that is the finding.
