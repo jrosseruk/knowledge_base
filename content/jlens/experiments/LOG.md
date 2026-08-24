@@ -846,3 +846,56 @@ number-writing neurons each bending a little, rather than one threshold unit.
 
 Descriptive localisation, not a hypothesis test. What it rules out is the
 picture the toy model suggests -- a single sigmoid at a particular place.
+
+### The lens grid: does the tangent/chord pattern generalise?
+
+`lens_grid.py` + `plot_lens_grid.py` -> `fig_lens_grid.png`. Six items at layer
+34, five that gate and one that does not, each with both lenses fitted twice:
+on the relation's own corpus (top row) and on web text (bottom row). Every panel
+also shows the curve's own tangent and chord, which are properties of the model
+rather than of any lens.
+
+tuned-lens slope as a fraction of the chord:
+
+| item | gates | domain | web |
+|---|---|---|---|
+| sides: triangle -> square | yes | **0.96** | 0.66 |
+| legs: spider -> dog | yes | 0.60 | 0.25 |
+| legs: ant -> bird | yes | 0.53 | 0.36 |
+| players: basketball -> volleyball | yes | 0.46 | 0.02 |
+| wheels: bicycle -> car | yes | 0.39 | **0.44** |
+| colour: Mars -> Earth | no | 1.16 | 0.88 |
+
+**The direction of the effect generalises: 5 of 6 items move toward the chord
+when the lens is refitted in-domain** (median over the gating items 0.53 against
+0.36). The five gating columns show clean sigmoids well above every lens line,
+and the non-gating column shows a near-straight response that all the lenses
+track -- which is the specificity the earlier work predicted.
+
+**Two findings that weaken Addendum 4's headline, recorded as such.**
+
+1. *It is corpus-sensitive.* `spider -> dog` gave tuned/chord = 1.02 in the
+   dedicated Addendum 4 run and **0.60** here -- same item, same layer, same
+   estimator. The only difference is the domain corpus: 375 mixed
+   animal-property lines there against 230 legs-focused lines here. So "the
+   regression becomes the chord" is not a stable constant; it depends on corpus
+   composition in a way this work has not controlled. The clean near-unity
+   result reproduces on `sides` (0.96) and nowhere else.
+
+2. *The tuned-versus-J separation does not reproduce.* Median tuned/J is 1.55
+   in-domain against 1.39 on web text, and two of five gating items move the
+   wrong way (wheels 0.98 against 1.70; ant-bird 1.55 against 1.72). So refitting
+   in-domain reliably moves the regression *toward the chord*, but does not
+   reliably pull it *away from the Jacobian*.
+
+The honest summary is that the qualitative story survives -- a regression fitted
+where the gate lives sees more of the chord than one fitted on generic text --
+while the striking quantitative version of it, from a single item, does not.
+
+Note also the corpus-diversity trap that produced a first, wrong version of this
+grid: with only ~20 distinct lines per family repeated to fill the corpus, the
+activation cloud is low-rank, the 3840-dimensional least-squares fit is decided
+by the ridge term, and every domain slope came out shrunk (spider -> dog read
+0.31 of the chord). The corpora here cross entities with 8 frames to give
+88-230 distinct lines. This is the third time in this project that an
+under-powered least-squares fit has produced a confidently wrong number.
