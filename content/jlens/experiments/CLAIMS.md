@@ -387,3 +387,61 @@ both answers must be single tokens. Attrition is reported.
 
 Reported as measured. If families do not separate at all, the earlier 5-vs-2
 split was noise, and that is the finding.
+
+---
+
+# Addendum 6: an effectiveness precondition, and a correction
+
+Written 2026-08-24, after inspecting the survey's logit swings and **before**
+the rerun.
+
+## The correction
+
+Addendum 5's survey was scored on transition width alone. Checking how far each
+intervention actually moved the output shows that most non-numeric items were
+never moved at all:
+
+| item | swing (nats) | crosses zero | width |
+|---|---|---|---|
+| 7 numeric items | 13.6 - 16.3 | yes | 0.217 - 0.483 |
+| up-wet | 0.66 | no | 0.733 |
+| light-fast | 2.52 | no | 0.817 |
+| paris-madrid | 8.03 | no | 0.683 |
+| mars-earth | 1.94 | yes | 0.833 |
+
+A transition width computed on a response that never moves is a measurement of
+noise. **The conclusion "H-numeric beats H-discrete" is therefore withdrawn**:
+the discrete group had no effective interventions, so it did not test anything.
+The only non-numeric item with an intervention that flips the sign is
+`mars-earth`, and one item decides nothing.
+
+The same defect voids the few-shot items in `controlled_gate_test.py` (swings
+0.12 - 1.03). Their flat responses reflect the final-position residual of a
+few-shot prompt not carrying the entity distinction, not an absence of gating.
+
+## The precondition, fixed now
+
+An item's width is interpretable only if the intervention is **causally
+effective**:
+
+1. `|logit(B') - logit(B)|` swings by at least **4 nats** across the path, and
+2. the difference **changes sign**, i.e. the intervention actually reverses
+   which answer the model prefers.
+
+Items failing either are reported as attrition and never scored.
+
+## The fix to the intervention
+
+The failures share a cause: the pairs differ in a word several tokens before
+the readout, so interpolating only the final residual moves little. The rerun
+uses **token-length-matched pairs** differing in a single token, and
+interpolates the residual at **every position** rather than only the last. The
+path is still `(1-alpha) h_A + alpha h_B` between two states the model really
+produces, so the endpoints remain on-distribution.
+
+## Prediction, fixed before running
+
+With effective interventions on both sides, the numeric group keeps its sharp
+transitions. The open question is what the non-numeric group does, and this
+time it will be a real test rather than an artefact. No prediction is offered
+for it; the point of the rerun is that Addendum 5 could not answer it.

@@ -281,6 +281,7 @@ def _main() -> None:
     figure_shape()
     figure_in_domain()
     figure_integrated()
+    figure_effective_gate()
 
 
 def figure_shape() -> None:
@@ -420,6 +421,65 @@ def figure_integrated() -> None:
     figure.savefig(HERE / "fig_integrated_lens.png")
     plt.close(figure)
     print("wrote fig_integrated_lens.png")
+
+
+
+def figure_effective_gate() -> None:
+    path = HERE / "effective_gate_test.json"
+    if not path.exists():
+        return
+    data = json.loads(path.read_text())
+    rows = data["rows"]
+    colours = {"numeric": jp.LENS_COLORS["j"], "discrete": jp.LENS_COLORS["tuned"],
+               "graded": jp.LENS_COLORS["logit"]}
+    order = ["numeric", "discrete", "graded"]
+
+    figure, axes = plt.subplots(1, 2, figsize=(12.2, 4.3),
+                               gridspec_kw={"width_ratios": [1, 1.3]})
+
+    # (a) normalised response curves, one panel, coloured by kind
+    axis = axes[0]
+    alphas = np.linspace(0, 1, len(rows[0]["response"]))
+    for record in rows:
+        response = np.array(record["response"])
+        scaled = (response - response[0]) / (response[-1] - response[0])
+        axis.plot(alphas, scaled, color=colours[record["kind"]], lw=1.9, alpha=0.85)
+    axis.plot([0, 1], [0, 1], color=jp.MUTED, lw=1.2, ls="--", label="linear response")
+    for kind in order:
+        axis.plot([], [], color=colours[kind], lw=2.2, label=kind)
+    axis.set_xlabel("interpolation $\\alpha$")
+    axis.set_ylabel("normalised logit(B′) − logit(B)")
+    axis.set_title("(a) Counting relations gate; others do not", fontsize=10)
+    axis.grid(alpha=0.7)
+    axis.legend(frameon=False, fontsize=8.5, loc="upper left")
+
+    # (b) paired workspace vs control width, one line per item
+    axis = axes[1]
+    for offset, kind in enumerate(order):
+        members = [r for r in rows if r["kind"] == kind]
+        for index, record in enumerate(members):
+            x = offset * 1.3 + (index - len(members) / 2) * 0.11
+            work = record["layers"]["workspace"]["width"]
+            control = record["layers"]["control"]["width"]
+            axis.plot([x, x], [work, control], color=colours[kind], lw=1.4, alpha=0.55)
+            axis.plot(x, work, "o", color=colours[kind], ms=7)
+            axis.plot(x, control, "o", color=colours[kind], ms=7, mfc="white", mew=1.6)
+    axis.plot([], [], "o", color=jp.MUTED, ms=7, label=f"layer {data['layer']} (workspace)")
+    axis.plot([], [], "o", color=jp.MUTED, ms=7, mfc="white", mew=1.6, label="layer 46 (control)")
+    axis.set_xticks([o * 1.3 for o in range(len(order))],
+                    [f"{k}\n(n={sum(1 for r in rows if r['kind']==k)})" for k in order])
+    axis.set_ylabel("10–90% transition width")
+    axis.set_title("(b) Sharper only where the answer is a count  (p = 0.024)", fontsize=10)
+    axis.grid(axis="y", alpha=0.7)
+    axis.legend(frameon=False, fontsize=8.5, loc="lower right")
+
+    figure.suptitle(
+        "With causally effective interventions on both sides, only counting gates",
+        fontsize=11.5, y=1.02,
+    )
+    figure.savefig(HERE / "fig_effective_gate.png")
+    plt.close(figure)
+    print("wrote fig_effective_gate.png")
 
 if __name__ == "__main__":
     _main()

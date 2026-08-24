@@ -689,3 +689,57 @@ was linear. There is no contradiction: sigma-smearing explores all directions,
 not just the Mars-to-Earth chord, so it can reach nonlinearity that the single
 chord misses. That also explains why the Addendum-2 result was a statement about
 one path rather than about the layer.
+
+### Correction, and the gate test redone properly
+
+Checking how far each intervention actually moved the output showed that most
+non-numeric items in the survey were never moved at all: swings of 0.66, 2.52
+and 8.03 nats that never change which answer the model prefers, against 13.6-16.3
+for every numeric item. A transition width computed on a response that does not
+move measures noise.
+
+**The Addendum 5 conclusion is withdrawn.** "H-numeric beats H-discrete" was
+not established: the discrete group had no effective interventions, so it never
+tested anything. The same defect voids the few-shot items in
+`controlled_gate_test.py` (swings 0.12-1.03) -- in a few-shot prompt the entity
+distinction lives at earlier positions, so interpolating the final residual
+moves almost nothing.
+
+`effective_gate_test.py` redoes it with two changes, both preregistered in
+Addendum 6:
+
+* an item is scored only if the intervention swings the logit difference by
+  >= 4 nats **and** flips its sign;
+* pairs are token-length matched and differ in a single token, so the residual
+  is interpolated at **every** position rather than only the last.
+
+10 of 18 items scored, every one with a swing of 5.8-30.0 nats crossing zero.
+
+| kind | n | median width | median control width | workspace - control |
+|---|---|---|---|---|
+| **numeric** | 5 | **0.333** | 0.717 | **-0.383** |
+| discrete non-numeric | 3 | 0.633 | 0.767 | -0.133 |
+| graded categorical | 2 | 0.675 | 0.767 | -0.092 |
+
+```
+numeric     : 0.250  0.333  0.333  0.350  0.433
+non-numeric : 0.550  0.583  0.633  0.667  0.800
+```
+
+The two sets are **perfectly separated**; exact permutation test on the median
+gap, p = 0.024. Numeric items also sharpen 3-4x more at the workspace layer
+relative to their own late-layer control.
+
+**H-numeric now stands on evidence rather than on artefact.** The discrete
+non-numeric group -- antonyms, biological class -- behaves like the graded
+group, not like counts, even though its answer space is small and closed. So
+what gates is not "a small set of possible answers" but counting specifically.
+
+Working items, all with clean sigmoids: legs (spider/ant, spider/dog), sides of
+a polygon, players on a basketball team, wheels on a vehicle. Non-gating items,
+all near-linear: antonyms (up/wet, fast/light), biological class
+(snake/salmon), planet colour, capital-to-language.
+
+Remaining attrition is behavioural and worth recording: Gemma answers colour
+questions with hedges ("90% yellow", "not always green"), gives Italian in
+Chinese, and answers "At room temperature, water is a" with a density.
